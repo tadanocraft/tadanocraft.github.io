@@ -44,28 +44,38 @@
         <!-- Grille 4 cartes (Services, Réalisations, Studio Créa, Instagram) -->
         <section class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 animate-slide-up" style="animation-delay: 200ms;">
             
-            <!-- Carte 1 : Mes Services -->
-            <div onclick="openModal('modalServices')" class="group relative h-80 md:h-96 rounded-[2rem] overflow-hidden bg-[#222222] cursor-pointer transition-transform duration-300 active:scale-[0.98] md:hover:scale-[1.02] border border-white/5">
-                <div class="absolute inset-0 flex items-center justify-center p-8 pointer-events-none">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80" class="absolute w-48 h-64 object-cover rounded-xl shadow-2xl -rotate-12 opacity-60 transition-transform duration-500 group-hover:rotate-[-8deg]" alt="Service bg">
-                    <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80" class="absolute w-48 h-64 object-cover rounded-xl shadow-2xl rotate-12 opacity-60 transition-transform duration-500 group-hover:rotate-[8deg]" alt="Service bg2">
-                    <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=400&q=80" class="absolute z-10 w-52 h-72 object-cover rounded-xl shadow-2xl transition-transform duration-500 group-hover:scale-105" alt="Mes Services">
+           <!-- Carte 1 : Mes Services -->
+            <div onclick="openModal('modalServices')" class="group relative h-80 md:h-96 rounded-[2rem] overflow-hidden bg-[#222222] cursor-pointer transition-transform duration-300 active:scale-[0.98] md:hover:scale-[1.02] border border-white/5 flex flex-col">
+                <!-- Éventail d'images -->
+                <div class="flex-1 relative flex items-center justify-center mt-6 pointer-events-none">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80" class="absolute w-32 h-44 md:w-40 md:h-56 object-cover rounded-xl shadow-xl -rotate-12 opacity-60 transition-transform duration-500 group-hover:rotate-[-8deg]" alt="Service bg">
+                    <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80" class="absolute w-32 h-44 md:w-40 md:h-56 object-cover rounded-xl shadow-xl rotate-12 opacity-60 transition-transform duration-500 group-hover:rotate-[8deg]" alt="Service bg2">
+                    <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=400&q=80" class="absolute z-10 w-36 h-48 md:w-48 md:h-64 object-cover rounded-xl shadow-2xl transition-transform duration-500 group-hover:scale-105" alt="Mes Services">
                 </div>
-                <div class="absolute bottom-6 inset-x-0 text-center z-20 pointer-events-none">
-                    <h3 class="font-bebas text-3xl tracking-wide drop-shadow-md">Mes Services</h3>
-                    <p class="text-sm text-zinc-300">Design 2D & 3D</p>
+                <!-- Texte en dessous -->
+                <div class="shrink-0 text-center pb-6 z-20 pointer-events-none">
+                    <h3 class="font-sans font-bold text-xl md:text-2xl text-white">Mes services</h3>
+                    <div class="flex items-center justify-center gap-1.5 mt-1 text-zinc-400 text-sm">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
+                        <span>Gallery • Design 2D & 3D</span>
+                    </div>
                 </div>
             </div>
 
             <!-- Carte 2 : Mes Réalisations -->
-            <div onclick="openModal('modalRealisations')" class="group relative h-80 md:h-96 rounded-[2rem] overflow-hidden bg-[#222222] cursor-pointer transition-transform duration-300 active:scale-[0.98] md:hover:scale-[1.02] border border-white/5">
-                <div class="absolute inset-0 flex items-center justify-center p-8 pointer-events-none">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80" class="absolute w-48 h-64 object-cover rounded-xl shadow-2xl -rotate-6 opacity-60 transition-transform duration-500 group-hover:rotate-[-2deg]" alt="bg1">
-                    <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80" class="absolute z-10 w-52 h-72 object-cover rounded-xl shadow-2xl transition-transform duration-500 group-hover:scale-105" alt="Mes Réalisations">
+            <div onclick="openModal('modalRealisations')" class="group relative h-80 md:h-96 rounded-[2rem] overflow-hidden bg-[#222222] cursor-pointer transition-transform duration-300 active:scale-[0.98] md:hover:scale-[1.02] border border-white/5 flex flex-col">
+                <!-- Éventail d'images -->
+                <div class="flex-1 relative flex items-center justify-center mt-6 pointer-events-none">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80" class="absolute w-32 h-44 md:w-40 md:h-56 object-cover rounded-xl shadow-xl -rotate-6 opacity-60 transition-transform duration-500 group-hover:rotate-[-2deg]" alt="bg1">
+                    <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80" class="absolute z-10 w-36 h-48 md:w-48 md:h-64 object-cover rounded-xl shadow-2xl transition-transform duration-500 group-hover:scale-105" alt="Mes Réalisations">
                 </div>
-                <div class="absolute bottom-6 inset-x-0 text-center z-20 pointer-events-none">
-                    <h3 class="font-bebas text-3xl tracking-wide drop-shadow-md">Mes Réalisations</h3>
-                    <p class="text-sm text-zinc-300">Portfolio</p>
+                <!-- Texte en dessous -->
+                <div class="shrink-0 text-center pb-6 z-20 pointer-events-none">
+                    <h3 class="font-sans font-bold text-xl md:text-2xl text-white">Mes réalisations</h3>
+                    <div class="flex items-center justify-center gap-1.5 mt-1 text-zinc-400 text-sm">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
+                        <span>Gallery • Portfolio</span>
+                    </div>
                 </div>
             </div>
 
