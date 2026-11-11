@@ -52,16 +52,18 @@ function closeLightbox() {
     }, 300);
 }
 
-// Exposer explicitement au scope global
+// Exposer explicitement au scope global window
 window.openModal = openModal;
 window.closeModal = closeModal;
 window.openLightbox = openLightbox;
 window.closeLightbox = closeLightbox;
 
 /* =========================================
-   3. Formulaire Google Apps Script
+   3. Écouteurs d'événements au chargement
    ========================================= */
 document.addEventListener('DOMContentLoaded', () => {
+
+    // Gestion du Formulaire Google Apps Script
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -75,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const formData = new FormData(this);
             
-            // Colle ton URL Google Apps Script ici si ce n'est pas encore fait
+            // REMPLACER PAR TON URL GOOGLE APPS SCRIPT
             const GOOGLE_SCRIPT_URL = "VOTRE_URL_GOOGLE_SCRIPT_ICI";
             
             fetch(GOOGLE_SCRIPT_URL, {
