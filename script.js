@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(this);
             
             // REMPLACER PAR TON URL GOOGLE APPS SCRIPT
-            const GOOGLE_SCRIPT_URL = "VOTRE_URL_GOOGLE_SCRIPT_ICI";
+            const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxhgmqzwOXgOUH10gPrHjSa_fP2L7dgpBKHNuihavsHZg6MXFZjcQUZsVW5tzezaFbN/exec";
             
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
