@@ -60,14 +60,25 @@
         <!-- Grille 4 cartes -->
         <section class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 animate-slide-up" style="animation-delay: 200ms;">
             
-            <!-- Carte 1 : Mes Services -->
-            <div onclick="openModal('modalServices')" class="group relative h-80 md:h-96 rounded-[2rem] overflow-hidden bg-[#222222] cursor-pointer transition-transform duration-300 active:scale-[0.98] md:hover:scale-[1.02] border border-white/5 flex flex-col">
-                <div class="flex-1 relative flex items-center justify-center mt-6 pointer-events-none">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80" class="absolute w-32 h-44 md:w-40 md:h-56 object-cover rounded-xl shadow-xl -rotate-12 opacity-60 transition-transform duration-500 group-hover:rotate-[-8deg]" alt="Aperçu création graphique 1">
-                    <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80" class="absolute w-32 h-44 md:w-40 md:h-56 object-cover rounded-xl shadow-xl rotate-12 opacity-60 transition-transform duration-500 group-hover:rotate-[8deg]" alt="Aperçu création graphique 2">
-                    <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=400&q=80" class="absolute z-10 w-36 h-48 md:w-48 md:h-64 object-cover rounded-xl shadow-2xl transition-transform duration-500 group-hover:scale-105" alt="Services Design Graphique 2D et 3D">
+            <!-- Carte 1 : Mes Services (Style Linktree) -->
+            <div onclick="openModal('modalServices')" class="group relative h-80 md:h-96 rounded-[2rem] overflow-hidden bg-[#222222] cursor-pointer transition-transform duration-300 active:scale-[0.98] md:hover:scale-[1.02] border border-white/5 flex flex-col justify-between p-6">
+                <!-- Groupe d'images Linktree (Paysage superposées) -->
+                <div class="relative w-full h-48 md:h-56 mt-4 flex items-center justify-center pointer-events-none perspective">
+                    <!-- Image Gauche (Arrière) -->
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" 
+                         class="absolute w-4/5 h-full object-cover rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] -rotate-6 -translate-x-6 opacity-60 transition-all duration-500 group-hover:-translate-x-8 group-hover:-rotate-12" 
+                         alt="Aperçu création graphique 1">
+                    <!-- Image Droite (Arrière) -->
+                    <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=600&q=80" 
+                         class="absolute w-4/5 h-full object-cover rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] rotate-6 translate-x-6 opacity-60 transition-all duration-500 group-hover:translate-x-8 group-hover:rotate-12" 
+                         alt="Aperçu création graphique 2">
+                    <!-- Image Centrale (Avant) -->
+                    <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=600&q=80" 
+                         class="absolute z-10 w-4/5 h-full object-cover rounded-xl shadow-[0_20px_40px_rgba(0,0,0,0.7)] border border-white/10 transition-transform duration-500 group-hover:scale-105" 
+                         alt="Services Design Graphique 2D et 3D">
                 </div>
-                <div class="shrink-0 text-center pb-6 z-20 pointer-events-none">
+                <!-- Texte en bas -->
+                <div class="text-center z-20 pointer-events-none mt-auto">
                     <h3 class="font-bold tracking-tight text-xl md:text-2xl text-white">Mes services</h3>
                     <div class="flex items-center justify-center gap-1.5 mt-1 text-zinc-400 font-medium text-sm">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
@@ -76,13 +87,21 @@
                 </div>
             </div>
 
-            <!-- Carte 2 : Mes Réalisations -->
-            <div onclick="openModal('modalRealisations')" class="group relative h-80 md:h-96 rounded-[2rem] overflow-hidden bg-[#222222] cursor-pointer transition-transform duration-300 active:scale-[0.98] md:hover:scale-[1.02] border border-white/5 flex flex-col">
-                <div class="flex-1 relative flex items-center justify-center mt-6 pointer-events-none">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80" class="absolute w-32 h-44 md:w-40 md:h-56 object-cover rounded-xl shadow-xl -rotate-6 opacity-60 transition-transform duration-500 group-hover:rotate-[-2deg]" alt="Projet portfolio arrière-plan">
-                    <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80" class="absolute z-10 w-36 h-48 md:w-48 md:h-64 object-cover rounded-xl shadow-2xl transition-transform duration-500 group-hover:scale-105" alt="Portfolio réalisations Tadano Craft">
+            <!-- Carte 2 : Mes Réalisations (Style Linktree) -->
+            <div onclick="openModal('modalRealisations')" class="group relative h-80 md:h-96 rounded-[2rem] overflow-hidden bg-[#222222] cursor-pointer transition-transform duration-300 active:scale-[0.98] md:hover:scale-[1.02] border border-white/5 flex flex-col justify-between p-6">
+                <!-- Groupe d'images Linktree (Paysage superposées) -->
+                <div class="relative w-full h-48 md:h-56 mt-4 flex items-center justify-center pointer-events-none perspective">
+                    <!-- Image Arrière (Légèrement décalée) -->
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" 
+                         class="absolute w-4/5 h-full object-cover rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] -rotate-3 -translate-x-4 opacity-60 transition-all duration-500 group-hover:-translate-x-6 group-hover:-rotate-6" 
+                         alt="Projet portfolio arrière-plan">
+                    <!-- Image Avant (Centrale) -->
+                    <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=600&q=80" 
+                         class="absolute z-10 w-4/5 h-full object-cover rounded-xl shadow-[0_20px_40px_rgba(0,0,0,0.7)] border border-white/10 transition-transform duration-500 group-hover:scale-105" 
+                         alt="Portfolio réalisations Tadano Craft">
                 </div>
-                <div class="shrink-0 text-center pb-6 z-20 pointer-events-none">
+                <!-- Texte en bas -->
+                <div class="text-center z-20 pointer-events-none mt-auto">
                     <h3 class="font-bold tracking-tight text-xl md:text-2xl text-white">Mes réalisations</h3>
                     <div class="flex items-center justify-center gap-1.5 mt-1 text-zinc-400 font-medium text-sm">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
@@ -169,72 +188,148 @@
         </button>
     </div>
 
-    <!-- === MODALES === -->
+    <!-- === MODALES : DESIGN GRILLE === -->
 
     <!-- Modale : Mes Services -->
-    <div id="modalServices" class="fixed inset-0 z-50 bg-tadano transform translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] flex flex-col">
-        <div class="h-16 bg-tadano shrink-0 z-20 flex items-center justify-center relative shadow-md border-b border-white/10">
-            <h2 class="text-white font-black text-xl md:text-2xl uppercase tracking-wider">Mes Services</h2>
-            <button onclick="closeModal('modalServices')" aria-label="Fermer" class="absolute right-4 w-9 h-9 bg-black/20 rounded-full flex items-center justify-center text-white hover:bg-black/40 transition active:scale-95">
+    <div id="modalServices" class="fixed inset-0 z-50 bg-[#111111] transform translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] flex flex-col">
+        <!-- En-tête de la modale -->
+        <div class="h-16 bg-[#1a1a1a] shrink-0 z-20 flex items-center justify-center relative border-b border-white/5 shadow-md">
+            <h2 class="text-white font-black text-lg md:text-xl uppercase tracking-widest">Mes Services</h2>
+            <button onclick="closeModal('modalServices')" aria-label="Fermer" class="absolute right-4 w-9 h-9 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition active:scale-95">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
-        <div class="flex-1 overflow-y-auto no-scrollbar pb-16">
-            <div class="max-w-2xl mx-auto p-4 md:p-8">
-                <img onclick="openLightbox(this.src)" src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=800&q=80" loading="lazy" class="w-full rounded-2xl shadow-xl mb-6 cursor-pointer hover:opacity-95 transition" alt="Design Graphique 2D et 3D">
-                <h3 class="text-2xl font-bold tracking-tight text-white mb-3">Design Graphique 2D & 3D</h3>
-                <p class="text-white/85 font-normal leading-relaxed mb-6">
-                    Je donne vie à l'image de votre marque grâce à des visuels percutants et sur mesure. Création de logo, identité visuelle complète, modélisation 3D : je conçois tout ce dont vous avez besoin pour affirmer votre identité.
-                </p>
+        
+        <!-- Contenu : Grille + Texte structuré -->
+        <div class="flex-1 overflow-y-auto no-scrollbar p-4 md:p-8">
+            <div class="max-w-4xl mx-auto">
+                
+                <!-- Intro du service -->
+                <div class="text-center mb-10 max-w-2xl mx-auto">
+                    <h3 class="text-3xl md:text-4xl font-black tracking-tight text-white mb-4">Design Graphique 2D & 3D</h3>
+                    <p class="text-zinc-400 font-normal leading-relaxed text-lg">
+                        Je donne vie à l'image de votre marque grâce à des visuels percutants et sur mesure. Création de logo, identité visuelle complète, ou encore modélisation 3D : je conçois des outils visuels qui marquent les esprits.
+                    </p>
+                </div>
+
+                <!-- Grille d'images maçonnée (Masonry) -->
+                <div class="columns-1 md:columns-2 gap-4 space-y-4">
+                    <!-- Image 1 -->
+                    <div class="relative break-inside-avoid rounded-2xl overflow-hidden group cursor-pointer border border-white/5">
+                        <img onclick="openLightbox(this.src)" src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=800&q=80" loading="lazy" class="w-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Création Logo">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <span class="text-white font-bold tracking-wide">Création de Logo</span>
+                        </div>
+                    </div>
+                    <!-- Image 2 -->
+                    <div class="relative break-inside-avoid rounded-2xl overflow-hidden group cursor-pointer border border-white/5">
+                        <img onclick="openLightbox(this.src)" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" loading="lazy" class="w-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Modélisation 3D">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <span class="text-white font-bold tracking-wide">Modélisation 3D (Rendu produit)</span>
+                        </div>
+                    </div>
+                    <!-- Image 3 -->
+                    <div class="relative break-inside-avoid rounded-2xl overflow-hidden group cursor-pointer border border-white/5">
+                        <img onclick="openLightbox(this.src)" src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=800&q=80" loading="lazy" class="w-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Identité Visuelle">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <span class="text-white font-bold tracking-wide">Identité Visuelle Globale</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Détails -->
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 bg-[#1a1a1a] p-8 rounded-3xl border border-white/5">
+                    <div>
+                        <h4 class="text-tadano font-bold text-xl mb-3">La Méthode</h4>
+                        <ul class="text-zinc-400 space-y-2">
+                            <li><strong class="text-white">1. Brief :</strong> Analyse de vos besoins et de votre cible.</li>
+                            <li><strong class="text-white">2. Moodboard :</strong> Validation de la direction artistique.</li>
+                            <li><strong class="text-white">3. Conception :</strong> Présentation de maquettes et ajustements.</li>
+                            <li><strong class="text-white">4. Livraison :</strong> Fichiers HD prêts pour le web et l'impression.</li>
+                        </ul>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <h4 class="text-white font-bold text-xl mb-3">Besoin d'une identité visuelle ?</h4>
+                        <p class="text-zinc-400 mb-4">Que ce soit pour une création de A à Z ou une refonte, discutons de votre projet pour établir un devis précis.</p>
+                        <button onclick="closeModal('modalServices'); setTimeout(() => openModal('modalContact'), 300);" class="bg-white text-black font-bold py-3 px-6 rounded-xl hover:bg-zinc-200 transition text-center">
+                            Demander un devis
+                        </button>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>
 
-    <!-- Modale : Mes Réalisations -->
-    <div id="modalRealisations" class="fixed inset-0 z-50 bg-tadano transform translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] flex flex-col">
-        <div class="h-16 bg-tadano shrink-0 z-20 flex items-center justify-center relative shadow-md border-b border-white/10">
-            <h2 class="text-white font-black text-xl md:text-2xl uppercase tracking-wider">Mes Réalisations</h2>
-            <button onclick="closeModal('modalRealisations')" aria-label="Fermer" class="absolute right-4 w-9 h-9 bg-black/20 rounded-full flex items-center justify-center text-white hover:bg-black/40 transition active:scale-95">
+    <!-- Modale : Mes Réalisations (Même structure) -->
+    <div id="modalRealisations" class="fixed inset-0 z-50 bg-[#111111] transform translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] flex flex-col">
+        <!-- En-tête de la modale -->
+        <div class="h-16 bg-[#1a1a1a] shrink-0 z-20 flex items-center justify-center relative border-b border-white/5 shadow-md">
+            <h2 class="text-white font-black text-lg md:text-xl uppercase tracking-widest">Mes Réalisations</h2>
+            <button onclick="closeModal('modalRealisations')" aria-label="Fermer" class="absolute right-4 w-9 h-9 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition active:scale-95">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
-        <div class="flex-1 overflow-y-auto no-scrollbar pb-16">
-            <div class="max-w-2xl mx-auto p-4 md:p-8 space-y-6">
-                <img onclick="openLightbox(this.src)" src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=800&q=80" loading="lazy" class="w-full rounded-2xl shadow-xl cursor-pointer hover:opacity-95 transition" alt="Objets promotionnels imprimés en 3D">
-                <p class="text-white/85 font-normal leading-relaxed">Création d'objets promotionnels imprimés en 3D avec finitions premium et modélisations personnalisées.</p>
+        
+        <!-- Contenu -->
+        <div class="flex-1 overflow-y-auto no-scrollbar p-4 md:p-8">
+            <div class="max-w-4xl mx-auto">
+                
+                <div class="text-center mb-10 max-w-2xl mx-auto">
+                    <h3 class="text-3xl md:text-4xl font-black tracking-tight text-white mb-4">Portfolio Récent</h3>
+                    <p class="text-zinc-400 font-normal leading-relaxed text-lg">
+                        Découvrez une sélection de mes derniers projets. De l'objet publicitaire imprimé en 3D à l'identité visuelle de commerce local.
+                    </p>
+                </div>
+
+                <div class="columns-1 md:columns-2 gap-4 space-y-4">
+                    <div class="relative break-inside-avoid rounded-2xl overflow-hidden group cursor-pointer border border-white/5">
+                        <img onclick="openLightbox(this.src)" src="https://images.unsplash.com/photo-1633511090164-b4a1618b76ce?auto=format&fit=crop&w=800&q=80" loading="lazy" class="w-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Impression 3D">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <span class="text-white font-bold tracking-wide">Goodies Imprimés en 3D</span>
+                        </div>
+                    </div>
+                    <div class="relative break-inside-avoid rounded-2xl overflow-hidden group cursor-pointer border border-white/5">
+                        <img onclick="openLightbox(this.src)" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" loading="lazy" class="w-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Affiche">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <span class="text-white font-bold tracking-wide">Affiche Typographique</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 
     <!-- Modale : Formulaire de Contact -->
     <div id="modalContact" class="fixed inset-0 z-50 transform translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] flex flex-col justify-end md:justify-center bg-black/60 backdrop-blur-sm">
-        <div class="bg-tadano w-full md:max-w-lg mx-auto rounded-t-3xl md:rounded-3xl shadow-2xl overflow-hidden relative">
+        <div class="bg-[#1a1a1a] w-full md:max-w-lg mx-auto rounded-t-3xl md:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/5 overflow-hidden relative">
             <div class="absolute top-4 right-4 z-20">
-                <button onclick="closeModal('modalContact')" aria-label="Fermer" class="w-9 h-9 bg-black/20 rounded-full flex items-center justify-center text-white hover:bg-black/40 transition active:scale-95">
+                <button onclick="closeModal('modalContact')" aria-label="Fermer" class="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition active:scale-95">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
             <div class="p-8 pt-10">
                 <h2 class="text-white font-black tracking-tight text-2xl md:text-3xl mb-2 text-center">Un projet en tête ?</h2>
-                <p class="text-white/80 font-normal text-center mb-6 text-sm">Laissez-moi vos coordonnées, je vous recontacte rapidement.</p>
+                <p class="text-zinc-400 font-normal text-center mb-6 text-sm">Laissez-moi vos coordonnées, je vous recontacte rapidement.</p>
                 
                 <form id="contactForm" class="space-y-4">
                     <div>
                         <label class="block text-white text-sm font-medium mb-1">Votre idée de projet *</label>
-                        <textarea name="projet" rows="3" required class="w-full rounded-xl bg-black/20 border border-white/20 text-white font-normal placeholder-white/40 px-4 py-2 outline-none focus:border-white/60 transition" placeholder="Décrivez votre besoin..."></textarea>
+                        <textarea name="projet" rows="3" required class="w-full rounded-xl bg-black border border-white/10 text-white font-normal placeholder-zinc-600 px-4 py-3 outline-none focus:border-tadano transition" placeholder="Décrivez votre besoin..."></textarea>
                     </div>
                     <div>
                         <label class="block text-white text-sm font-medium mb-1">Votre E-mail *</label>
-                        <input type="email" name="email" required class="w-full rounded-xl bg-black/20 border border-white/20 text-white font-normal placeholder-white/40 px-4 py-3 outline-none focus:border-white/60 transition" placeholder="contact@exemple.com">
+                        <input type="email" name="email" required class="w-full rounded-xl bg-black border border-white/10 text-white font-normal placeholder-zinc-600 px-4 py-3 outline-none focus:border-tadano transition" placeholder="contact@exemple.com">
                     </div>
                     <div>
                         <label class="block text-white text-sm font-medium mb-1">Numéro de téléphone (Facultatif)</label>
-                        <input type="tel" name="phone" class="w-full rounded-xl bg-black/20 border border-white/20 text-white font-normal placeholder-white/40 px-4 py-3 outline-none focus:border-white/60 transition" placeholder="04...">
+                        <input type="tel" name="phone" class="w-full rounded-xl bg-black border border-white/10 text-white font-normal placeholder-zinc-600 px-4 py-3 outline-none focus:border-tadano transition" placeholder="04...">
                     </div>
-                    <button id="submitBtn" type="submit" class="w-full bg-white text-tadano font-bold text-lg py-4 rounded-xl shadow-lg hover:bg-zinc-100 transition active:scale-[0.98] mt-2">
+                    <button id="submitBtn" type="submit" class="w-full bg-tadano text-white font-bold text-lg py-4 rounded-xl shadow-[0_8px_20px_rgba(127,43,63,0.3)] hover:bg-[#99344c] transition active:scale-[0.98] mt-2">
                         Envoyer ma demande
                     </button>
-                    <p id="successMsg" class="hidden text-green-300 text-center font-medium mt-2 text-sm">Message envoyé avec succès !</p>
+                    <p id="successMsg" class="hidden text-green-400 text-center font-medium mt-2 text-sm">Message envoyé avec succès !</p>
                 </form>
             </div>
         </div>
