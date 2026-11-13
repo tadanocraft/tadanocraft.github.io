@@ -59,9 +59,40 @@ window.openLightbox = openLightbox;
 window.closeLightbox = closeLightbox;
 
 /* =========================================
-   3. Écouteurs d'événements au chargement
+   3. Écouteurs d'événements (Clavier & Formulaires)
    ========================================= */
 document.addEventListener('DOMContentLoaded', () => {
+
+    // Fermeture avec la touche Échap (Escape)
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const lightbox = document.getElementById('lightbox');
+            // 1. Si le zoom photo est ouvert, on le ferme en priorité
+            if (lightbox && !lightbox.classList.contains('hidden')) {
+                closeLightbox();
+                return;
+            }
+
+            // 2. Sinon, on ferme la fenêtre modale ouverte
+            const modals = ['modalServices', 'modalRealisations', 'modalContact'];
+            modals.forEach(id => {
+                const modal = document.getElementById(id);
+                if (modal && !modal.classList.contains('translate-y-full')) {
+                    closeModal(id);
+                }
+            });
+        }
+    });
+
+    // Fermer la modale Contact en cliquant à côté de la carte
+    const modalContact = document.getElementById('modalContact');
+    if (modalContact) {
+        modalContact.addEventListener('click', (e) => {
+            if (e.target === modalContact) {
+                closeModal('modalContact');
+            }
+        });
+    }
 
     // Gestion du Formulaire Google Apps Script
     const contactForm = document.getElementById('contactForm');
@@ -78,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(this);
             
             // REMPLACER PAR TON URL GOOGLE APPS SCRIPT
-            const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxhgmqzwOXgOUH10gPrHjSa_fP2L7dgpBKHNuihavsHZg6MXFZjcQUZsVW5tzezaFbN/exec";
+            const GOOGLE_SCRIPT_URL = "VOTRE_URL_GOOGLE_SCRIPT_ICI";
             
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
