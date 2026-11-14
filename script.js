@@ -66,7 +66,6 @@ function closeLightbox() {
     }, 300);
 }
 
-// Exposition globale par sécurité
 window.openModal = openModal;
 window.closeModal = closeModal;
 window.openLightbox = openLightbox;
@@ -77,7 +76,6 @@ window.closeLightbox = closeLightbox;
    ========================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Délégation globale des clics (Modales, Lightbox, Fermetures)
     document.addEventListener('click', (e) => {
         const openTrigger = e.target.closest('[data-modal-open]');
         if (openTrigger) {
@@ -115,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Accessibilité clavier (Entrée / Espace sur les cartes interactives)
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
             const active = document.activeElement;
@@ -125,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Fermeture avec la touche Échap
         if (e.key === 'Escape') {
             const lightbox = document.getElementById('lightbox');
             if (lightbox && lightbox.classList.contains('is-open')) {
@@ -142,7 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Envoi du formulaire de contact via Google Apps Script
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {

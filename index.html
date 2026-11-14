@@ -39,157 +39,162 @@
 </head>
 <body class="page-wrapper">
 
-    <!-- En-tête : Identité du Studio -->
-    <header class="site-header animate-slide-up" style="--delay: 100ms;">
-        
-        <!-- Fond GIF avec fondu (Nouveau) -->
-        <div class="header-hero-bg">
-            <!-- Remplace le src par le chemin de ton GIF -->
-            <img src="https://64.media.tumblr.com/6b9d5fbcc7d6ebe2c3636ed25a550787/f02e19988b551a66-43/s1280x1920/311bc898f00d0bea349351a7a36333f9f659f645.gif" 
-                 alt="Animation de fond" 
-                 class="hero-gif">
-        </div>
+    <!-- 1. LE FOND GIF PLEINE LARGEUR (Sorti du conteneur central) -->
+    <div class="header-hero-bg" aria-hidden="true">
+        <img src="https://i.pinimg.com/originals/eb/50/87/eb50875a68b04b0480fa929af2c7547c.gif" 
+             alt="" 
+             width="1920" 
+             height="1080" 
+             loading="eager" 
+             onerror="this.style.display='none'"
+             class="hero-gif">
+    </div>
 
-        <!-- Contenu Logo (Au-dessus du fond) -->
-        <div class="header-content">
-            <img 
-                src="media/images/tranche1.webp" 
-                alt="TADANO CRAFT — Studio Design 2D et 3D" 
-                width="1000" 
-                height="1000" 
-                loading="eager" 
-                class="logo-header">
-            <h1 class="subtitle-header">
-                <span class="sr-only">Tadano Craft — </span>Designs 2D, Créations 3D
-            </h1>
-        </div>
-    </header>
+    <!-- 2. LE CONTENEUR CENTRAL (Logo + Cartes) -->
+    <div class="linktree-shell">
 
-    <!-- Conteneur Principal -->
-    <main class="main-container">
-
-        <!-- Grille Bento 4 Cartes -->
-        <section aria-label="Navigation principale du studio" class="bento-grid animate-slide-up" style="--delay: 200ms;">
-
-            <!-- Carte 1 : Mes Services (Style Linktree 3 images) -->
-            <article class="bento-card bento-card--gallery" role="button" tabindex="0" data-modal-open="modalServices">
-                <div class="card-stack">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=600&amp;q=80" 
-                         width="600" height="400" loading="lazy"
-                         class="card-stack__img card-stack__img--left" 
-                         alt="Aperçu création graphique 1">
-                    <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&amp;fit=crop&amp;w=600&amp;q=80" 
-                         width="600" height="400" loading="lazy"
-                         class="card-stack__img card-stack__img--right" 
-                         alt="Aperçu création graphique 2">
-                    <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&amp;fit=crop&amp;w=600&amp;q=80" 
-                         width="600" height="400" loading="eager"
-                         class="card-stack__img card-stack__img--front" 
-                         alt="Services Design Graphique 2D et 3D">
-                </div>
-                <div class="bento-card__footer">
-                    <h2 class="bento-card__title">Mes services</h2>
-                    <p class="bento-card__meta">
-                        <svg class="icon-sm" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
-                        <span>Gallery • Design 2D &amp; 3D</span>
-                    </p>
-                </div>
-            </article>
-
-            <!-- Carte 2 : Mes Réalisations (Style Linktree 2 images) -->
-            <article class="bento-card bento-card--gallery" role="button" tabindex="0" data-modal-open="modalRealisations">
-                <div class="card-stack">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=600&amp;q=80" 
-                         width="600" height="400" loading="lazy"
-                         class="card-stack__img card-stack__img--back" 
-                         alt="Projet portfolio arrière-plan">
-                    <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&amp;fit=crop&amp;w=600&amp;q=80" 
-                         width="600" height="400" loading="eager"
-                         class="card-stack__img card-stack__img--front" 
-                         alt="Portfolio réalisations Tadano Craft">
-                </div>
-                <div class="bento-card__footer">
-                    <h2 class="bento-card__title">Mes réalisations</h2>
-                    <p class="bento-card__meta">
-                        <svg class="icon-sm" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
-                        <span>Gallery • Portfolio</span>
-                    </p>
-                </div>
-            </article>
-
-            <!-- Carte 3 : Studio Créa (Lightbox) -->
-            <article class="bento-card bento-card--cover" role="button" tabindex="0" data-lightbox-src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=1200&amp;q=80">
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=800&amp;q=80" 
-                     width="800" height="800" loading="lazy" 
-                     class="bento-card__bg" 
-                     alt="Studio Créa Tadano Craft">
-                <div class="bento-card__gradient"></div>
-                <div class="bento-card__overlay">
-                    <h2 class="bento-card__title">Studio Créa</h2>
-                    <p class="bento-card__subtitle">Espace &amp; Projets</p>
-                </div>
-            </article>
-
-            <!-- Carte 4 : Instagram -->
-            <a href="https://www.instagram.com/tadanocraft/" target="_blank" rel="noopener noreferrer" class="bento-card bento-card--social">
-                <svg class="icon-xl text-brand" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                <h2 class="bento-card__title">Instagram</h2>
-                <p class="bento-card__meta">@tadanocraft</p>
-            </a>
-
-        </section>
-
-        <!-- Section 3D Interactive -->
-        <section class="section-block animate-slide-up" style="--delay: 300ms;">
-            <h2 class="section-title">Mes Projets 3D</h2>
-            <div class="viewer-card">
-                <model-viewer 
-                    src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
-                    alt="Modèle 3D interactif Tadano Craft"
-                    auto-rotate
-                    camera-controls
-                    disable-pan
-                    shadow-intensity="1"
-                    environment-image="neutral"
-                    exposure="1.2"
-                    class="viewer-card__canvas">
-                </model-viewer>
-                <div class="viewer-badge">
-                    <svg class="icon-sm text-brand animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
-                    <span>Tournez à 360°</span>
-                </div>
+        <!-- En-tête : Logo uniquement -->
+        <header class="site-header animate-slide-up" style="--delay: 100ms;">
+            <div class="header-content">
+                <img 
+                    src="media/images/tranche1.webp" 
+                    alt="TADANO CRAFT — Studio Design 2D et 3D" 
+                    width="1000" 
+                    height="1000" 
+                    loading="eager" 
+                    class="logo-header">
+                <h1 class="subtitle-header">
+                    <span class="sr-only">Tadano Craft — </span>Designs 2D, Créations 3D
+                </h1>
             </div>
-        </section>
+        </header>
 
-        <!-- Section Contact et Infos -->
-        <section class="section-block animate-slide-up" style="--delay: 400ms;">
-            <h2 class="section-title">Contact et infos</h2>
-            <div class="social-grid">
-                <a href="mailto:contact@tadanocraft.com" class="social-tile">
-                    <svg class="icon-md text-brand" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                    <span>Mail</span>
-                </a>
-                <a href="https://www.facebook.com/profile.php?id=61594055529093" target="_blank" rel="noopener noreferrer" class="social-tile">
-                    <svg class="icon-md text-brand" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.53 11.68 6 13.52 6H16v3h-2c-.55 0-1 .45-1 1v2h3l-1 3h-2v6.8c4.56-.93 8-4.96 8-9.8z"/></svg>
-                    <span>Facebook</span>
-                </a>
-                <a href="https://fr.pinterest.com/tadanocraft/" target="_blank" rel="noopener noreferrer" class="social-tile">
-                    <svg class="icon-md text-brand" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.195 0 7.456 2.99 7.456 6.985 0 4.171-2.628 7.535-6.284 7.535-1.226 0-2.382-.638-2.775-1.39l-.756 2.877c-.274 1.054-1.017 2.37-1.517 3.176 1.15.352 2.36.541 3.6.541 6.621 0 11.989-5.367 11.989-11.987C24.008 5.367 18.638 0 12.017 0z"/></svg>
-                    <span>Pinterest</span>
-                </a>
-            </div>
+        <!-- Conteneur Principal -->
+        <main class="main-container">
 
-            <a href="https://www.google.com/maps/place/Charleroi" target="_blank" rel="noopener noreferrer" class="location-card">
-                <div class="location-card__bg"></div>
-                <div class="location-card__gradient"></div>
-                <div class="location-card__pin">
-                    <svg class="icon-md text-brand" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <!-- Grille Bento 4 Cartes -->
+            <section aria-label="Navigation principale du studio" class="bento-grid animate-slide-up" style="--delay: 200ms;">
+
+                <!-- Carte 1 : Mes Services (Style Linktree 3 images) -->
+                <article class="bento-card bento-card--gallery" role="button" tabindex="0" data-modal-open="modalServices">
+                    <div class="card-stack">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=600&amp;q=80" 
+                             width="600" height="400" loading="lazy"
+                             class="card-stack__img card-stack__img--left" 
+                             alt="Aperçu création graphique 1">
+                        <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&amp;fit=crop&amp;w=600&amp;q=80" 
+                             width="600" height="400" loading="lazy"
+                             class="card-stack__img card-stack__img--right" 
+                             alt="Aperçu création graphique 2">
+                        <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&amp;fit=crop&amp;w=600&amp;q=80" 
+                             width="600" height="400" loading="eager"
+                             class="card-stack__img card-stack__img--front" 
+                             alt="Services Design Graphique 2D et 3D">
+                    </div>
+                    <div class="bento-card__footer">
+                        <h2 class="bento-card__title">Mes services</h2>
+                        <p class="bento-card__meta">
+                            <svg class="icon-sm" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
+                            <span>Gallery • Design 2D &amp; 3D</span>
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Carte 2 : Mes Réalisations (Style Linktree 2 images) -->
+                <article class="bento-card bento-card--gallery" role="button" tabindex="0" data-modal-open="modalRealisations">
+                    <div class="card-stack">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=600&amp;q=80" 
+                             width="600" height="400" loading="lazy"
+                             class="card-stack__img card-stack__img--back" 
+                             alt="Projet portfolio arrière-plan">
+                        <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&amp;fit=crop&amp;w=600&amp;q=80" 
+                             width="600" height="400" loading="eager"
+                             class="card-stack__img card-stack__img--front" 
+                             alt="Portfolio réalisations Tadano Craft">
+                    </div>
+                    <div class="bento-card__footer">
+                        <h2 class="bento-card__title">Mes réalisations</h2>
+                        <p class="bento-card__meta">
+                            <svg class="icon-sm" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
+                            <span>Gallery • Portfolio</span>
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Carte 3 : Studio Créa (Lightbox) -->
+                <article class="bento-card bento-card--cover" role="button" tabindex="0" data-lightbox-src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=1200&amp;q=80">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=800&amp;q=80" 
+                         width="800" height="800" loading="lazy" 
+                         class="bento-card__bg" 
+                         alt="Studio Créa Tadano Craft">
+                    <div class="bento-card__gradient"></div>
+                    <div class="bento-card__overlay">
+                        <h2 class="bento-card__title">Studio Créa</h2>
+                        <p class="bento-card__subtitle">Espace &amp; Projets</p>
+                    </div>
+                </article>
+
+                <!-- Carte 4 : Instagram -->
+                <a href="https://www.instagram.com/tadanocraft/" target="_blank" rel="noopener noreferrer" class="bento-card bento-card--social">
+                    <svg class="icon-xl text-brand" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    <h2 class="bento-card__title">Instagram</h2>
+                    <p class="bento-card__meta">@tadanocraft</p>
+                </a>
+
+            </section>
+
+            <!-- Section 3D Interactive -->
+            <section class="section-block animate-slide-up" style="--delay: 300ms;">
+                <h2 class="section-title">Mes Projets 3D</h2>
+                <div class="viewer-card">
+                    <model-viewer 
+                        src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+                        alt="Modèle 3D interactif Tadano Craft"
+                        auto-rotate
+                        camera-controls
+                        disable-pan
+                        shadow-intensity="1"
+                        environment-image="neutral"
+                        exposure="1.2"
+                        class="viewer-card__canvas">
+                    </model-viewer>
+                    <div class="viewer-badge">
+                        <svg class="icon-sm text-brand animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
+                        <span>Tournez à 360°</span>
+                    </div>
                 </div>
-                <h3 class="location-card__label">Livraison Charleroi et alentours</h3>
-            </a>
-        </section>
+            </section>
 
-    </main>
+            <!-- Section Contact et Infos -->
+            <section class="section-block animate-slide-up" style="--delay: 400ms;">
+                <h2 class="section-title">Contact et infos</h2>
+                <div class="social-grid">
+                    <a href="mailto:contact@tadanocraft.com" class="social-tile">
+                        <svg class="icon-md text-brand" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        <span>Mail</span>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61594055529093" target="_blank" rel="noopener noreferrer" class="social-tile">
+                        <svg class="icon-md text-brand" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.53 11.68 6 13.52 6H16v3h-2c-.55 0-1 .45-1 1v2h3l-1 3h-2v6.8c4.56-.93 8-4.96 8-9.8z"/></svg>
+                        <span>Facebook</span>
+                    </a>
+                    <a href="https://fr.pinterest.com/tadanocraft/" target="_blank" rel="noopener noreferrer" class="social-tile">
+                        <svg class="icon-md text-brand" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.195 0 7.456 2.99 7.456 6.985 0 4.171-2.628 7.535-6.284 7.535-1.226 0-2.382-.638-2.775-1.39l-.756 2.877c-.274 1.054-1.017 2.37-1.517 3.176 1.15.352 2.36.541 3.6.541 6.621 0 11.989-5.367 11.989-11.987C24.008 5.367 18.638 0 12.017 0z"/></svg>
+                        <span>Pinterest</span>
+                    </a>
+                </div>
+
+                <a href="https://www.google.com/maps/place/Charleroi" target="_blank" rel="noopener noreferrer" class="location-card">
+                    <div class="location-card__bg"></div>
+                    <div class="location-card__gradient"></div>
+                    <div class="location-card__pin">
+                        <svg class="icon-md text-brand" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    </div>
+                    <h3 class="location-card__label">Livraison Charleroi et alentours</h3>
+                </a>
+            </section>
+
+        </main>
+    </div>
 
     <!-- Bouton d'action flottant -->
     <div class="fab-wrapper animate-slide-up" style="--delay: 500ms;">
