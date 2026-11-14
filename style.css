@@ -127,14 +127,14 @@ html, body {
     padding: clamp(7.5rem, 21vh, 13.5rem) 4% clamp(1.75rem, 4vh, 2.75rem);
 }
 
-/* Fond GIF collé à 100% aux bords gauche/droit/haut sans coins arrondis */
+/* Fond GIF collé à 100% aux bords de l'écran, sans coins arrondis ni débordement */
 .header-hero-bg {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     width: 100%;
-    height: clamp(5rem, 85%, 50rem);
+    height: clamp(18rem, 45vh, 28rem);
     z-index: 0;
     overflow: hidden;
     pointer-events: none;
@@ -436,7 +436,7 @@ html, body {
 }
 
 /* ==========================================================================
-   6. CONTACT, RÉSEAUX & LOCALISATION
+   6. CONTACT, RÉSEAUX & LOCALISATION (GOOGLE MAPS DARK MODE)
    ========================================================================== */
 .social-grid {
     display: grid;
@@ -493,7 +493,6 @@ html, body {
     }
 }
 
-/* Aperçu réel Google Maps converti en Dark Mode et recadré */
 .location-card__map {
     position: absolute;
     top: -60%;
@@ -540,7 +539,7 @@ html, body {
 }
 
 /* ==========================================================================
-   7. BOUTON D'ACTION FLOTTANT (FAB) & EFFETS LUMIÈRE
+   7. BOUTON FLOTTANT (FAB) & EFFETS DE LUMIÈRE GLOBAUX
    ========================================================================== */
 .fab-wrapper {
     position: fixed;
@@ -586,7 +585,7 @@ html, body {
     transform: scale(0.94);
 }
 
-/* Reflet global sans retour arrière sur toutes les cartes et boutons */
+/* Reflet lumineux unidirectionnel (sans retour arrière au départ de la souris) */
 .bento-card,
 .social-tile,
 .location-card,
@@ -628,7 +627,7 @@ html, body {
 }
 
 /* ==========================================================================
-   8. MODALES (GALERIES & FORMULAIRE)
+   8. MODALES (SERVICES DÉTAILLÉS, PORTFOLIO PHOTO & CONTACT)
    ========================================================================== */
 .btn-close {
     width: 2.25rem;
@@ -726,10 +725,10 @@ html, body {
     line-height: 1.65;
 }
 
-/* Grille Masonry */
+/* Grille Masonry (Photos pures pour Portfolio / Cartes détaillées pour Services) */
 .masonry-grid {
     columns: 1;
-    column-gap: 1rem;
+    column-gap: 1.5rem;
 }
 
 @media (min-width: 48em) {
@@ -741,39 +740,81 @@ html, body {
 .masonry-item {
     position: relative;
     break-inside: avoid;
-    margin: 0 0 1rem;
+    margin: 0 0 1.5rem;
     border-radius: var(--radius-tile);
+    background-color: var(--color-surface);
     border: 1px solid var(--color-border);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Variante Portfolio : 100% Photo pure */
+.masonry-item[data-lightbox-src] {
     cursor: pointer;
 }
 
-.masonry-item img {
+.masonry-item > img {
     display: block;
     width: 100%;
     height: auto;
     transition: transform 0.5s var(--ease-smooth);
 }
 
-.masonry-item:hover img {
+.masonry-item:hover > img {
     transform: scale(1.05);
 }
 
-.masonry-item__caption {
+/* Variante Services : Photo cliquable + Texte descriptif */
+.masonry-item__image-wrapper {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.masonry-item__image-wrapper img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s var(--ease-smooth);
+}
+
+.masonry-item__image-wrapper:hover img {
+    transform: scale(1.05);
+}
+
+.masonry-item__zoom-hint {
     position: absolute;
     inset: 0;
     display: flex;
-    align-items: flex-end;
-    padding: 1rem;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent 55%);
-    font-weight: 700;
-    letter-spacing: 0.02em;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: var(--color-text);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-.masonry-item:hover .masonry-item__caption {
+.masonry-item__image-wrapper:hover .masonry-item__zoom-hint {
     opacity: 1;
+}
+
+.masonry-item__body {
+    padding: 1.25rem;
+}
+
+.masonry-item__title {
+    margin: 0 0 0.5rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.masonry-item__desc {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
 }
 
 /* Bloc Méthode & Devis */
