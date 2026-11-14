@@ -134,7 +134,7 @@ html, body {
     left: 0;
     right: 0;
     width: 100%;
-    height: clamp(18rem, 45vh, 28rem);
+    height: clamp(5rem, 85%, 50rem);
     z-index: 0;
     overflow: hidden;
     pointer-events: none;
