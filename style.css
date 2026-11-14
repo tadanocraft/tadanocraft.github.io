@@ -160,7 +160,7 @@ html, body {
 
 .logo-header {
     display: block;
-    width: clamp(12rem, 100%, 55rem);
+    width: clamp(12rem, 70%, 55rem);
     max-width: 100%;
     height: auto;
     margin: 0 auto;
@@ -376,6 +376,31 @@ html, body {
     transform: scale(1.12);
 }
 
+/* Badge flottant sur la carte dernière publication Instagram */
+.insta-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 20;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999rem;
+    background-color: rgba(17, 17, 17, 0.72);
+    backdrop-filter: blur(0.625rem);
+    -webkit-backdrop-filter: blur(0.625rem);
+    border: 1px solid var(--color-border-strong);
+    color: var(--color-text);
+    font-size: 0.75rem;
+    font-weight: 600;
+    pointer-events: none;
+}
+
+.insta-badge .icon-sm {
+    color: var(--color-brand);
+}
+
 /* ==========================================================================
    5. SECTIONS & VISIONNEUSE 3D
    ========================================================================== */
@@ -480,24 +505,43 @@ html, body {
     transition: transform 0.3s var(--ease-smooth);
 }
 
+.location-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: clamp(8.5rem, 15vh, 10.5rem);
+    border-radius: var(--radius-tile);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border-strong);
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.3s var(--ease-smooth), border-color 0.3s ease;
+}
+
 @media (min-width: 36em) {
     .location-card:hover {
         transform: scale(1.015);
+        border-color: rgba(255, 255, 255, 0.25);
     }
 }
 
-.location-card__bg {
+/* Aperçu réel Google Maps converti en Dark Mode et recadré */
+.location-card__map {
     position: absolute;
-    inset: 0;
-    background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.4;
-    transition: transform 0.5s var(--ease-smooth);
+    top: -60%;
+    left: -5%;
+    width: 110%;
+    height: 220%;
+    border: 0;
+    pointer-events: none;
+    opacity: 0.72;
+    filter: invert(90%) hue-rotate(180deg) contrast(95%) saturate(75%);
+    transition: transform 0.5s var(--ease-smooth), opacity 0.3s ease;
 }
 
-.location-card:hover .location-card__bg {
-    transform: scale(1.05);
+.location-card:hover .location-card__map {
+    transform: scale(1.04);
+    opacity: 0.88;
 }
 
 .location-card__gradient {
@@ -526,6 +570,70 @@ html, body {
     font-weight: 600;
     color: var(--color-text);
 }
+
+/* ==========================================================================
+   EFFET DE REFLET GLOBAL (TOUTES LES CARTES & BOUTONS)
+   ========================================================================== */
+.bento-card,
+.social-tile,
+.location-card,
+.btn-fab,
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+.bento-card::after,
+.social-tile::after,
+.location-card::after,
+.btn-fab::after,
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.14) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    z-index: 30;
+    pointer-events: none;
+}
+
+.bento-card:hover::after,
+.social-tile:hover::after,
+.location-card:hover::after,
+.btn-fab:hover::after,
+.btn-primary:hover::after {
+    left: 200%;
+    transition: left 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   EFFET DE LUEUR (PULSE) SUR LE BOUTON CONTACT
+   ========================================================================== */
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 0 0 rgba(127, 43, 63, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(127, 43, 63, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(127, 43, 63, 0); }
+}
+
+.btn-fab {
+    /* Remplace l'ombre fixe par l'animation continue */
+    animation: pulseGlow 2.5s infinite;
+}
+
+.btn-fab:hover {
+    /* Arrête la pulsation et met une lueur fixe forte au survol */
+    animation: none;
+    box-shadow: 0 0 30px rgba(127, 43, 63, 0.8);
+}
+
 
 /* ==========================================================================
    7. BOUTON D'ACTION FLOTTANT (FAB)

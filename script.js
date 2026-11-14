@@ -111,6 +111,33 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.classList.contains('modal-backdrop')) {
             closeModal(e.target.id);
         }
+// Récupération automatique de la dernière publication Instagram (via Behold.so)
+    const BEHOLD_FEED_URL = 'VOTRE_URL_BEHOLD_ICI';
+    const instaCard = document.getElementById('instaCard');
+    const instaPostImg = document.getElementById('instaPostImg');
+
+    if (instaCard && instaPostImg && BEHOLD_FEED_URL !== 'https://feeds.behold.so/7axuN4we2Mc4uPPQrSop') {
+        fetch(BEHOLD_FEED_URL)
+            .then(response => response.json())
+            .then(data => {
+                const posts = Array.isArray(data) ? data : data.posts;
+                if (!posts || posts.length === 0) return;
+
+                const latestPost = posts[0];
+                const imageUrl = latestPost.sizes?.medium?.mediaUrl || latestPost.mediaUrl || latestPost.thumbnailUrl;
+
+                if (imageUrl) {
+                    instaPostImg.src = imageUrl;
+                }
+                if (latestPost.permalink) {
+                    instaCard.href = latestPost.permalink;
+                }
+                if (latestPost.caption) {
+                    instaPostImg.alt = latestPost.caption.slice(0, 120);
+                }
+            })
+            .catch(err => console.warn('Flux Instagram en mode secours :', err));
+    }
     });
 
     document.addEventListener('keydown', (e) => {
