@@ -101,11 +101,41 @@ html, body {
 .icon-xl { width: 4rem; height: 4rem; flex-shrink: 0; }
 
 /* ==========================================================================
-   3. EN-TÊTE (HEADER) & CONTENEUR
+   3. EN-TÊTE (HEADER) & FOND GIF
    ========================================================================== */
 .site-header {
+    position: relative;
     text-align: center;
-    padding: clamp(3.5rem, 9vh, 6.5rem) 1rem clamp(2.5rem, 6vh, 4.5rem);
+    /* On augmente le padding-top pour laisser la place au GIF au-dessus du logo */
+    padding: clamp(12rem, 30vh, 22rem) 1rem clamp(2.5rem, 6vh, 4.5rem);
+}
+
+/* Conteneur du GIF en arrière-plan */
+.header-hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* Le GIF descend jusqu'à 80% de la hauteur de l'en-tête */
+    height: 80%; 
+    z-index: 0;
+    pointer-events: none;
+    /* Effet de fondu : 100% visible en haut (black), 0% visible en bas (transparent) */
+    -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+}
+
+.hero-gif {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6; /* Assombrit légèrement le GIF pour ne pas agresser l'oeil */
+}
+
+/* Assure que le logo et le texte restent cliquables/visibles par-dessus */
+.header-content {
+    position: relative;
+    z-index: 10;
 }
 
 .logo-header {
@@ -115,7 +145,7 @@ html, body {
     height: auto;
     margin: 0 auto;
     object-fit: contain;
-    filter: drop-shadow(0 25px 25px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 25px 25px rgba(0, 0, 0, 0.7));
     pointer-events: none;
 }
 
@@ -126,13 +156,6 @@ html, body {
     font-weight: 500;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-}
-
-.main-container {
-    width: 100%;
-    max-width: 56rem;
-    margin: 0 auto;
-    padding: 0 1rem;
 }
 
 /* ==========================================================================
