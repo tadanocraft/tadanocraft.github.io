@@ -34,24 +34,24 @@
     <!-- Visionneuse 3D Google -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
 
-    <!-- Feuille de styles principale -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Feuille de styles principale (avec paramètre anti-cache) -->
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body class="page-wrapper">
 
-    <!-- 1. LE FOND GIF PLEINE LARGEUR (Sorti du conteneur central) -->
+    <!-- 1. FOND GIF PLEINE LARGEUR (Collé à 100% aux bords de l'écran) -->
     <div class="header-hero-bg" aria-hidden="true">
-        <!-- Dimensions retirées pour s'adapter à 100% -->
         <img src="https://i.pinimg.com/originals/eb/50/87/eb50875a68b04b0480fa929af2c7547c.gif" 
              alt="" 
              loading="eager" 
+             onerror="this.style.display='none'"
              class="hero-gif">
     </div>
 
-    <!-- 2. LE CONTENEUR CENTRAL (Logo + Cartes) -->
+    <!-- 2. CONTENEUR CENTRAL RESPONSIVE (Logo + Cartes) -->
     <div class="linktree-shell">
 
-        <!-- En-tête : Logo uniquement -->
+        <!-- En-tête : Identité du Studio -->
         <header class="site-header animate-slide-up" style="--delay: 100ms;">
             <div class="header-content">
                 <img 
@@ -132,12 +132,10 @@
                     </div>
                 </article>
 
-                <!-- Carte 4 : Instagram (Dernière publication) -->
+                <!-- Carte 4 : Instagram (Dernière publication via Behold.so) -->
                 <a id="instaCard" href="https://www.instagram.com/tadanocraft/" target="_blank" rel="noopener noreferrer" class="bento-card bento-card--cover">
-                    <!-- Correction de la balise onerror -->
                     <img id="instaPostImg"
-                         src="media/images/insta-last.webp" 
-                         onerror="this.src='https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&amp;fit=crop&amp;w=800&amp;q=80'"
+                         src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&amp;fit=crop&amp;w=800&amp;q=80" 
                          width="800" height="800" loading="lazy" 
                          class="bento-card__bg" 
                          alt="Dernière publication Instagram de Tadano Craft">
@@ -196,16 +194,16 @@
 
                 <a href="https://www.google.com/maps/place/Charleroi" target="_blank" rel="noopener noreferrer" class="location-card">
                     <iframe 
-                         src="https://maps.google.com/maps?q=Charleroi,+Belgique&amp;t=&amp;z=10&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
-                         title="Carte Google Maps — Zone de livraison Charleroi et alentours"
-                         loading="lazy"
-                         referrerpolicy="no-referrer-when-downgrade"
-                         class="location-card__map">
+                        src="https://maps.google.com/maps?q=Charleroi,+Belgique&amp;t=&amp;z=10&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+                        title="Carte Google Maps — Zone de livraison Charleroi et alentours"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="location-card__map">
                     </iframe>
-                <div class="location-card__gradient"></div>
-                <div class="location-card__pin">
-                <svg class="icon-md text-brand" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                </div>
+                    <div class="location-card__gradient"></div>
+                    <div class="location-card__pin">
+                        <svg class="icon-md text-brand" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    </div>
                     <h3 class="location-card__label">Livraison Charleroi et alentours</h3>
                 </a>
             </section>
@@ -353,7 +351,7 @@
         <img id="lightbox-img" src="" class="lightbox__img" alt="Aperçu agrandi">
     </div>
 
-    <!-- Script Principal -->
-    <script src="script.js"></script>
+    <!-- Script Principal (avec paramètre anti-cache) -->
+    <script src="script.js?v=3"></script>
 </body>
 </html>

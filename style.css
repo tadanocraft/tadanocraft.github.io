@@ -105,10 +105,11 @@ html, body {
 .icon-xl { width: 3.75rem; height: 3.75rem; flex-shrink: 0; }
 
 /* ==========================================================================
-   3. CONTENEUR CENTRAL RESPONSIVE & EN-TÊTE GIF
+   3. CONTENEUR CENTRAL RESPONSIVE & EN-TÊTE GIF PLEINE LARGEUR
    ========================================================================== */
 .linktree-shell {
     position: relative;
+    z-index: 1;
     width: min(94%, clamp(38rem, 62vw, 54rem));
     margin: 0 auto;
 }
@@ -126,7 +127,7 @@ html, body {
     padding: clamp(7.5rem, 21vh, 13.5rem) 4% clamp(1.75rem, 4vh, 2.75rem);
 }
 
-/* Fond GIF bord à bord, sans marge droite ni coins arrondis */
+/* Fond GIF collé à 100% aux bords gauche/droit/haut sans coins arrondis */
 .header-hero-bg {
     position: absolute;
     top: 0;
@@ -318,14 +319,14 @@ html, body {
     font-weight: 500;
 }
 
-/* Variante : Carte Couverture (Studio Créa) */
+/* Variante : Carte Couverture (Studio Créa & Instagram) */
 .bento-card__bg {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.8;
+    opacity: 0.85;
     transition: transform 0.7s var(--ease-smooth);
 }
 
@@ -354,24 +355,6 @@ html, body {
     font-size: 0.85rem;
     font-weight: 500;
     color: #d4d4d8;
-}
-
-/* Variante : Carte Sociale (Instagram) */
-.bento-card--social {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.45rem;
-}
-
-.bento-card--social .icon-xl {
-    margin-bottom: 0.4rem;
-    transition: transform 0.3s var(--ease-smooth);
-}
-
-.bento-card--social:hover .icon-xl {
-    transform: scale(1.12);
 }
 
 /* Badge flottant sur la carte dernière publication Instagram */
@@ -494,19 +477,6 @@ html, body {
     position: relative;
     display: block;
     width: 100%;
-    height: clamp(7.25rem, 12vh, 8.75rem);
-    border-radius: var(--radius-tile);
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border-strong);
-    overflow: hidden;
-    text-decoration: none;
-    transition: transform 0.3s var(--ease-smooth);
-}
-
-.location-card {
-    position: relative;
-    display: block;
-    width: 100%;
     height: clamp(8.5rem, 15vh, 10.5rem);
     border-radius: var(--radius-tile);
     background-color: var(--color-surface);
@@ -570,8 +540,53 @@ html, body {
 }
 
 /* ==========================================================================
-   EFFET DE REFLET GLOBAL (TOUTES LES CARTES & BOUTONS)
+   7. BOUTON D'ACTION FLOTTANT (FAB) & EFFETS LUMIÈRE
    ========================================================================== */
+.fab-wrapper {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 40;
+    pointer-events: none;
+}
+
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 0 0 rgba(127, 43, 63, 0.7); }
+    70% { box-shadow: 0 0 0 0.95rem rgba(127, 43, 63, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(127, 43, 63, 0); }
+}
+
+.btn-fab {
+    pointer-events: auto;
+    border: none;
+    border-radius: 999rem;
+    background-color: var(--color-brand);
+    color: var(--color-text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 0.95rem 2rem;
+    cursor: pointer;
+    animation: pulseGlow 2.5s infinite;
+    transition: transform 0.25s var(--ease-smooth), background-color 0.25s ease;
+}
+
+.btn-fab:hover {
+    background-color: var(--color-brand-hover);
+    transform: scale(1.05);
+    animation: none;
+    box-shadow: 0 0 1.875rem rgba(127, 43, 63, 0.85);
+}
+
+.btn-fab:active {
+    transform: scale(0.94);
+}
+
+/* Reflet global sans retour arrière sur toutes les cartes et boutons */
 .bento-card,
 .social-tile,
 .location-card,
@@ -609,67 +624,7 @@ html, body {
 .btn-fab:hover::after,
 .btn-primary:hover::after {
     left: 200%;
-    transition: left 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* ==========================================================================
-   EFFET DE LUEUR (PULSE) SUR LE BOUTON CONTACT
-   ========================================================================== */
-@keyframes pulseGlow {
-    0% { box-shadow: 0 0 0 0 rgba(127, 43, 63, 0.7); }
-    70% { box-shadow: 0 0 0 15px rgba(127, 43, 63, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(127, 43, 63, 0); }
-}
-
-.btn-fab {
-    /* Remplace l'ombre fixe par l'animation continue */
-    animation: pulseGlow 2.5s infinite;
-}
-
-.btn-fab:hover {
-    /* Arrête la pulsation et met une lueur fixe forte au survol */
-    animation: none;
-    box-shadow: 0 0 30px rgba(127, 43, 63, 0.8);
-}
-
-
-/* ==========================================================================
-   7. BOUTON D'ACTION FLOTTANT (FAB)
-   ========================================================================== */
-.fab-wrapper {
-    position: fixed;
-    bottom: 1.5rem;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    z-index: 40;
-    pointer-events: none;
-}
-
-.btn-fab {
-    pointer-events: auto;
-    border: none;
-    border-radius: 999rem;
-    background-color: var(--color-brand);
-    color: var(--color-text);
-    font-family: inherit;
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    padding: 0.95rem 2rem;
-    box-shadow: var(--shadow-brand);
-    cursor: pointer;
-    transition: transform 0.25s var(--ease-smooth), background-color 0.25s ease;
-}
-
-.btn-fab:hover {
-    background-color: var(--color-brand-hover);
-    transform: scale(1.05);
-}
-
-.btn-fab:active {
-    transform: scale(0.94);
+    transition: left 1.1s var(--ease-smooth);
 }
 
 /* ==========================================================================
@@ -1115,7 +1070,8 @@ html, body {
 
 @media (prefers-reduced-motion: reduce) {
     .animate-slide-up,
-    .animate-bounce {
+    .animate-bounce,
+    .btn-fab {
         opacity: 1;
         animation: none;
     }
