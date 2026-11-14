@@ -127,21 +127,23 @@ html, body {
     padding: clamp(7.5rem, 21vh, 13.5rem) 4% clamp(1.75rem, 4vh, 2.75rem);
 }
 
-/* Fond GIF collé à 100% aux bords de l'écran, sans coins arrondis ni débordement */
+/* Fond GIF collé à 100% avec fondu en COURBE vers le bas */
 .header-hero-bg {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     width: 100%;
-    height: clamp(18rem, 45vh, 28rem);
+    height: clamp(5rem, 50vh, 40rem);
     z-index: 0;
     overflow: hidden;
     pointer-events: none;
     border-radius: 0;
     background: radial-gradient(ellipse at 50% 25%, rgba(127, 43, 63, 0.42) 0%, rgba(28, 28, 28, 0.65) 55%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 38%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 38%, transparent 100%);
+    
+    /* Le masque en forme d'ellipse géante pour créer la courbe */
+    -webkit-mask-image: radial-gradient(ellipse 150% 100% at 50% 0%, black 45%, transparent 100%);
+    mask-image: radial-gradient(ellipse 150% 100% at 50% 0%, black 45%, transparent 100%);
 }
 
 .hero-gif {
