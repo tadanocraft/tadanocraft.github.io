@@ -122,29 +122,23 @@ html, body {
     padding: clamp(7.5rem, 21vh, 13.5rem) 4% clamp(1.75rem, 4vh, 2.75rem);
 }
 
-/* Fond GIF avec halo bordeaux de secours et fondu progressif */
 .header-hero-bg {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    width: 100%; /* S'étire de bord à bord sur tous les écrans */
-    height: clamp(18rem, 45vh, 28rem); /* Hauteur fluide pour le fondu */
+    width: 100vw;       /* Largeur stricte de l'écran */
+    max-width: 100%;    /* Empêche la barre de scroll horizontale */
+    height: clamp(18rem, 45vh, 28rem);
     z-index: 0;
     overflow: hidden;
     pointer-events: none;
     background: radial-gradient(ellipse at 50% 25%, rgba(127, 43, 63, 0.42) 0%, rgba(28, 28, 28, 0.65) 55%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 38%, transparent 100%);
     mask-image: linear-gradient(to bottom, black 38%, transparent 100%);
+    border-radius: 0;   /* Force l'annulation des coins ronds */
 }
 
-@media (min-width: 40em) {
-    .header-hero-bg {
-        left: 2%;
-        right: 2%;
-        border-radius: var(--radius-card) var(--radius-card) 0 0;
-    }
-}
+/* (Assure-toi que l'ancien bloc @media avec "border-radius: var(--radius-card)" est bien supprimé) */
 
 .hero-gif {
     width: 100%;

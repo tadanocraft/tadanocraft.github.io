@@ -72,10 +72,48 @@ window.openLightbox = openLightbox;
 window.closeLightbox = closeLightbox;
 
 /* ==========================================================================
-   2. ÉVÉNEMENTS CLAVIER, CLICS & FORMULAIRE
+   2. INITIALISATION AU CHARGEMENT DE LA PAGE
    ========================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
 
+    // ----------------------------------------------------------------------
+    // A. Récupération automatique de la dernière publication Instagram
+    // ----------------------------------------------------------------------
+    const BEHOLD_FEED_URL = 'https://feeds.behold.so/7axuN4we2Mc4uPPQrSop';
+    const instaCard = document.getElementById('instaCard');
+    const instaPostImg = document.getElementById('instaPostImg');
+
+    if (instaCard && instaPostImg && BEHOLD_FEED_URL) {
+        fetch(BEHOLD_FEED_URL)
+            .then(response => {
+                if (!response.ok) throw new Error('Erreur HTTP ' + response.status);
+                return response.json();
+            })
+            .then(data => {
+                const posts = Array.isArray(data) ? data : data.posts;
+                if (!posts || posts.length === 0) return;
+
+                const latestPost = posts[0];
+                const imageUrl = latestPost.mediaType === 'VIDEO'
+                    ? (latestPost.thumbnailUrl || latestPost.sizes?.medium?.mediaUrl)
+                    : (latestPost.sizes?.medium?.mediaUrl || latestPost.mediaUrl || latestPost.thumbnailUrl);
+
+                if (imageUrl) {
+                    instaPostImg.src = imageUrl;
+                }
+                if (latestPost.permalink) {
+                    instaCard.href = latestPost.permalink;
+                }
+                if (latestPost.caption) {
+                    instaPostImg.alt = latestPost.caption.slice(0, 120);
+                }
+            })
+            .catch(err => console.warn('Flux Instagram en mode secours :', err));
+    }
+
+    // ----------------------------------------------------------------------
+    // B. Délégation des clics (Modales & Lightbox)
+    // ----------------------------------------------------------------------
     document.addEventListener('click', (e) => {
         const openTrigger = e.target.closest('[data-modal-open]');
         if (openTrigger) {
@@ -111,35 +149,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.classList.contains('modal-backdrop')) {
             closeModal(e.target.id);
         }
-// Récupération automatique de la dernière publication Instagram (via Behold.so)
-    const BEHOLD_FEED_URL = 'VOTRE_URL_BEHOLD_ICI';
-    const instaCard = document.getElementById('instaCard');
-    const instaPostImg = document.getElementById('instaPostImg');
-
-    if (instaCard && instaPostImg && BEHOLD_FEED_URL !== 'https://feeds.behold.so/7axuN4we2Mc4uPPQrSop') {
-        fetch(BEHOLD_FEED_URL)
-            .then(response => response.json())
-            .then(data => {
-                const posts = Array.isArray(data) ? data : data.posts;
-                if (!posts || posts.length === 0) return;
-
-                const latestPost = posts[0];
-                const imageUrl = latestPost.sizes?.medium?.mediaUrl || latestPost.mediaUrl || latestPost.thumbnailUrl;
-
-                if (imageUrl) {
-                    instaPostImg.src = imageUrl;
-                }
-                if (latestPost.permalink) {
-                    instaCard.href = latestPost.permalink;
-                }
-                if (latestPost.caption) {
-                    instaPostImg.alt = latestPost.caption.slice(0, 120);
-                }
-            })
-            .catch(err => console.warn('Flux Instagram en mode secours :', err));
-    }
     });
 
+    // ----------------------------------------------------------------------
+    // C. Accessibilité clavier (Entrée, Espace & Échap)
+    // ----------------------------------------------------------------------
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
             const active = document.activeElement;
@@ -165,6 +179,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // ----------------------------------------------------------------------
+    // D. Envoi du formulaire de contact via Google Apps Script
+    // ----------------------------------------------------------------------
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {

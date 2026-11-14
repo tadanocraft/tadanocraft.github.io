@@ -41,12 +41,10 @@
 
     <!-- 1. LE FOND GIF PLEINE LARGEUR (Sorti du conteneur central) -->
     <div class="header-hero-bg" aria-hidden="true">
+        <!-- Dimensions retirées pour s'adapter à 100% -->
         <img src="https://i.pinimg.com/originals/eb/50/87/eb50875a68b04b0480fa929af2c7547c.gif" 
              alt="" 
-             width="1920" 
-             height="1080" 
              loading="eager" 
-             onerror="this.style.display='none'"
              class="hero-gif">
     </div>
 
@@ -136,9 +134,10 @@
 
                 <!-- Carte 4 : Instagram (Dernière publication) -->
                 <a id="instaCard" href="https://www.instagram.com/tadanocraft/" target="_blank" rel="noopener noreferrer" class="bento-card bento-card--cover">
+                    <!-- Correction de la balise onerror -->
                     <img id="instaPostImg"
                          src="media/images/insta-last.webp" 
-                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&amp;fit=crop&amp;w=800&amp;q=80';"
+                         onerror="this.src='https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&amp;fit=crop&amp;w=800&amp;q=80'"
                          width="800" height="800" loading="lazy" 
                          class="bento-card__bg" 
                          alt="Dernière publication Instagram de Tadano Craft">
