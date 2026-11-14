@@ -22,7 +22,7 @@ html, body {
 .custom-bg {
     background-color: #111111;
     background-image: radial-gradient(circle at 50% 0%, rgba(42,42,42,0.8) 0%, transparent 70%),
-                      url('fond topo full quali.jpg'); 
+                      url('media/images/fond_topo.jpg'); 
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
