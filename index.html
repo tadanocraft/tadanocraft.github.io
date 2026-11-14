@@ -3,142 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TADANO CRAFT</title>
+    <title>TADANO CRAFT — Studio Design 2D &amp; Créations 3D</title>
     <meta name="description" content="Studio de design graphique 2D et modélisation 3D sur mesure à Charleroi. Création de logos, identités visuelles et objets 3D personnalisés.">
-    
+    <link rel="canonical" href="https://tadanocraft.com/">
+
     <!-- Open Graph (Partage réseaux sociaux) -->
-    <meta property="og:title" content="TADANO CRAFT | Créations 3D & Design 2D">
+    <meta property="og:title" content="TADANO CRAFT | Créations 3D &amp; Design 2D">
     <meta property="og:description" content="Designs 2D, créations et impressions 3D sur mesure à Charleroi et alentours.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tadanocraft.com/">
 
-    <!-- Données structurées SEO (Google) -->
+    <!-- Données structurées SEO (Schema.org) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "DesignAgency",
       "name": "Tadano Craft",
+      "url": "https://tadanocraft.com/",
       "description": "Studio de design graphique 2D et créations 3D sur mesure.",
       "areaServed": "Charleroi",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Charleroi",
+        "addressCountry": "BE"
+      },
       "email": "contact@tadanocraft.com"
     }
     </script>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: { tadano: '#7F2B3F' },
-                    fontFamily: {
-                        sans: ['Satoshi', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    
+
     <!-- Visionneuse 3D Google -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
-    
-    <!-- Styles externes -->
+
+    <!-- Feuille de styles principale -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-[#111111] text-white min-h-screen font-sans font-normal custom-bg antialiased selection:bg-tadano selection:text-white pb-24 animate-fade-in">
+<body class="page-wrapper">
 
-
-<!-- En-tête : Logo -->
-    <header class="site-header text-center animate-slide-up" style="animation-delay: 100ms;">
+    <!-- En-tête : Identité du Studio -->
+    <header class="site-header animate-slide-up" style="--delay: 100ms;">
         <img 
             src="media/images/tranche1.webp" 
-            alt="TADANO CRAFT - Studio Design 2D et 3D" 
+            alt="TADANO CRAFT — Studio Design 2D et 3D" 
             width="1000" 
             height="1000" 
             loading="eager" 
-            class="logo-header mx-auto object-contain drop-shadow-2xl pointer-events-none">
-        <h1 class="subtitle-header text-zinc-400 font-medium tracking-[0.2em] text-xs md:text-sm uppercase">
+            class="logo-header">
+        <h1 class="subtitle-header">
             <span class="sr-only">Tadano Craft — </span>Designs 2D, Créations 3D
         </h1>
     </header>
 
     <!-- Conteneur Principal -->
-    <main class="max-w-4xl mx-auto px-4 w-full">
-        
-        <!-- Grille 4 cartes -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 animate-slide-up" style="animation-delay: 200ms;">
-            
-            <!-- Carte 1 : Mes Services (Style Linktree) -->
-            <div onclick="openModal('modalServices')" class="group relative h-80 md:h-96 rounded-[2rem] overflow-hidden bg-[#222222] cursor-pointer transition-transform duration-300 active:scale-[0.98] md:hover:scale-[1.02] border border-white/5 flex flex-col justify-between p-6">
-                <!-- Groupe d'images Linktree (Paysage superposées) -->
-                <div class="relative w-full h-48 md:h-56 mt-4 flex items-center justify-center pointer-events-none perspective">
-                    <!-- Image Gauche (Arrière) -->
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" 
-                         class="absolute w-4/5 h-full object-cover rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] -rotate-6 -translate-x-6 opacity-60 transition-all duration-500 group-hover:-translate-x-8 group-hover:-rotate-12" 
+    <main class="main-container">
+
+        <!-- Grille Bento 4 Cartes -->
+        <section aria-label="Navigation principale du studio" class="bento-grid animate-slide-up" style="--delay: 200ms;">
+
+            <!-- Carte 1 : Mes Services (Style Linktree 3 images) -->
+            <article class="bento-card bento-card--gallery" role="button" tabindex="0" data-modal-open="modalServices">
+                <div class="card-stack">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=600&amp;q=80" 
+                         width="600" height="400" loading="lazy"
+                         class="card-stack__img card-stack__img--left" 
                          alt="Aperçu création graphique 1">
-                    <!-- Image Droite (Arrière) -->
-                    <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=600&q=80" 
-                         class="absolute w-4/5 h-full object-cover rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] rotate-6 translate-x-6 opacity-60 transition-all duration-500 group-hover:translate-x-8 group-hover:rotate-12" 
+                    <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&amp;fit=crop&amp;w=600&amp;q=80" 
+                         width="600" height="400" loading="lazy"
+                         class="card-stack__img card-stack__img--right" 
                          alt="Aperçu création graphique 2">
-                    <!-- Image Centrale (Avant) -->
-                    <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=600&q=80" 
-                         class="absolute z-10 w-4/5 h-full object-cover rounded-xl shadow-[0_20px_40px_rgba(0,0,0,0.7)] border border-white/10 transition-transform duration-500 group-hover:scale-105" 
+                    <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&amp;fit=crop&amp;w=600&amp;q=80" 
+                         width="600" height="400" loading="eager"
+                         class="card-stack__img card-stack__img--front" 
                          alt="Services Design Graphique 2D et 3D">
                 </div>
-                <!-- Texte en bas -->
-                <div class="text-center z-20 pointer-events-none mt-auto">
-                    <h3 class="font-bold tracking-tight text-xl md:text-2xl text-white">Mes services</h3>
-                    <div class="flex items-center justify-center gap-1.5 mt-1 text-zinc-400 font-medium text-sm">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
-                        <span>Gallery • Design 2D & 3D</span>
-                    </div>
+                <div class="bento-card__footer">
+                    <h2 class="bento-card__title">Mes services</h2>
+                    <p class="bento-card__meta">
+                        <svg class="icon-sm" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
+                        <span>Gallery • Design 2D &amp; 3D</span>
+                    </p>
                 </div>
-            </div>
+            </article>
 
-            <!-- Carte 2 : Mes Réalisations (Style Linktree) -->
-            <div onclick="openModal('modalRealisations')" class="group relative h-80 md:h-96 rounded-[2rem] overflow-hidden bg-[#222222] cursor-pointer transition-transform duration-300 active:scale-[0.98] md:hover:scale-[1.02] border border-white/5 flex flex-col justify-between p-6">
-                <!-- Groupe d'images Linktree (Paysage superposées) -->
-                <div class="relative w-full h-48 md:h-56 mt-4 flex items-center justify-center pointer-events-none perspective">
-                    <!-- Image Arrière (Légèrement décalée) -->
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" 
-                         class="absolute w-4/5 h-full object-cover rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] -rotate-3 -translate-x-4 opacity-60 transition-all duration-500 group-hover:-translate-x-6 group-hover:-rotate-6" 
+            <!-- Carte 2 : Mes Réalisations (Style Linktree 2 images) -->
+            <article class="bento-card bento-card--gallery" role="button" tabindex="0" data-modal-open="modalRealisations">
+                <div class="card-stack">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=600&amp;q=80" 
+                         width="600" height="400" loading="lazy"
+                         class="card-stack__img card-stack__img--back" 
                          alt="Projet portfolio arrière-plan">
-                    <!-- Image Avant (Centrale) -->
-                    <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=600&q=80" 
-                         class="absolute z-10 w-4/5 h-full object-cover rounded-xl shadow-[0_20px_40px_rgba(0,0,0,0.7)] border border-white/10 transition-transform duration-500 group-hover:scale-105" 
+                    <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&amp;fit=crop&amp;w=600&amp;q=80" 
+                         width="600" height="400" loading="eager"
+                         class="card-stack__img card-stack__img--front" 
                          alt="Portfolio réalisations Tadano Craft">
                 </div>
-                <!-- Texte en bas -->
-                <div class="text-center z-20 pointer-events-none mt-auto">
-                    <h3 class="font-bold tracking-tight text-xl md:text-2xl text-white">Mes réalisations</h3>
-                    <div class="flex items-center justify-center gap-1.5 mt-1 text-zinc-400 font-medium text-sm">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
+                <div class="bento-card__footer">
+                    <h2 class="bento-card__title">Mes réalisations</h2>
+                    <p class="bento-card__meta">
+                        <svg class="icon-sm" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
                         <span>Gallery • Portfolio</span>
-                    </div>
+                    </p>
                 </div>
-            </div>
+            </article>
 
             <!-- Carte 3 : Studio Créa (Lightbox) -->
-            <div onclick="openLightbox('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80')" class="group relative h-80 md:h-96 rounded-[2rem] overflow-hidden bg-[#222222] cursor-pointer transition-transform duration-300 active:scale-[0.98] md:hover:scale-[1.02] border border-white/5">
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" loading="lazy" class="absolute inset-0 w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-110" alt="Studio Créa Tadano Craft">
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                <div class="absolute bottom-6 inset-x-0 text-center z-20 pointer-events-none">
-                    <h3 class="font-bold tracking-tight text-xl md:text-2xl text-white drop-shadow-md">Studio Créa</h3>
-                    <p class="text-sm font-medium text-zinc-300 mt-0.5">Espace & Projets</p>
+            <article class="bento-card bento-card--cover" role="button" tabindex="0" data-lightbox-src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=1200&amp;q=80">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=800&amp;q=80" 
+                     width="800" height="800" loading="lazy" 
+                     class="bento-card__bg" 
+                     alt="Studio Créa Tadano Craft">
+                <div class="bento-card__gradient"></div>
+                <div class="bento-card__overlay">
+                    <h2 class="bento-card__title">Studio Créa</h2>
+                    <p class="bento-card__subtitle">Espace &amp; Projets</p>
                 </div>
-            </div>
+            </article>
 
             <!-- Carte 4 : Instagram -->
-            <a href="https://www.instagram.com/tadanocraft/" target="_blank" rel="noopener noreferrer" class="group relative h-80 md:h-96 rounded-[2rem] overflow-hidden bg-[#222222] flex flex-col items-center justify-center transition-transform duration-300 active:scale-[0.98] md:hover:scale-[1.02] border border-white/5">
-                <svg class="w-16 h-16 text-tadano mb-4 transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                <h3 class="font-bold tracking-tight text-xl md:text-2xl text-white">Instagram</h3>
-                <p class="text-sm font-medium text-zinc-400 mt-0.5">@tadanocraft</p>
+            <a href="https://www.instagram.com/tadanocraft/" target="_blank" rel="noopener noreferrer" class="bento-card bento-card--social">
+                <svg class="icon-xl text-brand" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                <h2 class="bento-card__title">Instagram</h2>
+                <p class="bento-card__meta">@tadanocraft</p>
             </a>
+
         </section>
 
-        <!-- Section 3D -->
-        <section class="mb-8 animate-slide-up" style="animation-delay: 300ms;">
-            <h2 class="font-black text-xl md:text-2xl uppercase tracking-wider mb-4 pl-2 text-white">Mes Projets 3D</h2>
-            <div class="relative w-full h-[400px] bg-[#222222] rounded-[2rem] overflow-hidden border border-white/5 shadow-2xl">
+        <!-- Section 3D Interactive -->
+        <section class="section-block animate-slide-up" style="--delay: 300ms;">
+            <h2 class="section-title">Mes Projets 3D</h2>
+            <div class="viewer-card">
                 <model-viewer 
                     src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
                     alt="Modèle 3D interactif Tadano Craft"
@@ -148,209 +140,186 @@
                     shadow-intensity="1"
                     environment-image="neutral"
                     exposure="1.2"
-                    class="w-full h-full outline-none">
+                    class="viewer-card__canvas">
                 </model-viewer>
-                <div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-md text-white font-medium text-xs px-4 py-2 rounded-full flex items-center gap-2 border border-white/10 pointer-events-none">
-                    <svg class="w-4 h-4 animate-bounce text-tadano" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
-                    Tournez à 360°
+                <div class="viewer-badge">
+                    <svg class="icon-sm text-brand animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
+                    <span>Tournez à 360°</span>
                 </div>
             </div>
         </section>
 
-        <!-- Contact et infos -->
-        <section class="animate-slide-up" style="animation-delay: 400ms;">
-            <h2 class="font-black text-xl md:text-2xl uppercase tracking-wider mb-4 pl-2 text-white">Contact et infos</h2>
-            <div class="grid grid-cols-3 gap-3 md:gap-4 mb-4">
-                <a href="mailto:contact@tadanocraft.com" class="bg-[#222222] h-28 md:h-32 rounded-2xl flex flex-col items-center justify-center transition-transform active:scale-[0.96] md:hover:scale-105 border border-white/5">
-                    <svg class="w-7 h-7 md:w-8 md:h-8 text-tadano mb-2" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                    <span class="text-xs md:text-sm font-semibold">Mail</span>
+        <!-- Section Contact et Infos -->
+        <section class="section-block animate-slide-up" style="--delay: 400ms;">
+            <h2 class="section-title">Contact et infos</h2>
+            <div class="social-grid">
+                <a href="mailto:contact@tadanocraft.com" class="social-tile">
+                    <svg class="icon-md text-brand" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <span>Mail</span>
                 </a>
-                <a href="https://www.facebook.com/profile.php?id=61594055529093" target="_blank" rel="noopener noreferrer" class="bg-[#222222] h-28 md:h-32 rounded-2xl flex flex-col items-center justify-center transition-transform active:scale-[0.96] md:hover:scale-105 border border-white/5">
-                    <svg class="w-7 h-7 md:w-8 md:h-8 text-tadano mb-2" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.53 11.68 6 13.52 6H16v3h-2c-.55 0-1 .45-1 1v2h3l-1 3h-2v6.8c4.56-.93 8-4.96 8-9.8z"/></svg>
-                    <span class="text-xs md:text-sm font-semibold">Facebook</span>
+                <a href="https://www.facebook.com/profile.php?id=61594055529093" target="_blank" rel="noopener noreferrer" class="social-tile">
+                    <svg class="icon-md text-brand" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.53 11.68 6 13.52 6H16v3h-2c-.55 0-1 .45-1 1v2h3l-1 3h-2v6.8c4.56-.93 8-4.96 8-9.8z"/></svg>
+                    <span>Facebook</span>
                 </a>
-                <a href="https://fr.pinterest.com/tadanocraft/" target="_blank" rel="noopener noreferrer" class="bg-[#222222] h-28 md:h-32 rounded-2xl flex flex-col items-center justify-center transition-transform active:scale-[0.96] md:hover:scale-105 border border-white/5">
-                    <svg class="w-7 h-7 md:w-8 md:h-8 text-tadano mb-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.195 0 7.456 2.99 7.456 6.985 0 4.171-2.628 7.535-6.284 7.535-1.226 0-2.382-.638-2.775-1.39l-.756 2.877c-.274 1.054-1.017 2.37-1.517 3.176 1.15.352 2.36.541 3.6.541 6.621 0 11.989-5.367 11.989-11.987C24.008 5.367 18.638 0 12.017 0z"/></svg>
-                    <span class="text-xs md:text-sm font-semibold">Pinterest</span>
+                <a href="https://fr.pinterest.com/tadanocraft/" target="_blank" rel="noopener noreferrer" class="social-tile">
+                    <svg class="icon-md text-brand" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.195 0 7.456 2.99 7.456 6.985 0 4.171-2.628 7.535-6.284 7.535-1.226 0-2.382-.638-2.775-1.39l-.756 2.877c-.274 1.054-1.017 2.37-1.517 3.176 1.15.352 2.36.541 3.6.541 6.621 0 11.989-5.367 11.989-11.987C24.008 5.367 18.638 0 12.017 0z"/></svg>
+                    <span>Pinterest</span>
                 </a>
             </div>
-            <a href="https://www.google.com/maps/place/Charleroi" target="_blank" rel="noopener noreferrer" class="w-full group relative h-28 md:h-32 rounded-2xl overflow-hidden border border-white/10 bg-[#222222] transition-transform active:scale-[0.98] md:hover:scale-[1.02] block">
-                <div class="absolute inset-0 bg-cover bg-center opacity-40 transition-transform duration-500 group-hover:scale-105" style="background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80');"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                <div class="absolute inset-0 flex items-center justify-center -translate-y-2">
-                    <svg class="w-8 h-8 text-tadano drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+
+            <a href="https://www.google.com/maps/place/Charleroi" target="_blank" rel="noopener noreferrer" class="location-card">
+                <div class="location-card__bg"></div>
+                <div class="location-card__gradient"></div>
+                <div class="location-card__pin">
+                    <svg class="icon-md text-brand" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                 </div>
-                <div class="absolute bottom-3 left-4 right-4">
-                    <h3 class="text-xs md:text-sm font-semibold text-white">Livraison Charleroi et alentours</h3>
-                </div>
+                <h3 class="location-card__label">Livraison Charleroi et alentours</h3>
             </a>
         </section>
 
     </main>
 
     <!-- Bouton d'action flottant -->
-    <div class="fixed bottom-6 inset-x-0 flex justify-center z-40 animate-slide-up" style="animation-delay: 500ms;">
-        <button onclick="openModal('modalContact')" class="bg-tadano text-white font-bold tracking-wide py-4 px-8 rounded-full shadow-[0_8px_30px_rgba(127,43,63,0.5)] transition-transform active:scale-90 hover:scale-105">
+    <div class="fab-wrapper animate-slide-up" style="--delay: 500ms;">
+        <button type="button" class="btn-fab" data-modal-open="modalContact">
             Discutons de votre projet
         </button>
     </div>
 
-    <!-- === MODALES : DESIGN GRILLE === -->
+    <!-- === MODALES === -->
 
     <!-- Modale : Mes Services -->
-    <div id="modalServices" class="fixed inset-0 z-50 bg-[#111111] transform translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] flex flex-col">
-        <!-- En-tête de la modale -->
-        <div class="h-16 bg-[#1a1a1a] shrink-0 z-20 flex items-center justify-center relative border-b border-white/5 shadow-md">
-            <h2 class="text-white font-black text-lg md:text-xl uppercase tracking-widest">Mes Services</h2>
-            <button onclick="closeModal('modalServices')" aria-label="Fermer" class="absolute right-4 w-9 h-9 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition active:scale-95">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    <div id="modalServices" class="modal-sheet" role="dialog" aria-modal="true" aria-labelledby="titleServices" aria-hidden="true">
+        <div class="modal-header">
+            <h2 id="titleServices" class="modal-header__title">Mes Services</h2>
+            <button type="button" class="btn-close" data-modal-close="modalServices" aria-label="Fermer">
+                <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
-        
-        <!-- Contenu : Grille + Texte structuré -->
-        <div class="flex-1 overflow-y-auto no-scrollbar p-4 md:p-8">
-            <div class="max-w-4xl mx-auto">
-                
-                <!-- Intro du service -->
-                <div class="text-center mb-10 max-w-2xl mx-auto">
-                    <h3 class="text-3xl md:text-4xl font-black tracking-tight text-white mb-4">Design Graphique 2D & 3D</h3>
-                    <p class="text-zinc-400 font-normal leading-relaxed text-lg">
+
+        <div class="modal-body no-scrollbar">
+            <div class="modal-container">
+                <div class="modal-intro">
+                    <h3 class="modal-intro__title">Design Graphique 2D &amp; 3D</h3>
+                    <p class="modal-intro__text">
                         Je donne vie à l'image de votre marque grâce à des visuels percutants et sur mesure. Création de logo, identité visuelle complète, ou encore modélisation 3D : je conçois des outils visuels qui marquent les esprits.
                     </p>
                 </div>
 
-                <!-- Grille d'images maçonnée (Masonry) -->
-                <div class="columns-1 md:columns-2 gap-4 space-y-4">
-                    <!-- Image 1 -->
-                    <div class="relative break-inside-avoid rounded-2xl overflow-hidden group cursor-pointer border border-white/5">
-                        <img onclick="openLightbox(this.src)" src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=800&q=80" loading="lazy" class="w-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Création Logo">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white font-bold tracking-wide">Création de Logo</span>
-                        </div>
-                    </div>
-                    <!-- Image 2 -->
-                    <div class="relative break-inside-avoid rounded-2xl overflow-hidden group cursor-pointer border border-white/5">
-                        <img onclick="openLightbox(this.src)" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" loading="lazy" class="w-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Modélisation 3D">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white font-bold tracking-wide">Modélisation 3D (Rendu produit)</span>
-                        </div>
-                    </div>
-                    <!-- Image 3 -->
-                    <div class="relative break-inside-avoid rounded-2xl overflow-hidden group cursor-pointer border border-white/5">
-                        <img onclick="openLightbox(this.src)" src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=800&q=80" loading="lazy" class="w-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Identité Visuelle">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white font-bold tracking-wide">Identité Visuelle Globale</span>
-                        </div>
-                    </div>
+                <div class="masonry-grid">
+                    <figure class="masonry-item" data-lightbox-src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&amp;fit=crop&amp;w=1200&amp;q=80">
+                        <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&amp;fit=crop&amp;w=800&amp;q=80" width="800" height="600" loading="lazy" alt="Création Logo">
+                        <figcaption class="masonry-item__caption">Création de Logo</figcaption>
+                    </figure>
+
+                    <figure class="masonry-item" data-lightbox-src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=1200&amp;q=80">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=800&amp;q=80" width="800" height="1000" loading="lazy" alt="Modélisation 3D">
+                        <figcaption class="masonry-item__caption">Modélisation 3D (Rendu produit)</figcaption>
+                    </figure>
+
+                    <figure class="masonry-item" data-lightbox-src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&amp;fit=crop&amp;w=1200&amp;q=80">
+                        <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&amp;fit=crop&amp;w=800&amp;q=80" width="800" height="700" loading="lazy" alt="Identité Visuelle">
+                        <figcaption class="masonry-item__caption">Identité Visuelle Globale</figcaption>
+                    </figure>
                 </div>
 
-                <!-- Section Détails -->
-                <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 bg-[#1a1a1a] p-8 rounded-3xl border border-white/5">
+                <div class="method-box">
                     <div>
-                        <h4 class="text-tadano font-bold text-xl mb-3">La Méthode</h4>
-                        <ul class="text-zinc-400 space-y-2">
-                            <li><strong class="text-white">1. Brief :</strong> Analyse de vos besoins et de votre cible.</li>
-                            <li><strong class="text-white">2. Moodboard :</strong> Validation de la direction artistique.</li>
-                            <li><strong class="text-white">3. Conception :</strong> Présentation de maquettes et ajustements.</li>
-                            <li><strong class="text-white">4. Livraison :</strong> Fichiers HD prêts pour le web et l'impression.</li>
+                        <h4 class="method-box__heading text-brand">La Méthode</h4>
+                        <ul class="method-list">
+                            <li><strong>1. Brief :</strong> Analyse de vos besoins et de votre cible.</li>
+                            <li><strong>2. Moodboard :</strong> Validation de la direction artistique.</li>
+                            <li><strong>3. Conception :</strong> Présentation de maquettes et ajustements.</li>
+                            <li><strong>4. Livraison :</strong> Fichiers HD prêts pour le web et l'impression.</li>
                         </ul>
                     </div>
-                    <div class="flex flex-col justify-center">
-                        <h4 class="text-white font-bold text-xl mb-3">Besoin d'une identité visuelle ?</h4>
-                        <p class="text-zinc-400 mb-4">Que ce soit pour une création de A à Z ou une refonte, discutons de votre projet pour établir un devis précis.</p>
-                        <button onclick="closeModal('modalServices'); setTimeout(() => openModal('modalContact'), 300);" class="bg-white text-black font-bold py-3 px-6 rounded-xl hover:bg-zinc-200 transition text-center">
+                    <div class="method-box__cta">
+                        <h4 class="method-box__heading">Besoin d'une identité visuelle ?</h4>
+                        <p class="method-box__desc">Que ce soit pour une création de A à Z ou une refonte, discutons de votre projet pour établir un devis précis.</p>
+                        <button type="button" class="btn-light" data-switch-modal="modalServices:modalContact">
                             Demander un devis
                         </button>
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>
 
-    <!-- Modale : Mes Réalisations (Même structure) -->
-    <div id="modalRealisations" class="fixed inset-0 z-50 bg-[#111111] transform translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] flex flex-col">
-        <!-- En-tête de la modale -->
-        <div class="h-16 bg-[#1a1a1a] shrink-0 z-20 flex items-center justify-center relative border-b border-white/5 shadow-md">
-            <h2 class="text-white font-black text-lg md:text-xl uppercase tracking-widest">Mes Réalisations</h2>
-            <button onclick="closeModal('modalRealisations')" aria-label="Fermer" class="absolute right-4 w-9 h-9 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition active:scale-95">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    <!-- Modale : Mes Réalisations -->
+    <div id="modalRealisations" class="modal-sheet" role="dialog" aria-modal="true" aria-labelledby="titleRealisations" aria-hidden="true">
+        <div class="modal-header">
+            <h2 id="titleRealisations" class="modal-header__title">Mes Réalisations</h2>
+            <button type="button" class="btn-close" data-modal-close="modalRealisations" aria-label="Fermer">
+                <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
-        
-        <!-- Contenu -->
-        <div class="flex-1 overflow-y-auto no-scrollbar p-4 md:p-8">
-            <div class="max-w-4xl mx-auto">
-                
-                <div class="text-center mb-10 max-w-2xl mx-auto">
-                    <h3 class="text-3xl md:text-4xl font-black tracking-tight text-white mb-4">Portfolio Récent</h3>
-                    <p class="text-zinc-400 font-normal leading-relaxed text-lg">
+
+        <div class="modal-body no-scrollbar">
+            <div class="modal-container">
+                <div class="modal-intro">
+                    <h3 class="modal-intro__title">Portfolio Récent</h3>
+                    <p class="modal-intro__text">
                         Découvrez une sélection de mes derniers projets. De l'objet publicitaire imprimé en 3D à l'identité visuelle de commerce local.
                     </p>
                 </div>
 
-                <div class="columns-1 md:columns-2 gap-4 space-y-4">
-                    <div class="relative break-inside-avoid rounded-2xl overflow-hidden group cursor-pointer border border-white/5">
-                        <img onclick="openLightbox(this.src)" src="https://images.unsplash.com/photo-1633511090164-b4a1618b76ce?auto=format&fit=crop&w=800&q=80" loading="lazy" class="w-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Impression 3D">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white font-bold tracking-wide">Goodies Imprimés en 3D</span>
-                        </div>
-                    </div>
-                    <div class="relative break-inside-avoid rounded-2xl overflow-hidden group cursor-pointer border border-white/5">
-                        <img onclick="openLightbox(this.src)" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" loading="lazy" class="w-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Affiche">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white font-bold tracking-wide">Affiche Typographique</span>
-                        </div>
-                    </div>
-                </div>
+                <div class="masonry-grid">
+                    <figure class="masonry-item" data-lightbox-src="https://images.unsplash.com/photo-1633511090164-b4a1618b76ce?auto=format&amp;fit=crop&amp;w=1200&amp;q=80">
+                        <img src="https://images.unsplash.com/photo-1633511090164-b4a1618b76ce?auto=format&amp;fit=crop&amp;w=800&amp;q=80" width="800" height="800" loading="lazy" alt="Impression 3D">
+                        <figcaption class="masonry-item__caption">Goodies Imprimés en 3D</figcaption>
+                    </figure>
 
+                    <figure class="masonry-item" data-lightbox-src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=1200&amp;q=80">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=800&amp;q=80" width="800" height="900" loading="lazy" alt="Affiche Typographique">
+                        <figcaption class="masonry-item__caption">Affiche Typographique</figcaption>
+                    </figure>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Modale : Formulaire de Contact -->
-    <div id="modalContact" class="fixed inset-0 z-50 transform translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] flex flex-col justify-end md:justify-center bg-black/60 backdrop-blur-sm">
-        <div class="bg-[#1a1a1a] w-full md:max-w-lg mx-auto rounded-t-3xl md:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/5 overflow-hidden relative">
-            <div class="absolute top-4 right-4 z-20">
-                <button onclick="closeModal('modalContact')" aria-label="Fermer" class="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition active:scale-95">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
-            <div class="p-8 pt-10">
-                <h2 class="text-white font-black tracking-tight text-2xl md:text-3xl mb-2 text-center">Un projet en tête ?</h2>
-                <p class="text-zinc-400 font-normal text-center mb-6 text-sm">Laissez-moi vos coordonnées, je vous recontacte rapidement.</p>
-                
-                <form id="contactForm" class="space-y-4">
-                    <div>
-                        <label class="block text-white text-sm font-medium mb-1">Votre idée de projet *</label>
-                        <textarea name="projet" rows="3" required class="w-full rounded-xl bg-black border border-white/10 text-white font-normal placeholder-zinc-600 px-4 py-3 outline-none focus:border-tadano transition" placeholder="Décrivez votre besoin..."></textarea>
+    <div id="modalContact" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="titleContact" aria-hidden="true">
+        <div class="modal-dialog">
+            <button type="button" class="btn-close modal-dialog__close" data-modal-close="modalContact" aria-label="Fermer">
+                <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <div class="modal-dialog__body">
+                <h2 id="titleContact" class="modal-dialog__title">Un projet en tête ?</h2>
+                <p class="modal-dialog__subtitle">Laissez-moi vos coordonnées, je vous recontacte rapidement.</p>
+
+                <form id="contactForm" class="contact-form">
+                    <div class="form-group">
+                        <label for="inputProjet" class="form-label">Votre idée de projet *</label>
+                        <textarea id="inputProjet" name="projet" rows="3" required class="form-control" placeholder="Décrivez votre besoin..."></textarea>
                     </div>
-                    <div>
-                        <label class="block text-white text-sm font-medium mb-1">Votre E-mail *</label>
-                        <input type="email" name="email" required class="w-full rounded-xl bg-black border border-white/10 text-white font-normal placeholder-zinc-600 px-4 py-3 outline-none focus:border-tadano transition" placeholder="contact@exemple.com">
+                    <div class="form-group">
+                        <label for="inputEmail" class="form-label">Votre E-mail *</label>
+                        <input id="inputEmail" type="email" name="email" required class="form-control" placeholder="contact@exemple.com">
                     </div>
-                    <div>
-                        <label class="block text-white text-sm font-medium mb-1">Numéro de téléphone (Facultatif)</label>
-                        <input type="tel" name="phone" class="w-full rounded-xl bg-black border border-white/10 text-white font-normal placeholder-zinc-600 px-4 py-3 outline-none focus:border-tadano transition" placeholder="04...">
+                    <div class="form-group">
+                        <label for="inputPhone" class="form-label">Numéro de téléphone (Facultatif)</label>
+                        <input id="inputPhone" type="tel" name="phone" class="form-control" placeholder="04...">
                     </div>
-                    <button id="submitBtn" type="submit" class="w-full bg-tadano text-white font-bold text-lg py-4 rounded-xl shadow-[0_8px_20px_rgba(127,43,63,0.3)] hover:bg-[#99344c] transition active:scale-[0.98] mt-2">
+                    <button id="submitBtn" type="submit" class="btn-primary">
                         Envoyer ma demande
                     </button>
-                    <p id="successMsg" class="hidden text-green-400 text-center font-medium mt-2 text-sm">Message envoyé avec succès !</p>
+                    <p id="successMsg" class="form-success" hidden>Message envoyé avec succès !</p>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Lightbox -->
-    <div id="lightbox" class="fixed inset-0 z-[60] bg-black/95 hidden items-center justify-center backdrop-blur-md opacity-0 transition-opacity duration-300" onclick="closeLightbox()">
-        <button onclick="closeLightbox()" aria-label="Fermer l'aperçu" class="absolute top-6 right-6 text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition z-10">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    <!-- Lightbox Zoom Photo -->
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Aperçu agrandi" aria-hidden="true">
+        <button type="button" class="btn-close lightbox__close" data-lightbox-close aria-label="Fermer l'aperçu">
+            <svg class="icon-md" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
-        <img id="lightbox-img" src="" class="max-w-[95vw] max-h-[90vh] object-contain rounded-lg shadow-2xl transition-transform duration-300 scale-95" alt="Aperçu agrandi" onclick="event.stopPropagation()">
+        <img id="lightbox-img" src="" class="lightbox__img" alt="Aperçu agrandi">
     </div>
 
-    <!-- Script JS -->
+    <!-- Script Principal -->
     <script src="script.js"></script>
 </body>
 </html>

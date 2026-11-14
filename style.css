@@ -1,4 +1,6 @@
-/* Déclaration de la police variable Satoshi (chemin relatif compatible PC & Netlify) */
+/* ==========================================================================
+   1. TYPOGRAPHIE & VARIABLES DESIGN SYSTEM
+   ========================================================================== */
 @font-face {
     font-family: 'Satoshi';
     src: url('media/Satoshi_woff2/Satoshi-Variable.woff2') format('woff2'),
@@ -10,44 +12,80 @@
     font-display: swap;
 }
 
-/* Paramètres globaux */
+:root {
+    /* Couleurs */
+    --color-bg: #111111;
+    --color-surface: #222222;
+    --color-surface-elevated: #1a1a1a;
+    --color-brand: #7F2B3F;
+    --color-brand-hover: #99344c;
+    --color-text: #ffffff;
+    --color-text-muted: #a1a1aa;
+    --color-text-subtle: #71717a;
+    --color-border: rgba(255, 255, 255, 0.06);
+    --color-border-strong: rgba(255, 255, 255, 0.12);
+
+    /* Typographie */
+    --font-sans: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    /* Rayons & Ombres */
+    --radius-card: 2rem;
+    --radius-tile: 1rem;
+    --radius-inner: 0.75rem;
+    --shadow-brand: 0 8px 30px rgba(127, 43, 63, 0.5);
+
+    /* Courbes d'animation */
+    --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-sheet: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* ==========================================================================
+   2. RESET & BASE GLOBALE
+   ========================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 html, body {
     margin: 0;
     padding: 0;
-    font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-sans);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     -webkit-tap-highlight-color: transparent;
 }
 
-/* Espacement responsive de l'en-tête */
-.site-header {
-    padding-top: clamp(3.5rem, 9vh, 6.5rem);
-    padding-bottom: clamp(2.5rem, 6vh, 4.5rem);
-    padding-left: 1rem;
-    padding-right: 1rem;
+::selection {
+    background-color: var(--color-brand);
+    color: var(--color-text);
 }
 
-.logo-header {
-    width: clamp(180px, 50vw, 550px);
-    max-width: 100%;
-    height: auto;
-}
-
-.subtitle-header {
-    margin-top: clamp(1rem, 2.5vh, 1.75rem);
-}
-
-/* Fond topographique combiné avec dégradé */
-.custom-bg {
-    background-color: #111111;
-    background-image: radial-gradient(circle at 50% 0%, rgba(42,42,42,0.8) 0%, transparent 70%),
-                      url('media/images/fond_topo.jpg'); 
+.page-wrapper {
+    min-height: 100vh;
+    padding-bottom: 6.5rem;
+    background-color: var(--color-bg);
+    background-image: radial-gradient(circle at 50% 0%, rgba(42, 42, 42, 0.8) 0%, transparent 70%),
+                      url('media/images/fond_topo.jpg');
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
     background-blend-mode: overlay;
 }
 
-/* Masquer les barres de défilement */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 .no-scrollbar::-webkit-scrollbar {
     display: none;
 }
@@ -56,17 +94,913 @@ html, body {
     scrollbar-width: none;
 }
 
-/* Animations d'entrée douces */
+/* Icônes & Utilitaires */
+.text-brand { color: var(--color-brand); }
+.icon-sm { width: 1rem; height: 1rem; flex-shrink: 0; }
+.icon-md { width: 1.85rem; height: 1.85rem; flex-shrink: 0; }
+.icon-xl { width: 4rem; height: 4rem; flex-shrink: 0; }
+
+/* ==========================================================================
+   3. EN-TÊTE (HEADER) & CONTENEUR
+   ========================================================================== */
+.site-header {
+    text-align: center;
+    padding: clamp(3.5rem, 9vh, 6.5rem) 1rem clamp(2.5rem, 6vh, 4.5rem);
+}
+
+.logo-header {
+    display: block;
+    width: clamp(180px, 50vw, 550px);
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
+    filter: drop-shadow(0 25px 25px rgba(0, 0, 0, 0.5));
+    pointer-events: none;
+}
+
+.subtitle-header {
+    margin: clamp(1rem, 2.5vh, 1.75rem) 0 0;
+    color: var(--color-text-muted);
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.main-container {
+    width: 100%;
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* ==========================================================================
+   4. GRILLE BENTO & CARTES LINKTREE
+   ========================================================================== */
+.bento-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 2.25rem;
+}
+
+@media (min-width: 768px) {
+    .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.bento-card {
+    position: relative;
+    height: 20rem;
+    border-radius: var(--radius-card);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s var(--ease-smooth), border-color 0.3s ease;
+}
+
+@media (min-width: 768px) {
+    .bento-card {
+        height: 24rem;
+    }
+    .bento-card:hover {
+        transform: scale(1.02);
+        border-color: var(--color-border-strong);
+    }
+}
+
+.bento-card:active {
+    transform: scale(0.98);
+}
+
+/* Variante : Carte Galerie Empilée (Linktree) */
+.bento-card--gallery {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+}
+
+.card-stack {
+    position: relative;
+    width: 100%;
+    height: 12rem;
+    margin-top: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+@media (min-width: 768px) {
+    .card-stack {
+        height: 14rem;
+    }
+}
+
+.card-stack__img {
+    position: absolute;
+    width: 80%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-inner);
+    transition: transform 0.5s var(--ease-smooth), opacity 0.5s var(--ease-smooth);
+}
+
+.card-stack__img--left {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transform: translateX(-1.5rem) rotate(-6deg);
+    opacity: 0.6;
+}
+
+.card-stack__img--right {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transform: translateX(1.5rem) rotate(6deg);
+    opacity: 0.6;
+}
+
+.card-stack__img--back {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transform: translateX(-1rem) rotate(-3deg);
+    opacity: 0.6;
+}
+
+.card-stack__img--front {
+    z-index: 10;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bento-card:hover .card-stack__img--left {
+    transform: translateX(-2rem) rotate(-12deg);
+    opacity: 0.85;
+}
+
+.bento-card:hover .card-stack__img--right {
+    transform: translateX(2rem) rotate(12deg);
+    opacity: 0.85;
+}
+
+.bento-card:hover .card-stack__img--back {
+    transform: translateX(-1.5rem) rotate(-6deg);
+    opacity: 0.85;
+}
+
+.bento-card:hover .card-stack__img--front {
+    transform: scale(1.05);
+}
+
+.bento-card__footer {
+    text-align: center;
+    z-index: 20;
+    pointer-events: none;
+    margin-top: auto;
+}
+
+.bento-card__title {
+    margin: 0;
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+}
+
+.bento-card__meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    margin: 0.35rem 0 0;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Variante : Carte Couverture (Studio Créa) */
+.bento-card__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    transition: transform 0.7s var(--ease-smooth);
+}
+
+.bento-card--cover:hover .bento-card__bg {
+    transform: scale(1.1);
+}
+
+.bento-card__gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.92), transparent 60%);
+}
+
+.bento-card__overlay {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.bento-card__subtitle {
+    margin: 0.25rem 0 0;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #d4d4d8;
+}
+
+/* Variante : Carte Sociale (Instagram) */
+.bento-card--social {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.bento-card--social .icon-xl {
+    margin-bottom: 0.5rem;
+    transition: transform 0.3s var(--ease-smooth);
+}
+
+.bento-card--social:hover .icon-xl {
+    transform: scale(1.12);
+}
+
+/* ==========================================================================
+   5. SECTIONS & VISIONNEUSE 3D
+   ========================================================================== */
+.section-block {
+    margin-bottom: 2.25rem;
+}
+
+.section-title {
+    margin: 0 0 1rem;
+    padding-left: 0.5rem;
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.viewer-card {
+    position: relative;
+    width: 100%;
+    height: 25rem;
+    background-color: var(--color-surface);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.viewer-card__canvas {
+    width: 100%;
+    height: 100%;
+    outline: none;
+}
+
+.viewer-badge {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    background-color: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--color-border-strong);
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   6. CONTACT, RÉSEAUX & LOCALISATION
+   ========================================================================== */
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+    .social-grid {
+        gap: 1rem;
+    }
+}
+
+.social-tile {
+    height: 7rem;
+    border-radius: var(--radius-tile);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--color-text);
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: transform 0.25s var(--ease-smooth), border-color 0.25s ease;
+}
+
+@media (min-width: 768px) {
+    .social-tile {
+        height: 8rem;
+    }
+    .social-tile:hover {
+        transform: scale(1.04);
+        border-color: var(--color-border-strong);
+    }
+}
+
+.social-tile:active {
+    transform: scale(0.96);
+}
+
+.location-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 7.5rem;
+    border-radius: var(--radius-tile);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border-strong);
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.3s var(--ease-smooth);
+}
+
+@media (min-width: 768px) {
+    .location-card {
+        height: 8.5rem;
+    }
+    .location-card:hover {
+        transform: scale(1.02);
+    }
+}
+
+.location-card__bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.4;
+    transition: transform 0.5s var(--ease-smooth);
+}
+
+.location-card:hover .location-card__bg {
+    transform: scale(1.05);
+}
+
+.location-card__gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.35), transparent);
+}
+
+.location-card__pin {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-0.5rem);
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6));
+}
+
+.location-card__label {
+    position: absolute;
+    bottom: 0.85rem;
+    left: 1rem;
+    right: 1rem;
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+/* ==========================================================================
+   7. BOUTON D'ACTION FLOTTANT (FAB)
+   ========================================================================== */
+.fab-wrapper {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 40;
+    pointer-events: none;
+}
+
+.btn-fab {
+    pointer-events: auto;
+    border: none;
+    border-radius: 9999px;
+    background-color: var(--color-brand);
+    color: var(--color-text);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 1rem 2rem;
+    box-shadow: var(--shadow-brand);
+    cursor: pointer;
+    transition: transform 0.25s var(--ease-smooth), background-color 0.25s ease;
+}
+
+.btn-fab:hover {
+    background-color: var(--color-brand-hover);
+    transform: scale(1.05);
+}
+
+.btn-fab:active {
+    transform: scale(0.94);
+}
+
+/* ==========================================================================
+   8. MODALES (GALERIES & FORMULAIRE)
+   ========================================================================== */
+.btn-close {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 9999px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-close:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-close:active {
+    transform: scale(0.92);
+}
+
+/* Panneaux Plein Écran (Services & Réalisations) */
+.modal-sheet {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background-color: var(--color-bg);
+    display: flex;
+    flex-direction: column;
+    transform: translateY(100%);
+    visibility: hidden;
+    transition: transform 0.5s var(--ease-sheet), visibility 0.5s;
+}
+
+.modal-sheet.is-open {
+    transform: translateY(0);
+    visibility: visible;
+}
+
+.modal-header {
+    position: relative;
+    height: 4rem;
+    flex-shrink: 0;
+    background-color: var(--color-surface-elevated);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+}
+
+.modal-header__title {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+.modal-header .btn-close {
+    position: absolute;
+    right: 1rem;
+}
+
+.modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem 1rem 4rem;
+}
+
+@media (min-width: 768px) {
+    .modal-body {
+        padding: 2.5rem 2rem 5rem;
+    }
+}
+
+.modal-container {
+    max-width: 56rem;
+    margin: 0 auto;
+}
+
+.modal-intro {
+    text-align: center;
+    max-width: 42rem;
+    margin: 0 auto 2.5rem;
+}
+
+.modal-intro__title {
+    margin: 0 0 1rem;
+    font-size: clamp(1.75rem, 4vw, 2.35rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+}
+
+.modal-intro__text {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+}
+
+/* Grille Masonry */
+.masonry-grid {
+    columns: 1;
+    column-gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .masonry-grid {
+        columns: 2;
+    }
+}
+
+.masonry-item {
+    position: relative;
+    break-inside: avoid;
+    margin: 0 0 1rem;
+    border-radius: var(--radius-tile);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.masonry-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s var(--ease-smooth);
+}
+
+.masonry-item:hover img {
+    transform: scale(1.05);
+}
+
+.masonry-item__caption {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent 55%);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.masonry-item:hover .masonry-item__caption {
+    opacity: 1;
+}
+
+/* Bloc Méthode & Devis */
+.method-box {
+    margin-top: 3rem;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    background-color: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .method-box {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.method-box__heading {
+    margin: 0 0 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.method-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: var(--color-text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    line-height: 1.5;
+}
+
+.method-list strong {
+    color: var(--color-text);
+}
+
+.method-box__cta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.method-box__desc {
+    margin: 0 0 1.25rem;
+    color: var(--color-text-muted);
+    line-height: 1.55;
+}
+
+.btn-light {
+    border: none;
+    border-radius: var(--radius-inner);
+    background-color: var(--color-text);
+    color: #000000;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0.85rem 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-light:hover {
+    background-color: #e4e4e7;
+}
+
+/* Modale Contact (Bottom Sheet Mobile / Centrée Desktop) */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-color: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s;
+}
+
+.modal-backdrop.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-dialog {
+    position: relative;
+    width: 100%;
+    max-width: 32rem;
+    margin: 0 auto;
+    border-radius: 1.75rem 1.75rem 0 0;
+    background-color: var(--color-surface-elevated);
+    border: 1px solid var(--color-border-strong);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    transform: translateY(100%);
+    transition: transform 0.45s var(--ease-sheet);
+}
+
+.modal-backdrop.is-open .modal-dialog {
+    transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+    .modal-backdrop {
+        justify-content: center;
+        padding: 1.5rem;
+    }
+    .modal-dialog {
+        border-radius: 1.75rem;
+        transform: translateY(24px) scale(0.97);
+    }
+    .modal-backdrop.is-open .modal-dialog {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-dialog__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
+}
+
+.modal-dialog__body {
+    padding: 2.5rem 2rem 2rem;
+}
+
+.modal-dialog__title {
+    margin: 0 0 0.4rem;
+    text-align: center;
+    font-size: clamp(1.5rem, 3vw, 1.85rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+}
+
+.modal-dialog__subtitle {
+    margin: 0 0 1.5rem;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    border-radius: var(--radius-inner);
+    background-color: #09090b;
+    border: 1px solid var(--color-border-strong);
+    color: var(--color-text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 0.75rem 1rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.form-control::placeholder {
+    color: var(--color-text-subtle);
+}
+
+.form-control:focus {
+    border-color: var(--color-brand);
+}
+
+.btn-primary {
+    width: 100%;
+    margin-top: 0.5rem;
+    border: none;
+    border-radius: var(--radius-inner);
+    background-color: var(--color-brand);
+    color: var(--color-text);
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: 700;
+    padding: 1rem;
+    box-shadow: 0 8px 20px rgba(127, 43, 63, 0.35);
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-brand-hover);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.form-success {
+    margin: 0.5rem 0 0;
+    text-align: center;
+    color: #4ade80;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   9. LIGHTBOX ZOOM PHOTO
+   ========================================================================== */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s;
+}
+
+.lightbox.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox__close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    z-index: 10;
+}
+
+.lightbox__img {
+    max-width: 95vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: var(--radius-inner);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+    transform: scale(0.95);
+    transition: transform 0.3s var(--ease-smooth);
+}
+
+.lightbox.is-open .lightbox__img {
+    transform: scale(1);
+}
+
+/* ==========================================================================
+   10. ANIMATIONS & ACCESSIBILITÉ
+   ========================================================================== */
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes gentleBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
 }
 
 .animate-slide-up {
     opacity: 0;
-    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: fadeInUp 0.65s var(--ease-smooth) var(--delay, 0ms) forwards;
 }
 
-.animate-fade-in {
-    animation: fadeInUp 0.8s ease-out;
+.animate-bounce {
+    animation: gentleBounce 1.6s infinite ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-slide-up {
+        opacity: 1;
+        animation: none;
+    }
+    .animate-bounce {
+        animation: none;
+    }
+    .bento-card,
+    .card-stack__img,
+    .modal-sheet,
+    .modal-backdrop,
+    .modal-dialog,
+    .lightbox,
+    .lightbox__img {
+        transition: none;
+    }
 }
