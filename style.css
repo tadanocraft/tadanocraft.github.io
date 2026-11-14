@@ -18,6 +18,24 @@ html, body {
     -webkit-tap-highlight-color: transparent;
 }
 
+/* Espacement responsive de l'en-tête */
+.site-header {
+    padding-top: clamp(3.5rem, 9vh, 6.5rem);
+    padding-bottom: clamp(2.5rem, 6vh, 4.5rem);
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.logo-header {
+    width: clamp(180px, 50vw, 550px);
+    max-width: 100%;
+    height: auto;
+}
+
+.subtitle-header {
+    margin-top: clamp(1rem, 2.5vh, 1.75rem);
+}
+
 /* Fond topographique combiné avec dégradé */
 .custom-bg {
     background-color: #111111;
