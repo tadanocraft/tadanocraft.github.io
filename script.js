@@ -523,4 +523,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     animateMagneticBtn();
   }
+  // ----------------------------------------------------------------------
+  // H. Rotation aléatoire du GIF d'en-tête à chaque actualisation
+  // ----------------------------------------------------------------------
+  const heroGif = document.getElementById("heroGif");
+
+  if (heroGif) {
+    // Liste de tes GIFs (tu peux en ajouter autant que tu veux entre les guillemets)
+    const gifs = [
+      "https://i.pinimg.com/originals/eb/50/87/eb50875a68b04b0480fa929af2c7547c.gif", // Ton GIF bordeaux actuel
+      "https://i.pinimg.com/originals/b1/5b/d5/b15bd596014d9d9310e59b07b85da550.gif", // Exemple de fichier local
+      "https://i.pinimg.com/originals/1e/7d/d6/1e7dd6800a6ad9862861c878cfcc2fb2.gif", // Ça marche aussi parfaitement avec les .webp animés
+    ];
+
+    // Tire un GIF au hasard dans la liste et l'applique immédiatement
+    const randomGif = gifs[Math.floor(Math.random() * gifs.length)];
+    heroGif.src = randomGif;
+  }
 });

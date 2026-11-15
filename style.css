@@ -24,7 +24,7 @@
   --color-text-muted: #a1a1aa;
   --color-text-subtle: #71717a;
   --color-border: rgba(255, 255, 255, 0.06);
-  --color-border-strong: rgba(255, 255, 255, 0.12);
+  --color-border-strong: #7f2b3f;
 
   /* Typographie */
   --font-sans: "Satoshi", -apple-system, BlinkMacSystemFont, sans-serif;
