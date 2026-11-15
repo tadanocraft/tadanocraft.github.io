@@ -201,10 +201,10 @@
             class="bento-card bento-card--cover"
             role="button"
             tabindex="0"
-            data-lightbox-src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=1200&amp;q=80"
+            data-lightbox-src="media/images/nuancier.jpg?auto=format&amp;fit=crop&amp;w=1200&amp;q=80"
           >
             <img
-              src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+              src="media/images/nuancier.jpg?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
               width="800"
               height="800"
               loading="lazy"
@@ -256,14 +256,14 @@
           <h2 class="section-title">Mes Projets 3D</h2>
           <div class="viewer-card">
             <model-viewer
-              src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+              src="media/3d/plaquette tadano v2.glb"
               alt="Modèle 3D interactif Tadano Craft"
               auto-rotate
               camera-controls
               disable-pan
               shadow-intensity="1"
               environment-image="neutral"
-              exposure="1.2"
+              exposure="0.5"
               class="viewer-card__canvas"
             >
             </model-viewer>
@@ -373,6 +373,24 @@
               Livraison Charleroi et alentours
             </h3>
           </a>
+          <!-- Carte Photo pleine largeur sous la carte Google Maps -->
+          <article
+            class="photo-banner-card"
+            role="button"
+            tabindex="0"
+            data-lightbox-src="media/images/IMG-20261101-WA0003.jpg"
+          >
+            <img
+              src="media/images/IMG-20261101-WA0003.jpg"
+              alt="Aperçu de l'atelier et des créations — Tadano Craft"
+              width="1200"
+              height="600"
+              loading="lazy"
+              class="photo-banner-card__img"
+            />
+            <div class="photo-banner-card__gradient" aria-hidden="true"></div>
+            <h3 class="photo-banner-card__label">Et rapide !</h3>
+          </article>
         </section>
       </main>
     </div>
@@ -663,36 +681,22 @@
             </p>
           </div>
 
-          <div class="masonry-grid">
-            <figure
-              class="masonry-item"
-              role="button"
-              tabindex="0"
-              data-lightbox-src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&amp;fit=crop&amp;w=1200&amp;q=80"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
-                width="800"
-                height="800"
-                loading="lazy"
-                alt="Création graphique et impression 3D sur mesure — Tadano Craft"
-              />
-            </figure>
+                <div class="masonry-grid">
+                    <!-- Photo 1 -->
+                    <figure class="masonry-item" role="button" tabindex="0" data-lightbox-src="media/images/projet-1.webp">
+                        <img src="media/images/projet-1.webp" width="800" height="800" loading="lazy" alt="Création graphique et impression 3D sur mesure — Tadano Craft">
+                    </figure>
 
-            <figure
-              class="masonry-item"
-              role="button"
-              tabindex="0"
-              data-lightbox-src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=1200&amp;q=80"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
-                width="800"
-                height="900"
-                loading="lazy"
-                alt="Affiche typographique et identité visuelle — Tadano Craft"
-              />
-            </figure>
+                    <!-- Photo 2 -->
+                    <figure class="masonry-item" role="button" tabindex="0" data-lightbox-src="media/images/projet-2.webp">
+                        <img src="media/images/projet-2.webp" width="800" height="1000" loading="lazy" alt="Identité visuelle et support publicitaire — Tadano Craft">
+                    </figure>
+
+                    <!-- Photo 3 (duplique ce bloc pour chaque nouvelle photo) -->
+                    <figure class="masonry-item" role="button" tabindex="0" data-lightbox-src="media/images/projet-3.webp">
+                        <img src="media/images/projet-3.webp" width="800" height="600" loading="lazy" alt="Objet personnalisé imprimé en 3D — Tadano Craft">
+                    </figure>
+                </div>
           </div>
         </div>
       </div>
