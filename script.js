@@ -257,11 +257,11 @@ document.addEventListener("DOMContentLoaded", () => {
       card.style.setProperty("--rotateY", `${rotateY.toFixed(2)}deg`);
       card.style.setProperty(
         "--glareX",
-        `${((x / rect.width) * 100).toFixed(1)}%`,
+        `${((x / rect.width) * 100).toFixed(1)}%`
       );
       card.style.setProperty(
         "--glareY",
-        `${((y / rect.height) * 100).toFixed(1)}%`,
+        `${((y / rect.height) * 100).toFixed(1)}%`
       );
     });
 
@@ -269,7 +269,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (window.innerWidth < 768) return;
       clearTimeout(enterTimeout);
       enterTimeout = setTimeout(() => {
-        card.style.transition = "border-color 0.3s ease";
+        card.style.transition = "border-color 0.3s ease, box-shadow 0.35s ease";
       }, 220);
     });
 
@@ -277,7 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (window.innerWidth < 768) return;
       clearTimeout(enterTimeout);
       card.style.transition =
-        "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease";
+        "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.35s ease";
       card.style.setProperty("--rotateX", "0deg");
       card.style.setProperty("--rotateY", "0deg");
       card.style.setProperty("--glareX", "50%");
@@ -286,170 +286,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ----------------------------------------------------------------------
-  // F. Maillage topographique 3D discret en arrière-plan
-  // ----------------------------------------------------------------------
-  const topoCanvas = document.getElementById("topoCanvas");
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
-
-  if (topoCanvas && !prefersReducedMotion) {
-    const ctx = topoCanvas.getContext("2d");
-    let width = 0;
-    let height = 0;
-    let cols = 0;
-    let rows = 0;
-    let spacing = 56;
-    let points = [];
-    let time = 0;
-
-    const pointer = {
-      x: -9999,
-      y: -9999,
-      smoothX: -9999,
-      smoothY: -9999,
-      active: false,
-    };
-
-    function initMesh() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      width = window.innerWidth;
-      height = window.innerHeight;
-      topoCanvas.width = width * dpr;
-      topoCanvas.height = height * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      spacing = width < 768 ? 68 : 56;
-      cols = Math.ceil(width / spacing) + 3;
-      rows = Math.ceil(height / spacing) + 3;
-
-      points = [];
-      for (let r = 0; r < rows; r++) {
-        const row = [];
-        for (let c = 0; c < cols; c++) {
-          row.push({
-            baseX: (c - 1) * spacing,
-            baseY: (r - 1) * spacing,
-            x: (c - 1) * spacing,
-            y: (r - 1) * spacing,
-            glow: 0,
-          });
-        }
-        points.push(row);
-      }
-    }
-
-    function animateMesh() {
-      time += 0.006;
-
-      if (pointer.active) {
-        if (pointer.smoothX < -5000) {
-          pointer.smoothX = pointer.x;
-          pointer.smoothY = pointer.y;
-        } else {
-          pointer.smoothX += (pointer.x - pointer.smoothX) * 0.06;
-          pointer.smoothY += (pointer.y - pointer.smoothY) * 0.06;
-        }
-      } else {
-        pointer.smoothX = -9999;
-        pointer.smoothY = -9999;
-      }
-
-      ctx.clearRect(0, 0, width, height);
-
-      const influenceRadius = 185;
-
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          const p = points[r][c];
-
-          // Ondulation très douce et lente
-          const waveX = Math.sin(p.baseY * 0.008 + time) * 3.5;
-          const waveY = Math.cos(p.baseX * 0.008 + time * 0.85) * 3.5;
-
-          let offsetX = waveX;
-          let offsetY = waveY;
-          let targetGlow = 0;
-
-          if (pointer.active) {
-            const dx = p.baseX - pointer.smoothX;
-            const dy = p.baseY - pointer.smoothY;
-            const dist = Math.hypot(dx, dy);
-
-            if (dist < influenceRadius && dist > 0.001) {
-              const force = Math.pow(1 - dist / influenceRadius, 2);
-              offsetX += (dx / dist) * force * 10;
-              offsetY += (dy / dist) * force * 10;
-              targetGlow = force;
-            }
-          }
-
-          p.x = p.baseX + offsetX;
-          p.y = p.baseY + offsetY;
-          p.glow += (targetGlow - p.glow) * 0.07;
-        }
-      }
-
-      ctx.lineWidth = 0.75;
-
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          const p = points[r][c];
-
-          if (c + 1 < cols) {
-            const right = points[r][c + 1];
-            const glow = Math.max(p.glow, right.glow);
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(right.x, right.y);
-            ctx.strokeStyle =
-              glow > 0.03
-                ? `rgba(127, 43, 63, ${(0.03 + glow * 0.22).toFixed(3)})`
-                : "rgba(255, 255, 255, 0.028)";
-            ctx.stroke();
-          }
-
-          if (r + 1 < rows) {
-            const bottom = points[r + 1][c];
-            const glow = Math.max(p.glow, bottom.glow);
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(bottom.x, bottom.y);
-            ctx.strokeStyle =
-              glow > 0.03
-                ? `rgba(127, 43, 63, ${(0.03 + glow * 0.22).toFixed(3)})`
-                : "rgba(255, 255, 255, 0.028)";
-            ctx.stroke();
-          }
-        }
-      }
-
-      requestAnimationFrame(animateMesh);
-    }
-
-    window.addEventListener("resize", initMesh, { passive: true });
-    window.addEventListener(
-      "mousemove",
-      (e) => {
-        pointer.x = e.clientX;
-        pointer.y = e.clientY;
-        pointer.active = true;
-      },
-      { passive: true },
-    );
-
-    document.addEventListener("mouseleave", () => {
-      pointer.active = false;
-    });
-
-    initMesh();
-    animateMesh();
-  }
-
-  // ----------------------------------------------------------------------
-  // G. Bouton magnétique ultra-doux et non collant
+  // F. Bouton magnétique ultra-doux et non collant
   // ----------------------------------------------------------------------
   const magneticBtn = document.getElementById("magneticBtn");
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
   if (magneticBtn && !prefersReducedMotion) {
     const magneticText = magneticBtn.querySelector(".btn-fab__text");
@@ -471,7 +313,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const btnCenterX = rect.left + rect.width / 2;
         const btnCenterY = rect.top + rect.height / 2;
 
-        // Zone d'approche très proche autour du bouton (marge de 32px seulement)
         const margin = 32;
         const isNear =
           e.clientX >= rect.left - margin &&
@@ -482,7 +323,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isNear) {
           const dx = e.clientX - btnCenterX;
           const dy = e.clientY - btnCenterY;
-          // Déplacement très léger et retenu (max 8px horizontal, 5px vertical)
           targetX = Math.max(-8, Math.min(8, dx * 0.14));
           targetY = Math.max(-5, Math.min(5, dy * 0.14));
         } else {
@@ -490,7 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
           targetY = 0;
         }
       },
-      { passive: true },
+      { passive: true }
     );
 
     document.addEventListener("mouseleave", () => {
@@ -499,7 +339,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function animateMagneticBtn() {
-      // Interpolation très douce sans rebond ni à-coup
       const ease = targetX === 0 && targetY === 0 ? 0.04 : 0.055;
       currentX += (targetX - currentX) * ease;
       currentY += (targetY - currentY) * ease;
@@ -523,20 +362,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     animateMagneticBtn();
   }
+
   // ----------------------------------------------------------------------
-  // H. Rotation aléatoire du GIF d'en-tête à chaque actualisation
+  // G. Rotation aléatoire du GIF d'en-tête à chaque actualisation
   // ----------------------------------------------------------------------
   const heroGif = document.getElementById("heroGif");
 
   if (heroGif) {
-    // Liste de tes GIFs (tu peux en ajouter autant que tu veux entre les guillemets)
     const gifs = [
-      "https://i.pinimg.com/originals/eb/50/87/eb50875a68b04b0480fa929af2c7547c.gif", // Ton GIF bordeaux actuel
-      "https://i.pinimg.com/originals/b1/5b/d5/b15bd596014d9d9310e59b07b85da550.gif", // Exemple de fichier local
-      "https://i.pinimg.com/originals/1e/7d/d6/1e7dd6800a6ad9862861c878cfcc2fb2.gif", // Ça marche aussi parfaitement avec les .webp animés
+      "https://i.pinimg.com/originals/eb/50/87/eb50875a68b04b0480fa929af2c7547c.gif",
+      "https://i.pinimg.com/originals/b1/5b/d5/b15bd596014d9d9310e59b07b85da550.gif",
+      "https://i.pinimg.com/originals/1e/7d/d6/1e7dd6800a6ad9862861c878cfcc2fb2.gif",
     ];
 
-    // Tire un GIF au hasard dans la liste et l'applique immédiatement
     const randomGif = gifs[Math.floor(Math.random() * gifs.length)];
     heroGif.src = randomGif;
   }
