@@ -161,7 +161,7 @@ body {
   margin: 0 auto;
 }
 
-@media (orientation: landscape) and (min-width: 48em) {
+@media (orientation: landscape) and (min-width: 48em) and (max-width: 63.99em) {
   .linktree-shell {
     width: min(90%, clamp(44rem, 65vw, 56rem));
     padding-top: 1.5rem;
@@ -237,9 +237,18 @@ body {
   text-transform: uppercase;
 }
 
+/* Pastilles discrètes visibles uniquement sur écran large PC */
+.header-pills {
+  display: none;
+}
+
 .main-container {
   width: 100%;
   padding: 0 2%;
+}
+
+.studio-layout {
+  display: block;
 }
 
 /* ==========================================================================
@@ -460,7 +469,7 @@ body {
 }
 
 /* ==========================================================================
-   5. SECTIONS & VISIONNEUSE 3D
+   5. SECTIONS & VISIONNEUSE 3D (GRADIENT PUR SANS INCLINAISON NI LUEUR)
    ========================================================================== */
 .section-block {
   margin-bottom: clamp(2rem, 4vh, 2.75rem);
@@ -486,14 +495,10 @@ body {
   border: 1px solid var(--color-border);
   box-shadow: var(--card-inner-shadow);
   overflow: hidden;
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.35s var(--ease-smooth);
 }
 
-.viewer-card:hover {
-  border-color: var(--color-border-strong);
-  box-shadow: var(--card-inner-shadow-hover);
+.viewer-top-badge {
+  display: none;
 }
 
 .viewer-card__canvas {
@@ -525,6 +530,10 @@ body {
 /* ==========================================================================
    6. CONTACT, RÉSEAUX & LOCALISATION
    ========================================================================== */
+.contact-bento-row {
+  display: block;
+}
+
 .social-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -646,77 +655,133 @@ body {
   color: var(--color-text);
 }
 
-/* Carte Photo pleine largeur sous la carte Google Maps */
-.photo-banner-card {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: clamp(11rem, 22vh, 15.5rem);
-  margin-top: clamp(0.875rem, 1.5vw, 1.15rem);
-  border-radius: var(--radius-tile);
-  background: var(--card-bg-gradient);
-  border: 1px solid var(--color-border-strong);
-  box-shadow: var(--card-inner-shadow);
-  overflow: hidden;
-  cursor: pointer;
-  text-decoration: none;
-  transition:
-    transform 0.3s var(--ease-smooth),
-    border-color 0.3s ease,
-    box-shadow 0.35s var(--ease-smooth);
-}
+/* ==========================================================================
+   7. ADAPTATION GRAND ÉCRAN PC (75% DE LARGEUR — ESPRIT BENTO CONSERVÉ)
+   ========================================================================== */
+@media (min-width: 64em) {
+  .linktree-shell {
+    width: min(92%, 75vw);
+    max-width: 96rem;
+  }
 
-@media (min-width: 36em) {
-  .photo-banner-card:hover {
-    transform: scale(1.015);
-    border-color: rgba(153, 52, 76, 0.9);
-    box-shadow: var(--card-inner-shadow-hover);
+  .site-header {
+    padding: clamp(5rem, 11vh, 7.5rem) 2% clamp(2.25rem, 4vh, 3rem);
+  }
+
+  .logo-header {
+    width: clamp(18rem, 32%, 28rem);
+  }
+
+  .header-pills {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1.1rem;
+  }
+
+  .header-pill {
+    padding: 0.35rem 0.9rem;
+    border-radius: 999rem;
+    background-color: rgba(24, 24, 28, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--color-border);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .main-container {
+    padding: 0;
+  }
+
+  /* Grille Bento PC : 4 cartes à gauche (7fr) + Visionneuse 3D à droite (5fr) */
+  .studio-layout {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  .bento-grid {
+    gap: 1.5rem;
+    margin-bottom: 0;
+  }
+
+  .bento-card {
+    height: clamp(18.5rem, 19vw, 21.5rem);
+  }
+
+  .card-stack {
+    height: clamp(10.75rem, 11.5vw, 13rem);
+  }
+
+  .mobile-section-heading {
+    display: none;
+  }
+
+  .viewer-section {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .viewer-card {
+    flex: 1;
+    height: 100%;
+    min-height: clamp(38.5rem, 39.5vw, 44.5rem);
+  }
+
+  .viewer-top-badge {
+    position: absolute;
+    top: 1.1rem;
+    left: 1.1rem;
+    z-index: 20;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999rem;
+    background-color: rgba(17, 17, 17, 0.72);
+    backdrop-filter: blur(0.75rem);
+    -webkit-backdrop-filter: blur(0.75rem);
+    border: 1px solid var(--color-border);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.11);
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    pointer-events: none;
+  }
+
+  /* Ligne Contact & Localisation sur toute la largeur en bas du Bento */
+  .contact-section {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+
+  .contact-bento-row {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  .social-grid {
+    margin-bottom: 0;
+    gap: 1.15rem;
+  }
+
+  .social-tile,
+  .location-card {
+    height: 9.5rem;
   }
 }
 
-.photo-banner-card:active {
-  transform: scale(0.98);
-}
-
-.photo-banner-card__img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s var(--ease-smooth);
-}
-
-.photo-banner-card:hover .photo-banner-card__img {
-  transform: scale(1.05);
-}
-
-.photo-banner-card__gradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(14, 10, 11, 0.8),
-    rgba(127, 43, 63, 0.05) 45%,
-    rgba(10, 10, 12, 0.14) 100%
-  );
-  box-shadow: var(--card-photo-inset);
-  pointer-events: none;
-}
-
-.photo-banner-card__label {
-  position: absolute;
-  bottom: 0.85rem;
-  left: 1.15rem;
-  right: 1.15rem;
-  margin: 0;
-  font-size: clamp(0.8rem, 1.1vw, 0.9rem);
-  font-weight: 600;
-  color: var(--color-text);
-  pointer-events: none;
-}
-
 /* ==========================================================================
-   7. BOUTON FLOTTANT MAGNÉTIQUE DOUX & EFFETS DE LUMIÈRE GLOBAUX
+   8. BOUTON FLOTTANT MAGNÉTIQUE DOUX & EFFETS DE LUMIÈRE GLOBAUX
    ========================================================================== */
 .fab-wrapper {
   position: fixed;
@@ -785,7 +850,6 @@ body {
 .bento-card,
 .social-tile,
 .location-card,
-.photo-banner-card,
 .btn-fab,
 .btn-primary {
   position: relative;
@@ -795,7 +859,6 @@ body {
 .bento-card::after,
 .social-tile::after,
 .location-card::after,
-.photo-banner-card::after,
 .btn-fab::after,
 .btn-primary::after {
   content: "";
@@ -818,7 +881,6 @@ body {
 .bento-card:hover::after,
 .social-tile:hover::after,
 .location-card:hover::after,
-.photo-banner-card:hover::after,
 .btn-fab:hover::after,
 .btn-primary:hover::after {
   left: 200%;
@@ -826,7 +888,7 @@ body {
 }
 
 /* ==========================================================================
-   8. MODALES (SERVICES DÉTAILLÉS, PORTFOLIO PHOTO & CONTACT)
+   9. MODALES (SERVICES DÉTAILLÉS, PORTFOLIO PHOTO & CONTACT)
    ========================================================================== */
 .btn-close {
   width: 2.25rem;
@@ -906,7 +968,7 @@ body {
 }
 
 .modal-container {
-  width: min(100%, 56rem);
+  width: min(100%, 68rem);
   margin: 0 auto;
 }
 
@@ -939,6 +1001,12 @@ body {
 @media (min-width: 48em) {
   .masonry-grid {
     columns: 2;
+  }
+}
+
+@media (min-width: 64em) {
+  .masonry-grid {
+    columns: 3;
   }
 }
 
@@ -1252,7 +1320,7 @@ body {
 }
 
 /* ==========================================================================
-   9. ZOOM PHOTO PLEIN ÉCRAN
+   10. ZOOM PHOTO PLEIN ÉCRAN
    ========================================================================== */
 .lightbox {
   position: fixed;
@@ -1301,7 +1369,7 @@ body {
 }
 
 /* ==========================================================================
-   10. ANIMATIONS & ACCESSIBILITÉ
+   11. ANIMATIONS & ACCESSIBILITÉ
    ========================================================================== */
 @keyframes fadeInUp {
   from {
@@ -1352,31 +1420,31 @@ body {
 }
 
 /* ==========================================================================
-   11. INCLINAISON 3D DIRECTIONNELLE & HALO SOURIS (ORDINATEUR)
+   12. INCLINAISON 3D DIRECTIONNELLE & HALO SOURIS (ORDINATEUR)
    ========================================================================== */
 @media (min-width: 48em) {
-  .bento-card {
+  .tilt-effect {
     transform: perspective(62.5rem) rotateX(var(--rotateX, 0deg))
       rotateY(var(--rotateY, 0deg)) scale(var(--scale, 1));
     will-change: transform;
   }
 
-  .bento-card:hover {
-    --scale: 1.025;
+  .tilt-effect:hover {
+    --scale: 1.02;
     transform: perspective(62.5rem) rotateX(var(--rotateX, 0deg))
-      rotateY(var(--rotateY, 0deg)) scale(var(--scale, 1.025));
+      rotateY(var(--rotateY, 0deg)) scale(var(--scale, 1.02));
     z-index: 30;
   }
 
   /* Halo lumineux interactif qui suit le pointeur */
-  .bento-card::before {
+  .tilt-effect::before {
     content: "";
     position: absolute;
     inset: 0;
     z-index: 25;
     background: radial-gradient(
       circle 22rem at var(--glareX, 50%) var(--glareY, 50%),
-      rgba(255, 255, 255, 0.14) 0%,
+      rgba(255, 255, 255, 0.12) 0%,
       transparent 70%
     );
     opacity: 0;
@@ -1384,7 +1452,7 @@ body {
     transition: opacity 0.45s var(--ease-smooth);
   }
 
-  .bento-card:hover::before {
+  .tilt-effect:hover::before {
     opacity: 1;
   }
 }

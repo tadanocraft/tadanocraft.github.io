@@ -236,7 +236,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ----------------------------------------------------------------------
   // E. Inclinaison 3D directionnelle & halo lumineux sur les cartes
   // ----------------------------------------------------------------------
-  const tiltCards = document.querySelectorAll(".bento-card");
+  const tiltCards = document.querySelectorAll(".tilt-effect");
 
   tiltCards.forEach((card) => {
     let enterTimeout;
@@ -250,8 +250,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -9;
-      const rotateY = ((x - centerX) / centerX) * 9;
+      const rotateX = ((y - centerY) / centerY) * -6;
+      const rotateY = ((x - centerX) / centerX) * 6;
 
       card.style.setProperty("--rotateX", `${rotateX.toFixed(2)}deg`);
       card.style.setProperty("--rotateY", `${rotateY.toFixed(2)}deg`);
