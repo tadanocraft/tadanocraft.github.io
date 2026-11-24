@@ -257,11 +257,11 @@ document.addEventListener("DOMContentLoaded", () => {
       card.style.setProperty("--rotateY", `${rotateY.toFixed(2)}deg`);
       card.style.setProperty(
         "--glareX",
-        `${((x / rect.width) * 100).toFixed(1)}%`
+        `${((x / rect.width) * 100).toFixed(1)}%`,
       );
       card.style.setProperty(
         "--glareY",
-        `${((y / rect.height) * 100).toFixed(1)}%`
+        `${((y / rect.height) * 100).toFixed(1)}%`,
       );
     });
 
@@ -290,7 +290,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ----------------------------------------------------------------------
   const magneticBtn = document.getElementById("magneticBtn");
   const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
+    "(prefers-reduced-motion: reduce)",
   ).matches;
 
   if (magneticBtn && !prefersReducedMotion) {
@@ -330,7 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
           targetY = 0;
         }
       },
-      { passive: true }
+      { passive: true },
     );
 
     document.addEventListener("mouseleave", () => {
