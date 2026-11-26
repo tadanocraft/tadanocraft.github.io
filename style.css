@@ -1969,3 +1969,24 @@ body {
     opacity: 1;
   }
 }
+
+/* ==========================================================================
+   13. ÉTAT VERROUILLÉ TEMPORAIRE (AVANT OUVERTURE DE LA BOUTIQUE)
+   ========================================================================== */
+.site-navbar__link.is-locked {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.site-navbar__link.is-locked:hover {
+  background-color: transparent;
+  color: var(--color-text-muted);
+}
+
+.bento-card--locked {
+  cursor: not-allowed;
+}
+
+.bento-card--locked .bento-card__bg {
+  opacity: 0.55;
+}

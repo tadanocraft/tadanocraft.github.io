@@ -80,7 +80,15 @@
         </a>
         <div class="site-navbar__links">
           <a href="index.html" class="site-navbar__link is-active">Le Studio</a>
-          <a href="pages/boutique.html" class="site-navbar__link">
+
+          <a href="pages/boutique.html" class="site-navbar__link"
+            >La Boutique</a
+          >
+          <span
+            class="site-navbar__link is-locked"
+            title="La boutique ouvre bientôt"
+            aria-disabled="true"
+          >
             <svg
               class="icon-sm"
               fill="none"
@@ -92,11 +100,12 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
               />
             </svg>
-            <span>La Boutique</span>
-          </a>
+            <span>Boutique (Bientôt)</span>
+          </span>
+
           <button
             type="button"
             class="site-navbar__cta"
@@ -120,9 +129,8 @@
       />
     </div>
 
-    <!-- 2. CONTENEUR CENTRAL RESPONSIVE (Vertical sur mobile / Bento 75% sur PC) -->
+    <!-- 2. CONTENEUR CENTRAL RESPONSIVE -->
     <div class="linktree-shell">
-      <!-- En-tête : Logo & Titre principal -->
       <header class="site-header animate-slide-up" style="--delay: 100ms">
         <div class="header-content">
           <img
@@ -145,7 +153,6 @@
         </div>
       </header>
 
-      <!-- Conteneur Principal -->
       <main class="main-container">
         <div class="studio-layout">
           <!-- Grille Bento 4 Cartes -->
@@ -154,7 +161,7 @@
             class="bento-grid animate-slide-up"
             style="--delay: 200ms"
           >
-            <!-- Carte 1 : Mes Services (Aperçu des 3 visuels de services) -->
+            <!-- Carte 1 : Mes Services -->
             <article
               class="bento-card bento-card--gallery tilt-effect"
               role="button"
@@ -248,11 +255,8 @@
               </div>
             </article>
 
-            <!-- Carte 3 : La Boutique (Lien direct vers pages/boutique.html) -->
-            <a
-              href="pages/boutique.html"
-              class="bento-card bento-card--cover tilt-effect"
-            >
+            <!-- Carte 3 : La Boutique (VERROU TEMPORAIRE : remplacer <article> par <a href="pages/boutique.html" class="bento-card bento-card--cover tilt-effect"> à l'ouverture) -->
+            <a href="pages/boutique.html" class="bento-card bento-card--cover tilt-effect">
               <img
                 src="media/images/nuancier.jpg?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
                 width="800"
@@ -273,18 +277,18 @@
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
                   />
                 </svg>
-                <span>Atelier</span>
+                <span>Bientôt disponible</span>
               </span>
               <div class="bento-card__overlay">
                 <h2 class="bento-card__title">La Boutique</h2>
                 <p class="bento-card__subtitle">Objets 3D &amp; T-shirts</p>
               </div>
-            </a>
+            </article>
 
-            <!-- Carte 4 : Instagram (Dernière publication via Behold.so) -->
+            <!-- Carte 4 : Instagram -->
             <a
               id="instaCard"
               href="https://www.instagram.com/tadanocraft/"
@@ -317,7 +321,7 @@
             </a>
           </section>
 
-          <!-- Section 3D Interactive (Fixe avec gradient pur, sans inclinaison ni lueur souris) -->
+          <!-- Section 3D Interactive (Fixe avec gradient pur) -->
           <section
             class="section-block viewer-section animate-slide-up"
             style="--delay: 300ms"
@@ -359,7 +363,7 @@
             </div>
           </section>
 
-          <!-- Section Contact et Infos (Ligne complète équilibrée sur PC) -->
+          <!-- Section Contact et Infos -->
           <section
             class="section-block contact-section animate-slide-up"
             style="--delay: 400ms"
@@ -458,7 +462,7 @@
           </section>
         </div>
 
-        <!-- Pied de page discret -->
+        <!-- Pied de page discret (VERROU TEMPORAIRE : décommenter les liens à l'ouverture de la boutique) -->
         <footer class="site-footer">
           <p>© 2026 Tadano Craft — Charleroi, Belgique</p>
           <nav aria-label="Pied de page" class="site-footer__links">
@@ -484,7 +488,7 @@
 
     <!-- === MODALES === -->
 
-    <!-- Modale : Mes Services (Images + Textes descriptifs) -->
+    <!-- Modale : Mes Services -->
     <div
       id="modalServices"
       class="modal-sheet"
@@ -531,7 +535,6 @@
           </div>
 
           <div class="masonry-grid masonry-grid--services">
-            <!-- Service 1 : Design Graphique -->
             <figure class="masonry-item">
               <div
                 class="masonry-item__image-wrapper"
@@ -574,7 +577,6 @@
               </figcaption>
             </figure>
 
-            <!-- Service 2 : Impression 3D & Conception -->
             <figure class="masonry-item">
               <div
                 class="masonry-item__image-wrapper"
@@ -619,7 +621,6 @@
               </figcaption>
             </figure>
 
-            <!-- Service 3 : Supports Visuels 3D & Marketing -->
             <figure class="masonry-item">
               <div
                 class="masonry-item__image-wrapper"
@@ -709,7 +710,7 @@
       </div>
     </div>
 
-    <!-- Modale : Mes Réalisations (Photos pures uniquement) -->
+    <!-- Modale : Mes Réalisations -->
     <div
       id="modalRealisations"
       class="modal-sheet"
@@ -756,7 +757,6 @@
           </div>
 
           <div class="masonry-grid">
-            <!-- Réalisation 1 : Pierret Camionnette -->
             <figure
               class="masonry-item"
               role="button"
@@ -772,7 +772,6 @@
               />
             </figure>
 
-            <!-- Réalisation 2 : Boîte refermable -->
             <figure
               class="masonry-item"
               role="button"
@@ -788,7 +787,6 @@
               />
             </figure>
 
-            <!-- Réalisation 3 : Print My Car -->
             <figure
               class="masonry-item"
               role="button"
@@ -804,7 +802,6 @@
               />
             </figure>
 
-            <!-- Réalisation 4 : Porte-clés Tadano Craft -->
             <figure
               class="masonry-item"
               role="button"
@@ -820,7 +817,6 @@
               />
             </figure>
 
-            <!-- Réalisation 5 : Pièce de ventilation -->
             <figure
               class="masonry-item"
               role="button"
@@ -836,7 +832,6 @@
               />
             </figure>
 
-            <!-- Réalisation 6 : Grand Visuel Noël -->
             <figure
               class="masonry-item"
               role="button"
@@ -982,7 +977,7 @@
       />
     </div>
 
-    <!-- Script Principal -->
-    <script src="script.js"></script>
+    <!-- Scripts (Cœur du site uniquement) -->
+    <script src="main.js"></script>
   </body>
 </html>
