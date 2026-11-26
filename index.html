@@ -12,7 +12,7 @@
     />
     <link rel="canonical" href="https://tadanocraft.com/" />
 
-    <!-- Open Graph (Partage réseaux sociaux) -->
+    <!-- Open Graph -->
     <meta
       property="og:title"
       content="TADANO CRAFT | Créations 3D, Design 2D &amp; Boutique"
@@ -28,7 +28,7 @@
       content="https://tadanocraft.com/media/images/tranche1.webp"
     />
 
-    <!-- Données structurées SEO (Schema.org) -->
+    <!-- Données structurées SEO -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -58,66 +58,13 @@
       src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"
     ></script>
 
-    <!-- Feuille de styles principale -->
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="page-wrapper has-top-nav">
-    <!-- 0. HEADER DE NAVIGATION FIXE (VERRE DÉPOLI) -->
-    <nav class="site-navbar" aria-label="Navigation principale">
-      <div class="site-navbar__inner">
-        <a
-          href="index.html"
-          class="site-navbar__brand"
-          aria-label="Accueil Tadano Craft"
-        >
-          <img
-            src="media/images/tranche1.webp"
-            alt="Tadano Craft"
-            width="180"
-            height="48"
-            class="site-navbar__logo"
-          />
-        </a>
-        <div class="site-navbar__links">
-          <a href="index.html" class="site-navbar__link is-active">Le Studio</a>
+    <!-- Header unique piloté par main.js -->
+    <tadano-header></tadano-header>
 
-          <a href="pages/boutique.html" class="site-navbar__link"
-            >La Boutique</a
-          >
-          <span
-            class="site-navbar__link is-locked"
-            title="La boutique ouvre bientôt"
-            aria-disabled="true"
-          >
-            <svg
-              class="icon-sm"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-              />
-            </svg>
-            <span>Boutique (Bientôt)</span>
-          </span>
-
-          <button
-            type="button"
-            class="site-navbar__cta"
-            data-modal-open="modalContact"
-          >
-            Devis
-          </button>
-        </div>
-      </div>
-    </nav>
-
-    <!-- 1. FOND GIF PLEINE LARGEUR (Bord à bord 100%) -->
+    <!-- Fond GIF pleine largeur -->
     <div class="header-hero-bg" aria-hidden="true">
       <img
         id="heroGif"
@@ -129,7 +76,6 @@
       />
     </div>
 
-    <!-- 2. CONTENEUR CENTRAL RESPONSIVE -->
     <div class="linktree-shell">
       <header class="site-header animate-slide-up" style="--delay: 100ms">
         <div class="header-content">
@@ -155,7 +101,6 @@
 
       <main class="main-container">
         <div class="studio-layout">
-          <!-- Grille Bento 4 Cartes -->
           <section
             aria-label="Navigation principale du studio"
             class="bento-grid animate-slide-up"
@@ -255,8 +200,11 @@
               </div>
             </article>
 
-            <!-- Carte 3 : La Boutique (VERROU TEMPORAIRE : remplacer <article> par <a href="pages/boutique.html" class="bento-card bento-card--cover tilt-effect"> à l'ouverture) -->
-            <a href="pages/boutique.html" class="bento-card bento-card--cover tilt-effect">
+            <!-- Carte 3 : La Boutique (Lien direct actif) -->
+            <a
+              href="pages/boutique.html"
+              class="bento-card bento-card--cover tilt-effect"
+            >
               <img
                 src="media/images/nuancier.jpg?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
                 width="800"
@@ -277,16 +225,16 @@
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                   />
                 </svg>
-                <span>Bientôt disponible</span>
+                <span>Atelier</span>
               </span>
               <div class="bento-card__overlay">
                 <h2 class="bento-card__title">La Boutique</h2>
                 <p class="bento-card__subtitle">Objets 3D &amp; T-shirts</p>
               </div>
-            </article>
+            </a>
 
             <!-- Carte 4 : Instagram -->
             <a
@@ -321,7 +269,7 @@
             </a>
           </section>
 
-          <!-- Section 3D Interactive (Fixe avec gradient pur) -->
+          <!-- Section 3D Interactive -->
           <section
             class="section-block viewer-section animate-slide-up"
             style="--delay: 300ms"
@@ -462,7 +410,6 @@
           </section>
         </div>
 
-        <!-- Pied de page discret (VERROU TEMPORAIRE : décommenter les liens à l'ouverture de la boutique) -->
         <footer class="site-footer">
           <p>© 2026 Tadano Craft — Charleroi, Belgique</p>
           <nav aria-label="Pied de page" class="site-footer__links">
@@ -474,7 +421,7 @@
       </main>
     </div>
 
-    <!-- Bouton d'action flottant magnétique doux -->
+    <!-- Bouton d'action flottant -->
     <div class="fab-wrapper animate-slide-up" style="--delay: 500ms">
       <button
         id="magneticBtn"
@@ -485,8 +432,6 @@
         <span class="btn-fab__text">Discutons de votre projet</span>
       </button>
     </div>
-
-    <!-- === MODALES === -->
 
     <!-- Modale : Mes Services -->
     <div
@@ -977,7 +922,6 @@
       />
     </div>
 
-    <!-- Scripts (Cœur du site uniquement) -->
     <script src="main.js"></script>
   </body>
 </html>

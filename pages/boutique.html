@@ -12,47 +12,8 @@
     <link rel="stylesheet" href="../style.css" />
   </head>
   <body class="page-wrapper has-top-nav">
-    <!-- HEADER DE NAVIGATION FIXE -->
-    <nav class="site-navbar" aria-label="Navigation principale">
-      <div class="site-navbar__inner">
-        <a
-          href="../index.html"
-          class="site-navbar__brand"
-          aria-label="Accueil Tadano Craft"
-        >
-          <img
-            src="../media/images/tranche1.webp"
-            alt="Tadano Craft"
-            width="180"
-            height="48"
-            class="site-navbar__logo"
-          />
-        </a>
-        <div class="site-navbar__links">
-          <a href="../index.html" class="site-navbar__link">Le Studio</a>
-          <a href="boutique.html" class="site-navbar__link is-active">
-            <svg
-              class="icon-sm"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-              />
-            </svg>
-            <span>La Boutique</span>
-          </a>
-          <a href="../index.html#sur-mesure" class="site-navbar__cta">
-            Sur mesure
-          </a>
-        </div>
-      </div>
-    </nav>
+    <!-- Header unique piloté par main.js -->
+    <tadano-header></tadano-header>
 
     <div class="linktree-shell">
       <header class="shop-header animate-slide-up" style="--delay: 80ms">
@@ -361,7 +322,6 @@
       />
     </div>
 
-    <!-- Scripts : Cœur du site + Logique dédiée Boutique -->
     <script src="../main.js"></script>
     <script src="../boutique.js"></script>
   </body>

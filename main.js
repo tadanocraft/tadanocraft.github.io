@@ -1,11 +1,12 @@
 "use strict";
 
 /* ==========================================================================
-   CONFIGURATION GLOBALE DU STUDIO
+   1. CONFIGURATION GLOBALE DU STUDIO
    ========================================================================== */
 const STUDIO_CONFIG = {
-  // Colle ici l'URL de ton futur Google Apps Script (/exec) pour recevoir devis et commandes
-  urlGoogleScript: "VOTRE_URL_GOOGLE_SCRIPT_ICI",
+  // Ton script Google Apps Script (Devis + Commandes)
+  urlGoogleScript:
+    "https://script.google.com/macros/s/AKfycbwmhlRG-jU5ir6ChjHeHRDnKMuLCUt0ILdafgagPG-t6ip-pK86oZSIJXwCfPsIJD0qeg/exec",
   // Flux Instagram Behold.so
   urlBeholdFeed: "https://feeds.behold.so/7axuN4we2Mc4uPPQrSop",
 };
@@ -13,7 +14,54 @@ const STUDIO_CONFIG = {
 window.STUDIO_CONFIG = STUDIO_CONFIG;
 
 /* ==========================================================================
-   1. GESTION DES MODALES, LIGHTBOX & BOUTON RETOUR MOBILE
+   2. COMPOSANT HEADER UNIQUE (<tadano-header>)
+   ========================================================================== */
+class TadanoHeader extends HTMLElement {
+  connectedCallback() {
+    const inPages = window.location.pathname.includes("/pages/");
+    const base = inPages ? "../" : "";
+    const pagesBase = inPages ? "" : "pages/";
+
+    const isBoutique = window.location.pathname.includes("boutique.html");
+    const isLegal = window.location.pathname.includes("mentions-legales.html");
+    const isHome = !isBoutique && !isLegal;
+
+    const ctaHtml = isHome
+      ? `<button type="button" class="site-navbar__cta" data-modal-open="modalContact">Devis</button>`
+      : `<a href="${base}index.html#sur-mesure" class="site-navbar__cta">Sur mesure</a>`;
+
+    this.innerHTML = `
+      <nav class="site-navbar" aria-label="Navigation principale">
+        <div class="site-navbar__inner">
+          <a href="${base}index.html" class="site-navbar__brand" aria-label="Accueil Tadano Craft">
+            <img
+              src="${base}media/images/tranche1.webp"
+              alt="Tadano Craft"
+              width="180"
+              height="48"
+              class="site-navbar__logo"
+            />
+          </a>
+          <div class="site-navbar__links">
+            <a href="${base}index.html" class="site-navbar__link ${isHome ? "is-active" : ""}">Le Studio</a>
+            <a href="${pagesBase}boutique.html" class="site-navbar__link ${isBoutique ? "is-active" : ""}">
+              <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              </svg>
+              <span>La Boutique</span>
+            </a>
+            ${ctaHtml}
+          </div>
+        </div>
+      </nav>
+    `;
+  }
+}
+
+customElements.define("tadano-header", TadanoHeader);
+
+/* ==========================================================================
+   3. GESTION DES MODALES, LIGHTBOX & BOUTON RETOUR MOBILE
    ========================================================================== */
 const MODAL_IDS = [
   "modalServices",
@@ -39,7 +87,6 @@ function openModal(id) {
   modal.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
 
-  // Ajoute un état d'historique pour que le bouton "Retour" mobile ferme la modale
   if (window.history && window.history.pushState) {
     window.history.pushState({ tadanoOverlay: id }, "");
   }
@@ -56,7 +103,6 @@ function closeModal(id, fromPopState = false) {
     document.body.style.overflow = "";
   }
 
-  // Nettoie l'état d'historique fictif si fermé via la croix ou Échap
   if (
     !fromPopState &&
     window.history.state &&
@@ -114,7 +160,6 @@ window.closeModal = closeModal;
 window.openLightbox = openLightbox;
 window.closeLightbox = closeLightbox;
 
-// Intercepte le bouton "Retour" du navigateur mobile pour fermer la fenêtre ouverte
 window.addEventListener("popstate", () => {
   const lightbox = document.getElementById("lightbox");
   if (lightbox && lightbox.classList.contains("is-open")) {
@@ -130,7 +175,7 @@ window.addEventListener("popstate", () => {
 });
 
 /* ==========================================================================
-   2. INITIALISATION AU CHARGEMENT DE LA PAGE
+   4. INITIALISATION AU CHARGEMENT DE LA PAGE
    ========================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
   if (window.location.hash === "#sur-mesure") {

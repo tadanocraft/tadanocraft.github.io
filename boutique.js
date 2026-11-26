@@ -5,7 +5,8 @@
    ========================================================================== */
 const CONFIG_BOUTIQUE = {
   // 1. Lien CSV de ton onglet "Catalogue" Google Sheets (Fichier > Partager > Publier sur le web > CSV)
-  urlCatalogueCSV: "",
+  urlCatalogueCSV:
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vT-tlASqtvlqmNIfn_PnLSI2oXvD2Yb2HPO1BfBeDzRnc4DpYH_rviigkV74Tel_hVjQ31IhJgbIzU5/pub?output=csv",
 
   // 2. Ton lien PayPal Business (ou lien de paiement par défaut)
   lienPayPal: "https://paypal.me/tadanocraft",
