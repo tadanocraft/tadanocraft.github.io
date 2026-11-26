@@ -3,17 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TADANO CRAFT — Studio Design 2D &amp; Créations 3D</title>
+    <title>
+      TADANO CRAFT — Studio Design 2D &amp; Créations 3D à Charleroi
+    </title>
     <meta
       name="description"
-      content="Studio de design graphique 2D, modélisation et impression 3D sur mesure à Charleroi. Création de logos, identités visuelles et supports PLV."
+      content="Studio de design graphique 2D, modélisation, impression 3D sur mesure et boutique atelier à Charleroi. Logos, identités visuelles et objets 3D."
     />
     <link rel="canonical" href="https://tadanocraft.com/" />
 
     <!-- Open Graph (Partage réseaux sociaux) -->
     <meta
       property="og:title"
-      content="TADANO CRAFT | Créations 3D &amp; Design 2D"
+      content="TADANO CRAFT | Créations 3D, Design 2D &amp; Boutique"
     />
     <meta
       property="og:description"
@@ -59,7 +61,53 @@
     <!-- Feuille de styles principale -->
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body class="page-wrapper">
+  <body class="page-wrapper has-top-nav">
+    <!-- 0. HEADER DE NAVIGATION FIXE (VERRE DÉPOLI) -->
+    <nav class="site-navbar" aria-label="Navigation principale">
+      <div class="site-navbar__inner">
+        <a
+          href="index.html"
+          class="site-navbar__brand"
+          aria-label="Accueil Tadano Craft"
+        >
+          <img
+            src="media/images/tranche1.webp"
+            alt="Tadano Craft"
+            width="180"
+            height="48"
+            class="site-navbar__logo"
+          />
+        </a>
+        <div class="site-navbar__links">
+          <a href="index.html" class="site-navbar__link is-active">Le Studio</a>
+          <a href="pages/boutique.html" class="site-navbar__link">
+            <svg
+              class="icon-sm"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+              />
+            </svg>
+            <span>La Boutique</span>
+          </a>
+          <button
+            type="button"
+            class="site-navbar__cta"
+            data-modal-open="modalContact"
+          >
+            Devis
+          </button>
+        </div>
+      </div>
+    </nav>
+
     <!-- 1. FOND GIF PLEINE LARGEUR (Bord à bord 100%) -->
     <div class="header-hero-bg" aria-hidden="true">
       <img
@@ -86,11 +134,12 @@
             class="logo-header"
           />
           <h1 class="subtitle-header">
-            <span class="sr-only">Tadano Craft — </span>Designs 2D, Créations 3D
+            <span class="sr-only">Tadano Craft Charleroi — </span>Designs 2D,
+            Créations 3D
           </h1>
           <div class="header-pills" aria-hidden="true">
-            <span class="header-pill">Charleroi, Hainaut</span>
-            <span class="header-pill">Identité Visuelle &amp; Design</span>
+            <span class="header-pill">Charleroi, Belgique</span>
+            <span class="header-pill">Identité Visuelle &amp; PLV</span>
             <span class="header-pill">Impression 3D Sur Mesure</span>
           </div>
         </div>
@@ -199,12 +248,10 @@
               </div>
             </article>
 
-            <!-- Carte 3 : Studio Créa (Zoom photo) -->
-            <article
+            <!-- Carte 3 : La Boutique (Lien direct vers pages/boutique.html) -->
+            <a
+              href="pages/boutique.html"
               class="bento-card bento-card--cover tilt-effect"
-              role="button"
-              tabindex="0"
-              data-lightbox-src="media/images/nuancier.jpg?auto=format&amp;fit=crop&amp;w=1200&amp;q=80"
             >
               <img
                 src="media/images/nuancier.jpg?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
@@ -212,14 +259,30 @@
                 height="800"
                 loading="lazy"
                 class="bento-card__bg"
-                alt="Studio Créa Tadano Craft"
+                alt="La Boutique Tadano Craft — Objets 3D et T-shirts"
               />
               <div class="bento-card__gradient"></div>
+              <span class="insta-badge" aria-hidden="true">
+                <svg
+                  class="icon-sm"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                  />
+                </svg>
+                <span>Atelier</span>
+              </span>
               <div class="bento-card__overlay">
-                <h2 class="bento-card__title">Studio Créa</h2>
-                <p class="bento-card__subtitle">Espace &amp; Projets</p>
+                <h2 class="bento-card__title">La Boutique</h2>
+                <p class="bento-card__subtitle">Objets 3D &amp; T-shirts</p>
               </div>
-            </article>
+            </a>
 
             <!-- Carte 4 : Instagram (Dernière publication via Behold.so) -->
             <a
@@ -394,6 +457,16 @@
             </div>
           </section>
         </div>
+
+        <!-- Pied de page discret -->
+        <footer class="site-footer">
+          <p>© 2026 Tadano Craft — Charleroi, Belgique</p>
+          <nav aria-label="Pied de page" class="site-footer__links">
+            <a href="pages/boutique.html">La Boutique</a>
+            <span>•</span>
+            <a href="pages/mentions-legales.html">Mentions légales &amp; CGV</a>
+          </nav>
+        </footer>
       </main>
     </div>
 
@@ -763,7 +836,7 @@
               />
             </figure>
 
-            <!-- Réalisation 5 : Pièce de ventilation -->
+            <!-- Réalisation 6 : Grand Visuel Noël -->
             <figure
               class="masonry-item"
               role="button"
@@ -775,7 +848,7 @@
                 width="800"
                 height="800"
                 loading="lazy"
-                alt="Pièce de ventilation technique conçue et imprimée en 3D sur mesure — Tadano Craft"
+                alt="Création graphique grand format édition Noël — Tadano Craft"
               />
             </figure>
           </div>

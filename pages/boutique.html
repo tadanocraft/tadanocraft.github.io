@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>La Boutique — Tadano Craft | Objets 3D &amp; T-shirts Atelier</title>
+    <meta
+      name="description"
+      content="Commandez les créations imprimées en 3D et t-shirts réalisés à l'atelier Tadano Craft à Charleroi. Retrait local gratuit ou livraison."
+    />
+    <link rel="canonical" href="https://tadanocraft.com/pages/boutique.html" />
+
+    <!-- Open Graph -->
+    <meta
+      property="og:title"
+      content="La Boutique | Tadano Craft — Objets 3D &amp; T-shirts"
+    />
+    <meta
+      property="og:description"
+      content="Créations 3D et textile fabriqués à la commande dans notre atelier à Charleroi."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://tadanocraft.com/pages/boutique.html"
+    />
+    <meta
+      property="og:image"
+      content="https://tadanocraft.com/media/images/tranche1.webp"
+    />
+
+    <!-- Feuille de styles principale (depuis /pages) -->
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body class="page-wrapper has-top-nav">
+    <!-- 0. HEADER DE NAVIGATION FIXE -->
+    <nav class="site-navbar" aria-label="Navigation principale">
+      <div class="site-navbar__inner">
+        <a
+          href="../index.html"
+          class="site-navbar__brand"
+          aria-label="Accueil Tadano Craft"
+        >
+          <img
+            src="../media/images/tranche1.webp"
+            alt="Tadano Craft"
+            width="180"
+            height="48"
+            class="site-navbar__logo"
+          />
+        </a>
+        <div class="site-navbar__links">
+          <a href="../index.html" class="site-navbar__link">Le Studio</a>
+          <a href="boutique.html" class="site-navbar__link is-active">
+            <svg
+              class="icon-sm"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+              />
+            </svg>
+            <span>La Boutique</span>
+          </a>
+          <a href="../index.html#sur-mesure" class="site-navbar__cta">
+            Sur mesure
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 1. CONTENEUR CENTRAL RESPONSIVE -->
+    <div class="linktree-shell">
+      <header class="shop-header animate-slide-up" style="--delay: 80ms">
+        <span class="shop-eyebrow">Atelier Charleroi • Fabrication Maison</span>
+        <h1 class="shop-title">La Boutique Tadano Craft</h1>
+        <p class="shop-subtitle">
+          Objets imprimés en 3D et t-shirts conçus à l'atelier. Choisissez votre
+          modèle, nous lançons la fabrication dès votre commande.
+        </p>
+      </header>
+
+      <main class="main-container">
+        <!-- Barre de recherche et filtres par catégorie -->
+        <section
+          aria-label="Filtrer les créations"
+          class="shop-toolbar animate-slide-up"
+          style="--delay: 160ms"
+        >
+          <div class="shop-search-box">
+            <svg
+              class="icon-sm shop-search-box__icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+            <input
+              id="shopSearchInput"
+              type="search"
+              class="shop-search-box__input"
+              placeholder="Rechercher un objet 3D, un t-shirt, un porte-clés..."
+              aria-label="Rechercher dans la boutique"
+            />
+          </div>
+
+          <div
+            id="shopCategoryFilters"
+            class="shop-filters"
+            role="tablist"
+            aria-label="Catégories de produits"
+          >
+            <button
+              type="button"
+              class="shop-filter-pill is-active"
+              data-category="Tous"
+            >
+              Tous
+            </button>
+          </div>
+        </section>
+
+        <!-- Grille des produits -->
+        <section
+          aria-label="Catalogue de la boutique"
+          class="animate-slide-up"
+          style="--delay: 240ms"
+        >
+          <div id="shopProductsGrid" class="shop-grid"></div>
+          <p id="shopEmptyState" class="shop-empty" hidden>
+            Aucun article ne correspond à votre recherche pour le moment.
+          </p>
+        </section>
+
+        <!-- Pied de page discret -->
+        <footer class="site-footer">
+          <p>© 2026 Tadano Craft — Charleroi, Belgique</p>
+          <nav aria-label="Pied de page" class="site-footer__links">
+            <a href="../index.html">Le Studio</a>
+            <span>•</span>
+            <a href="mentions-legales.html">Mentions légales &amp; CGV</a>
+          </nav>
+        </footer>
+      </main>
+    </div>
+
+    <!-- === MODALE DE COMMANDE (DOUBLE PAIEMENT) === -->
+    <div
+      id="modalOrder"
+      class="modal-backdrop"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="titleOrder"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog--wide">
+        <button
+          type="button"
+          class="btn-close modal-dialog__close"
+          data-modal-close="modalOrder"
+          aria-label="Fermer"
+        >
+          <svg
+            class="icon-sm"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+
+        <div class="modal-dialog__body">
+          <h2 id="titleOrder" class="modal-dialog__title">
+            Commander cet article
+          </h2>
+          <p id="orderProductSummary" class="modal-dialog__subtitle">
+            Article sélectionné
+          </p>
+
+          <form id="orderForm" class="contact-form">
+            <input type="hidden" id="orderProductName" name="produit" />
+            <input type="hidden" id="orderProductPrice" name="prix" />
+            <input type="hidden" id="orderStripeUrl" name="stripe_url" />
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="orderOption" class="form-label"
+                  >Variante (Couleur / Taille) *</label
+                >
+                <select
+                  id="orderOption"
+                  name="option"
+                  required
+                  class="form-control"
+                ></select>
+              </div>
+              <div class="form-group">
+                <label for="orderQty" class="form-label">Quantité *</label>
+                <input
+                  id="orderQty"
+                  type="number"
+                  name="quantite"
+                  min="1"
+                  max="20"
+                  value="1"
+                  required
+                  class="form-control"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="orderDelivery" class="form-label"
+                >Mode de remise *</label
+              >
+              <select
+                id="orderDelivery"
+                name="livraison"
+                required
+                class="form-control"
+              >
+                <option value="Retrait atelier (Charleroi - Gratuit)">
+                  Retrait atelier (Région de Charleroi — Gratuit)
+                </option>
+                <option value="Envoi postal (bpost / Mondial Relay)">
+                  Envoi postal (bpost / Mondial Relay)
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="orderPayment" class="form-label"
+                >Mode de règlement *</label
+              >
+              <select
+                id="orderPayment"
+                name="paiement"
+                required
+                class="form-control"
+              >
+                <option value="Au retrait / livraison (Espèces ou Wero Pro)">
+                  Au retrait / à la livraison (Espèces ou Wero Pro)
+                </option>
+                <option value="En ligne (PayPal Business / Virement / Carte)">
+                  En ligne maintenant (PayPal Business / Virement / Carte)
+                </option>
+              </select>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="orderName" class="form-label"
+                  >Nom &amp; Prénom *</label
+                >
+                <input
+                  id="orderName"
+                  type="text"
+                  name="client"
+                  required
+                  class="form-control"
+                  placeholder="Votre nom"
+                />
+              </div>
+              <div class="form-group">
+                <label for="orderEmail" class="form-label"
+                  >Votre E-mail *</label
+                >
+                <input
+                  id="orderEmail"
+                  type="email"
+                  name="email"
+                  required
+                  class="form-control"
+                  placeholder="contact@exemple.com"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="orderAddress" class="form-label"
+                >Téléphone &amp; Adresse postale (si envoi) *</label
+              >
+              <textarea
+                id="orderAddress"
+                name="coordonnees"
+                rows="2"
+                required
+                class="form-control"
+                placeholder="04... et adresse de livraison si envoi postal"
+              ></textarea>
+            </div>
+
+            <label class="form-checkbox">
+              <input type="checkbox" required />
+              <span>
+                J'ai lu et j'accepte les
+                <a href="mentions-legales.html" target="_blank"
+                  >Conditions Générales de Vente</a
+                >
+                et les délais de fabrication.
+              </span>
+            </label>
+
+            <button id="orderSubmitBtn" type="submit" class="btn-primary">
+              Valider ma commande
+            </button>
+
+            <div id="orderSuccessBox" class="order-success-box" hidden>
+              <p class="order-success-box__title">
+                Commande enregistrée avec succès !
+              </p>
+              <p id="orderSuccessDetail" class="order-success-box__text"></p>
+              <a
+                id="orderOnlinePayLink"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-light order-success-box__btn"
+                hidden
+              >
+                Procéder au règlement en ligne
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zoom Photo Plein Écran -->
+    <div
+      id="lightbox"
+      class="lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Aperçu agrandi"
+      aria-hidden="true"
+    >
+      <button
+        type="button"
+        class="btn-close lightbox__close"
+        data-lightbox-close
+        aria-label="Fermer l'aperçu"
+      >
+        <svg
+          class="icon-md"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          ></path>
+        </svg>
+      </button>
+      <img
+        id="lightbox-img"
+        src=""
+        class="lightbox__img"
+        alt="Aperçu agrandi"
+      />
+    </div>
+
+    <!-- Script Principal (depuis /pages) -->
+    <script src="../script.js"></script>
+  </body>
+</html>
