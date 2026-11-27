@@ -38,7 +38,7 @@ const COULEURS_FILAMENTS = {
     "linear-gradient(135deg, rgba(255,255,255,0.65), rgba(255,255,255,0.12))",
 };
 
-// Catalogue de secours (sans T-shirts)
+// Catalogue de secours (affiché uniquement si Google Sheets est inaccessible)
 const PRODUITS_DEMONSTRATION = [
   {
     nom: "Porte-clés Tadano Craft",
@@ -51,6 +51,7 @@ const PRODUITS_DEMONSTRATION = [
     delai: "2 à 3 jours",
     statut: "Impression sur commande",
     lien_paiement: "",
+    quantite_max: "20",
   },
   {
     nom: "Boîte de Rangement Refermable",
@@ -63,6 +64,7 @@ const PRODUITS_DEMONSTRATION = [
     delai: "3 à 5 jours",
     statut: "Impression sur commande",
     lien_paiement: "",
+    quantite_max: "5",
   },
   {
     nom: "Plaque Déco Print My Car",
@@ -75,6 +77,7 @@ const PRODUITS_DEMONSTRATION = [
     delai: "3 à 5 jours",
     statut: "En stock",
     lien_paiement: "",
+    quantite_max: "3",
   },
 ];
 
@@ -235,7 +238,10 @@ document.addEventListener("DOMContentLoaded", () => {
   let allProducts = [];
   let activeCategory = "Tous";
   let searchQuery = "";
+
+  // Valeurs temporaires mises à jour automatiquement dès qu'on clique sur un produit
   let currentUnitPrice = 0;
+  let currentMaxQty = 10;
 
   const qtyInput = document.getElementById("orderQty");
   const deliverySelect = document.getElementById("orderDelivery");
@@ -245,7 +251,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const priceInput = document.getElementById("orderProductPrice");
 
   function updateOrderTotals() {
-    const qty = Math.max(1, parseInt(qtyInput?.value || "1", 10) || 1);
+    let qty = parseInt(qtyInput?.value || "1", 10) || 1;
+    if (qty < 1) qty = 1;
+    if (qty > currentMaxQty) {
+      qty = currentMaxQty;
+      if (qtyInput) qtyInput.value = String(currentMaxQty);
+    }
+
     const selectedOpt = deliverySelect?.options[deliverySelect.selectedIndex];
     const shippingFee = selectedOpt
       ? parseFloat(selectedOpt.dataset.fee || "0")
@@ -298,12 +310,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const optionHiddenInput = document.getElementById("orderOption");
     const swatchContainer = document.getElementById("orderSwatchGrid");
     const fixedOptionEl = document.getElementById("orderFixedOption");
+    const maxQtyHint = document.getElementById("orderMaxQtyHint");
     const successBox = document.getElementById("orderSuccessBox");
 
+    // Lecture du prix et de la colonne Quantite_max depuis Google Sheets
     currentUnitPrice = parsePriceToNumber(product.prix);
+    const parsedMax = parseInt(product.quantite_max, 10);
+    currentMaxQty = !Number.isNaN(parsedMax) && parsedMax > 0 ? parsedMax : 10;
 
     if (successBox) successBox.hidden = true;
-    if (qtyInput) qtyInput.value = "1";
+    if (qtyInput) {
+      qtyInput.value = "1";
+      qtyInput.max = String(currentMaxQty);
+    }
+    if (maxQtyHint) {
+      maxQtyHint.innerHTML = `Maximum ${currentMaxQty} par commande directe. Pour une plus grande quantité, <a href="../index.html#sur-mesure">demandez un devis</a>.`;
+    }
     if (summaryEl) {
       summaryEl.textContent = `${product.nom} • ${product.prix} (${product.statut || "Impression sur commande"})`;
     }
