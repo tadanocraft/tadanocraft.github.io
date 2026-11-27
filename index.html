@@ -285,7 +285,7 @@
                 auto-rotate
                 camera-controls
                 disable-pan
-                shadow-intensity="1"
+                shadow-intensity="0.0"
                 environment-image="neutral"
                 exposure="0.7"
                 class="viewer-card__canvas"
@@ -873,6 +873,53 @@
                 placeholder="04..."
               />
             </div>
+
+            <details class="form-advanced">
+              <summary class="form-advanced__summary">
+                Options avancées / Informations professionnelles (Facultatif)
+              </summary>
+              <div class="form-advanced__content">
+                <div class="form-group">
+                  <label for="contactName" class="form-label"
+                    >Nom &amp; Prénom</label
+                  >
+                  <input
+                    id="contactName"
+                    type="text"
+                    name="nom"
+                    class="form-control"
+                    placeholder="Pour savoir à qui m'adresser"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="contactCompany" class="form-label"
+                    >Nom de l'entreprise / ASBL</label
+                  >
+                  <input
+                    id="contactCompany"
+                    type="text"
+                    name="societe"
+                    class="form-control"
+                    placeholder="Ex. Atelier Dupont SRL"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="contactVat" class="form-label"
+                    >Numéro de TVA</label
+                  >
+                  <input
+                    id="contactVat"
+                    type="text"
+                    name="tva"
+                    class="form-control"
+                    placeholder="Ex. BE 0123.456.789"
+                  />
+                </div>
+              </div>
+            </details>
+
             <button id="submitBtn" type="submit" class="btn-primary">
               Envoyer ma demande
             </button>
