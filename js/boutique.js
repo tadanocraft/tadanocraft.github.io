@@ -44,7 +44,8 @@ const PRODUITS_DEMONSTRATION = [
     nom: "Porte-clés Tadano Craft",
     categorie: "Accessoires",
     prix: "8,00 €",
-    image: "media/images/realisations/Tadano-Craft_Porte-cle.webp",
+    image:
+      "media/images/realisations/Tadano-Craft_Porte-cle.webp, media/images/realisations/Print-my-car.webp",
     description:
       "Porte-clés double couleur imprimé en 3D haute précision avec finition bordeaux et noir.",
     options: "Bordeaux & Noir, Noir & Blanc",
@@ -52,6 +53,7 @@ const PRODUITS_DEMONSTRATION = [
     statut: "Impression sur commande",
     lien_paiement: "",
     quantite_max: "20",
+    modele_3d: "media/3d/plaquette tadano v2.glb",
   },
   {
     nom: "Boîte de Rangement Refermable",
@@ -65,6 +67,7 @@ const PRODUITS_DEMONSTRATION = [
     statut: "Impression sur commande",
     lien_paiement: "",
     quantite_max: "5",
+    modele_3d: "",
   },
   {
     nom: "Plaque Déco Print My Car",
@@ -73,16 +76,17 @@ const PRODUITS_DEMONSTRATION = [
     image: "media/images/realisations/Print-my-car.webp",
     description:
       "Silhouette automobile en relief imprimée en 3D pour passionnés et décoration murale.",
-    options: "", // Produit à couleur fixe
+    options: "",
     delai: "3 à 5 jours",
     statut: "En stock",
     lien_paiement: "",
     quantite_max: "3",
+    modele_3d: "",
   },
 ];
 
 /* ==========================================================================
-   2. UTILITAIRES COULEURS, PRIX & CSV
+   2. UTILITAIRES MÉDIAS, COULEURS, PRIX & CSV
    ========================================================================== */
 function resolveAssetPath(path) {
   if (!path) return "";
@@ -97,6 +101,14 @@ function resolveAssetPath(path) {
   return window.location.pathname.includes("/pages/") ? `../${path}` : path;
 }
 
+function getProductImages(imageField) {
+  return String(imageField || "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .map(resolveAssetPath);
+}
+
 function getSwatchColor(label) {
   const clean = String(label || "")
     .toLowerCase()
@@ -106,7 +118,6 @@ function getSwatchColor(label) {
 
   if (COULEURS_FILAMENTS[clean]) return COULEURS_FILAMENTS[clean];
 
-  // Gestion automatique des couleurs doubles (ex: "Bordeaux & Noir")
   if (clean.includes("&") || clean.includes("/")) {
     const parts = clean.split(/[&/]/).map((p) => p.trim());
     const c1 = COULEURS_FILAMENTS[parts[0]];
@@ -225,7 +236,7 @@ function getStockBadgeConfig(statutRaw) {
 }
 
 /* ==========================================================================
-   3. RENDU DU CATALOGUE, PASTILLES COULEUR & COMMANDE
+   3. RENDU DU CATALOGUE, GALERIE MULTI-VUES / 3D & COMMANDE
    ========================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
   const shopGrid = document.getElementById("shopProductsGrid");
@@ -238,11 +249,162 @@ document.addEventListener("DOMContentLoaded", () => {
   let allProducts = [];
   let activeCategory = "Tous";
   let searchQuery = "";
-
-  // Valeurs temporaires mises à jour automatiquement dès qu'on clique sur un produit
   let currentUnitPrice = 0;
   let currentMaxQty = 10;
 
+  /* --- A. Visionneuse Multi-Photos + 3D GLB --- */
+  const galleryModal = document.getElementById("modalProductGallery");
+  const galleryTitle = document.getElementById("galleryTitle");
+  const galleryMainImg = document.getElementById("galleryMainImg");
+  const gallery3DContainer = document.getElementById("gallery3DContainer");
+  const galleryThumbs = document.getElementById("galleryThumbs");
+  const galleryPrevBtn = document.getElementById("galleryPrevBtn");
+  const galleryNextBtn = document.getElementById("galleryNextBtn");
+  const galleryCloseBtn = document.getElementById("galleryCloseBtn");
+  const galleryStage = document.getElementById("galleryStage");
+
+  let galleryItems = [];
+  let galleryIndex = 0;
+  let galleryProductName = "";
+
+  function renderGallerySlide(index) {
+    if (galleryItems.length === 0) return;
+    galleryIndex = (index + galleryItems.length) % galleryItems.length;
+    const item = galleryItems[galleryIndex];
+
+    if (item.type === "3d") {
+      galleryMainImg.hidden = true;
+      gallery3DContainer.hidden = false;
+      gallery3DContainer.innerHTML = `
+        <model-viewer
+          src="${item.src}"
+          alt="Modèle 3D interactif — ${galleryProductName}"
+          auto-rotate
+          camera-controls
+          disable-pan
+          shadow-intensity="1"
+          environment-image="neutral"
+          exposure="0.6"
+        ></model-viewer>
+      `;
+    } else {
+      gallery3DContainer.hidden = true;
+      gallery3DContainer.innerHTML = "";
+      galleryMainImg.src = item.src;
+      galleryMainImg.alt = `${galleryProductName} — Vue ${galleryIndex + 1}`;
+      galleryMainImg.hidden = false;
+    }
+
+    galleryThumbs.querySelectorAll(".gallery-thumb").forEach((btn, idx) => {
+      btn.classList.toggle("is-active", idx === galleryIndex);
+    });
+  }
+
+  function openProductGallery(product) {
+    if (!galleryModal) return;
+    const images = getProductImages(product.image);
+    const model3D = product.modele_3d
+      ? resolveAssetPath(product.modele_3d.trim())
+      : "";
+
+    galleryProductName = product.nom || "Aperçu";
+    galleryItems = images.map((src) => ({ type: "image", src }));
+    if (model3D) {
+      galleryItems.push({ type: "3d", src: model3D });
+    }
+    if (galleryItems.length === 0) return;
+
+    if (galleryTitle) galleryTitle.textContent = galleryProductName;
+
+    const showNav = galleryItems.length > 1;
+    if (galleryPrevBtn) galleryPrevBtn.hidden = !showNav;
+    if (galleryNextBtn) galleryNextBtn.hidden = !showNav;
+    if (galleryThumbs) {
+      galleryThumbs.hidden = !showNav;
+      galleryThumbs.innerHTML = "";
+      galleryItems.forEach((item, idx) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className =
+          "gallery-thumb" + (item.type === "3d" ? " gallery-thumb--3d" : "");
+        btn.setAttribute(
+          "aria-label",
+          item.type === "3d" ? "Afficher l'aperçu 3D" : `Photo ${idx + 1}`,
+        );
+
+        if (item.type === "3d") {
+          btn.innerHTML = `<span>3D</span><span>360°</span>`;
+        } else {
+          btn.innerHTML = `<img src="${item.src}" alt="" loading="lazy" />`;
+        }
+
+        btn.addEventListener("click", () => renderGallerySlide(idx));
+        galleryThumbs.appendChild(btn);
+      });
+    }
+
+    renderGallerySlide(0);
+    galleryModal.classList.add("is-open");
+    galleryModal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeProductGallery() {
+    if (!galleryModal || !galleryModal.classList.contains("is-open")) return;
+    galleryModal.classList.remove("is-open");
+    galleryModal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    if (gallery3DContainer) gallery3DContainer.innerHTML = "";
+  }
+
+  if (galleryPrevBtn)
+    galleryPrevBtn.addEventListener("click", () =>
+      renderGallerySlide(galleryIndex - 1),
+    );
+  if (galleryNextBtn)
+    galleryNextBtn.addEventListener("click", () =>
+      renderGallerySlide(galleryIndex + 1),
+    );
+  if (galleryCloseBtn)
+    galleryCloseBtn.addEventListener("click", closeProductGallery);
+  if (galleryModal) {
+    galleryModal.addEventListener("click", (e) => {
+      if (e.target === galleryModal) closeProductGallery();
+    });
+  }
+
+  // Navigation clavier & swipe tactile dans la galerie
+  document.addEventListener("keydown", (e) => {
+    if (!galleryModal || !galleryModal.classList.contains("is-open")) return;
+    if (e.key === "Escape") closeProductGallery();
+    if (e.key === "ArrowLeft") renderGallerySlide(galleryIndex - 1);
+    if (e.key === "ArrowRight") renderGallerySlide(galleryIndex + 1);
+  });
+
+  if (galleryStage) {
+    let touchStartX = 0;
+    galleryStage.addEventListener(
+      "touchstart",
+      (e) => {
+        if (galleryItems[galleryIndex]?.type === "3d") return;
+        touchStartX = e.changedTouches[0].screenX;
+      },
+      { passive: true },
+    );
+    galleryStage.addEventListener(
+      "touchend",
+      (e) => {
+        if (galleryItems[galleryIndex]?.type === "3d") return;
+        const diff = e.changedTouches[0].screenX - touchStartX;
+        if (Math.abs(diff) > 45) {
+          renderGallerySlide(diff > 0 ? galleryIndex - 1 : galleryIndex + 1);
+        }
+      },
+      { passive: true },
+    );
+  }
+
+  /* --- B. Calcul des totaux & Modale de commande --- */
   const qtyInput = document.getElementById("orderQty");
   const deliverySelect = document.getElementById("orderDelivery");
   const subtotalEl = document.getElementById("orderSubtotal");
@@ -313,7 +475,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const maxQtyHint = document.getElementById("orderMaxQtyHint");
     const successBox = document.getElementById("orderSuccessBox");
 
-    // Lecture du prix et de la colonne Quantite_max depuis Google Sheets
     currentUnitPrice = parsePriceToNumber(product.prix);
     const parsedMax = parseInt(product.quantite_max, 10);
     currentMaxQty = !Number.isNaN(parsedMax) && parsedMax > 0 ? parsedMax : 10;
@@ -332,7 +493,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (nameInput) nameInput.value = product.nom;
     if (stripeInput) stripeInput.value = product.lien_paiement || "";
 
-    // Génération des pastilles de couleur cliquables
     if (swatchContainer && optionHiddenInput && fixedOptionEl) {
       const opts = (product.options || "")
         .split(",")
@@ -399,14 +559,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     filtered.forEach((product) => {
       const badge = getStockBadgeConfig(product.statut);
-      const imgSrc = resolveAssetPath(product.image);
+      const images = getProductImages(product.image);
+      const mainImg = images[0] || "";
+      const has3D = Boolean(product.modele_3d && product.modele_3d.trim());
+
+      let mediaBadgesHtml = "";
+      if (images.length > 1 || has3D) {
+        mediaBadgesHtml = `<div class="product-media-badges">`;
+        if (images.length > 1) {
+          mediaBadgesHtml += `<span class="product-media-pill">${images.length} photos</span>`;
+        }
+        if (has3D) {
+          mediaBadgesHtml += `<span class="product-media-pill product-media-pill--3d">3D</span>`;
+        }
+        mediaBadgesHtml += `</div>`;
+      }
+
       const card = document.createElement("article");
       card.className = "product-card";
 
       card.innerHTML = `
-        <div class="product-card__media" data-lightbox-src="${imgSrc}" role="button" tabindex="0">
+        <div class="product-card__media" role="button" tabindex="0" aria-label="Voir les photos et aperçus de ${product.nom}">
           <span class="product-badge ${badge.className}">${badge.label}</span>
-          <img src="${imgSrc}" alt="${product.nom} — Tadano Craft" width="800" height="800" loading="lazy" class="product-card__img" />
+          ${mediaBadgesHtml}
+          <img src="${mainImg}" alt="${product.nom} — Tadano Craft" width="800" height="800" loading="lazy" class="product-card__img" />
         </div>
         <div class="product-card__body">
           <div class="product-card__top">
@@ -424,6 +600,11 @@ document.addEventListener("DOMContentLoaded", () => {
           </button>
         </div>
       `;
+
+      const mediaEl = card.querySelector(".product-card__media");
+      if (mediaEl) {
+        mediaEl.addEventListener("click", () => openProductGallery(product));
+      }
 
       const orderBtn = card.querySelector(".product-card__btn");
       if (orderBtn && !badge.disabled) {
@@ -513,7 +694,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const stripeUrl = formData.get("stripe_url") || "";
       const orderRef = "TC-" + Math.floor(1000 + Math.random() * 9000);
 
-      // Recombine téléphone + adresse dans "coordonnees" pour Google Apps Script
       const phoneVal = (phoneInput?.value || "").trim();
       const addrVal = (addressInput?.value || "").trim();
       formData.set("coordonnees", `Tél : ${phoneVal} | Adresse : ${addrVal}`);

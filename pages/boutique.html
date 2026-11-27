@@ -9,6 +9,13 @@
       content="Commandez les créations et objets imprimés en 3D Tadano Craft. Livraison dans la région de Charleroi ou envoi postal bpost / Mondial Relay."
     />
     <link rel="canonical" href="https://tadanocraft.com/pages/boutique.html" />
+
+    <!-- Visionneuse 3D Google (chargée uniquement pour les aperçus GLB) -->
+    <script
+      type="module"
+      src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"
+    ></script>
+
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/boutique.css" />
   </head>
@@ -93,7 +100,105 @@
       </main>
     </div>
 
-    <!-- MODALE DE COMMANDE -->
+    <!-- VISIONNEUSE PRODUIT (MULTI-PHOTOS + APERÇU 3D GLB) -->
+    <div
+      id="modalProductGallery"
+      class="gallery-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="galleryTitle"
+      aria-hidden="true"
+    >
+      <div class="gallery-modal__card">
+        <div class="gallery-modal__header">
+          <h2 id="galleryTitle" class="gallery-modal__title">Aperçu</h2>
+          <button
+            id="galleryCloseBtn"
+            type="button"
+            class="btn-close"
+            aria-label="Fermer la galerie"
+          >
+            <svg
+              class="icon-sm"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <div id="galleryStage" class="gallery-modal__stage">
+          <button
+            id="galleryPrevBtn"
+            type="button"
+            class="gallery-nav gallery-nav--prev"
+            aria-label="Vue précédente"
+          >
+            <svg
+              class="icon-md"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+
+          <img
+            id="galleryMainImg"
+            src=""
+            alt=""
+            class="gallery-modal__img"
+            hidden
+          />
+
+          <div id="gallery3DContainer" class="gallery-modal__3d" hidden></div>
+
+          <button
+            id="galleryNextBtn"
+            type="button"
+            class="gallery-nav gallery-nav--next"
+            aria-label="Vue suivante"
+          >
+            <svg
+              class="icon-md"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div
+          id="galleryThumbs"
+          class="gallery-modal__thumbs no-scrollbar"
+        ></div>
+      </div>
+    </div>
+
+    <!-- MODALE DE COMMANDE (2 COLONNES SUR PC) -->
     <div
       id="modalOrder"
       class="modal-backdrop"
@@ -139,233 +244,211 @@
             <input type="hidden" id="orderStripeUrl" name="stripe_url" />
             <input type="hidden" id="orderOption" name="option" />
 
-            <div class="form-group">
-              <span class="form-label">Couleur</span>
-              <div
-                id="orderSwatchGrid"
-                class="swatch-grid"
-                role="radiogroup"
-                aria-label="Choix de la couleur"
-              ></div>
-              <p id="orderFixedOption" class="order-fixed-option" hidden>
-                Couleur d'origine (non modifiable)
-              </p>
-            </div>
+            <div class="order-form-grid">
+              <!-- COLONNE GAUCHE : OPTIONS & TOTAL -->
+              <div class="order-form-col">
+                <p class="order-col-title">1. Votre commande</p>
 
-            <div class="form-group">
-              <label for="orderQty" class="form-label">Quantité *</label>
-              <input
-                id="orderQty"
-                type="number"
-                name="quantite"
-                min="1"
-                max="10"
-                value="1"
-                required
-                class="form-control"
-              />
-              <p
-                id="orderMaxQtyHint"
-                class="order-custom-note"
-                style="margin-top: 0.35rem"
-              ></p>
-            </div>
+                <div class="form-group">
+                  <span class="form-label">Couleur</span>
+                  <div
+                    id="orderSwatchGrid"
+                    class="swatch-grid"
+                    role="radiogroup"
+                    aria-label="Choix de la couleur"
+                  ></div>
+                  <p id="orderFixedOption" class="order-fixed-option" hidden>
+                    Couleur d'origine (non modifiable)
+                  </p>
+                </div>
 
-            <p class="order-custom-note">
-              Besoin d'une taille spécifique ou d'une adaptation ?
-              <a href="../index.html#sur-mesure">Demandez un devis studio</a>.
-            </p>
+                <div class="form-group">
+                  <label for="orderQty" class="form-label">Quantité *</label>
+                  <input
+                    id="orderQty"
+                    type="number"
+                    name="quantite"
+                    min="1"
+                    max="10"
+                    value="1"
+                    required
+                    class="form-control"
+                  />
+                  <p
+                    id="orderMaxQtyHint"
+                    class="order-custom-note"
+                    style="margin-top: 0.35rem"
+                  ></p>
+                </div>
 
-            <div class="form-group">
-              <label for="orderDelivery" class="form-label"
-                >Mode de livraison *</label
-              >
-              <select
-                id="orderDelivery"
-                name="livraison"
-                required
-                class="form-control"
-              >
-                <option
-                  value="Livraison par mes soins — Charleroi (< 15 km) (+ 2,00 €)"
-                  data-fee="2"
-                >
-                  Livraison par mes soins — Charleroi (&lt; 15 km) (+ 2,00 €)
-                </option>
-                <option
-                  value="Envoi postal — bpost / Mondial Relay (+ 5,50 €)"
-                  data-fee="5.5"
-                >
-                  Envoi postal — bpost / Mondial Relay (+ 5,50 €)
-                </option>
-              </select>
-            </div>
+                <p class="order-custom-note">
+                  Besoin d'une taille spécifique ou d'une adaptation ?
+                  <a href="../index.html#sur-mesure">Demandez un devis studio</a
+                  >.
+                </p>
 
-            <div class="form-group">
-              <label for="orderPayment" class="form-label"
-                >Mode de règlement *</label
-              >
-              <select
-                id="orderPayment"
-                name="paiement"
-                required
-                class="form-control"
-              >
-                <option
-                  value="À la livraison (Espèces, Carte / NFC, PayPal, Lydia...)"
-                >
-                  À la livraison (Espèces, Carte / NFC, PayPal, Lydia...)
-                </option>
-                <option value="En ligne / Virement bancaire (avant envoi)">
-                  En ligne / Virement bancaire (avant envoi)
-                </option>
-              </select>
-            </div>
+                <div class="form-group">
+                  <label for="orderDelivery" class="form-label"
+                    >Mode de livraison *</label
+                  >
+                  <select
+                    id="orderDelivery"
+                    name="livraison"
+                    required
+                    class="form-control"
+                  >
+                    <option
+                      value="Livraison par mes soins — Charleroi (< 15 km) (+ 2,00 €)"
+                      data-fee="2"
+                    >
+                      Livraison par mes soins — Charleroi (&lt; 15 km) (+ 2,00
+                      €)
+                    </option>
+                    <option
+                      value="Envoi postal — bpost / Mondial Relay (+ 5,50 €)"
+                      data-fee="5.5"
+                    >
+                      Envoi postal — bpost / Mondial Relay (+ 5,50 €)
+                    </option>
+                  </select>
+                </div>
 
-            <div class="order-total-box" aria-live="polite">
-              <div class="order-total-box__row">
-                <span>Sous-total article(s)</span>
-                <span id="orderSubtotal">0,00 €</span>
+                <div class="form-group">
+                  <label for="orderPayment" class="form-label"
+                    >Mode de règlement *</label
+                  >
+                  <select
+                    id="orderPayment"
+                    name="paiement"
+                    required
+                    class="form-control"
+                  >
+                    <option
+                      value="À la livraison (Espèces, Carte / NFC, PayPal, Lydia...)"
+                    >
+                      À la livraison (Espèces, Carte / NFC, PayPal, Lydia...)
+                    </option>
+                    <option value="En ligne / Virement bancaire (avant envoi)">
+                      En ligne / Virement bancaire (avant envoi)
+                    </option>
+                  </select>
+                </div>
+
+                <div class="order-total-box" aria-live="polite">
+                  <div class="order-total-box__row">
+                    <span>Sous-total article(s)</span>
+                    <span id="orderSubtotal">0,00 €</span>
+                  </div>
+                  <div class="order-total-box__row">
+                    <span>Frais de livraison</span>
+                    <span id="orderShippingFee">2,00 €</span>
+                  </div>
+                  <div class="order-total-box__row order-total-box__row--total">
+                    <span>Total estimé</span>
+                    <span id="orderGrandTotal">0,00 €</span>
+                  </div>
+                </div>
               </div>
-              <div class="order-total-box__row">
-                <span>Frais de livraison</span>
-                <span id="orderShippingFee">2,00 €</span>
+
+              <!-- COLONNE DROITE : COORDONNÉES & VALIDATION -->
+              <div class="order-form-col order-form-col--right">
+                <p class="order-col-title">2. Vos coordonnées</p>
+
+                <div class="form-group">
+                  <label for="orderName" class="form-label"
+                    >Nom &amp; Prénom *</label
+                  >
+                  <input
+                    id="orderName"
+                    type="text"
+                    name="client"
+                    required
+                    class="form-control"
+                    placeholder="Votre nom et prénom"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="orderEmail" class="form-label"
+                    >Votre E-mail *</label
+                  >
+                  <input
+                    id="orderEmail"
+                    type="email"
+                    name="email"
+                    required
+                    class="form-control"
+                    placeholder="contact@exemple.com"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="orderPhone" class="form-label"
+                    >Numéro de téléphone *</label
+                  >
+                  <input
+                    id="orderPhone"
+                    type="tel"
+                    name="telephone"
+                    required
+                    class="form-control"
+                    placeholder="0470 12 34 56"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="orderAddress" class="form-label"
+                    >Adresse complète de livraison *</label
+                  >
+                  <textarea
+                    id="orderAddress"
+                    name="adresse"
+                    rows="3"
+                    required
+                    class="form-control"
+                    placeholder="Rue, numéro, code postal et commune"
+                  ></textarea>
+                </div>
+
+                <label class="form-checkbox">
+                  <input type="checkbox" required />
+                  <span>
+                    J'ai lu et j'accepte les
+                    <a href="mentions-legales.html" target="_blank"
+                      >Conditions Générales de Vente</a
+                    >
+                    et les délais de fabrication.
+                  </span>
+                </label>
+
+                <button id="orderSubmitBtn" type="submit" class="btn-primary">
+                  Valider ma commande
+                </button>
+
+                <div id="orderSuccessBox" class="order-success-box" hidden>
+                  <p class="order-success-box__title">
+                    Commande enregistrée avec succès !
+                  </p>
+                  <p
+                    id="orderSuccessDetail"
+                    class="order-success-box__text"
+                  ></p>
+                  <a
+                    id="orderOnlinePayLink"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-light order-success-box__btn"
+                    hidden
+                  >
+                    Procéder au règlement en ligne
+                  </a>
+                </div>
               </div>
-              <div class="order-total-box__row order-total-box__row--total">
-                <span>Total estimé</span>
-                <span id="orderGrandTotal">0,00 €</span>
-              </div>
-            </div>
-
-            <div class="form-row-2">
-              <div class="form-group">
-                <label for="orderName" class="form-label"
-                  >Nom &amp; Prénom *</label
-                >
-                <input
-                  id="orderName"
-                  type="text"
-                  name="client"
-                  required
-                  class="form-control"
-                  placeholder="Votre nom et prénom"
-                />
-              </div>
-              <div class="form-group">
-                <label for="orderEmail" class="form-label"
-                  >Votre E-mail *</label
-                >
-                <input
-                  id="orderEmail"
-                  type="email"
-                  name="email"
-                  required
-                  class="form-control"
-                  placeholder="contact@exemple.com"
-                />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="orderPhone" class="form-label"
-                >Numéro de téléphone *</label
-              >
-              <input
-                id="orderPhone"
-                type="tel"
-                name="telephone"
-                required
-                class="form-control"
-                placeholder="0470 12 34 56"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="orderAddress" class="form-label"
-                >Adresse complète de livraison *</label
-              >
-              <textarea
-                id="orderAddress"
-                name="adresse"
-                rows="2"
-                required
-                class="form-control"
-                placeholder="Rue, numéro, code postal et commune"
-              ></textarea>
-            </div>
-
-            <label class="form-checkbox">
-              <input type="checkbox" required />
-              <span>
-                J'ai lu et j'accepte les
-                <a href="mentions-legales.html" target="_blank"
-                  >Conditions Générales de Vente</a
-                >
-                et les délais de fabrication.
-              </span>
-            </label>
-
-            <button id="orderSubmitBtn" type="submit" class="btn-primary">
-              Valider ma commande
-            </button>
-
-            <div id="orderSuccessBox" class="order-success-box" hidden>
-              <p class="order-success-box__title">
-                Commande enregistrée avec succès !
-              </p>
-              <p id="orderSuccessDetail" class="order-success-box__text"></p>
-              <a
-                id="orderOnlinePayLink"
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn-light order-success-box__btn"
-                hidden
-              >
-                Procéder au règlement en ligne
-              </a>
             </div>
           </form>
         </div>
       </div>
-    </div>
-
-    <!-- Zoom Photo Plein Écran -->
-    <div
-      id="lightbox"
-      class="lightbox"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Aperçu agrandi"
-      aria-hidden="true"
-    >
-      <button
-        type="button"
-        class="btn-close lightbox__close"
-        data-lightbox-close
-        aria-label="Fermer l'aperçu"
-      >
-        <svg
-          class="icon-md"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"
-          ></path>
-        </svg>
-      </button>
-      <img
-        id="lightbox-img"
-        src=""
-        class="lightbox__img"
-        alt="Aperçu agrandi"
-      />
     </div>
 
     <script src="../js/main.js"></script>
