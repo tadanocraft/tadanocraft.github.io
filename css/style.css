@@ -1702,6 +1702,7 @@ body {
   max-width: 32rem;
   max-height: 92vh;
   overflow-y: auto;
+  overflow-x: hidden;
   margin: 0 auto;
   border-radius: 1.75rem 1.75rem 0 0;
   background: var(--card-bg-gradient);
@@ -1789,6 +1790,11 @@ body {
 
 .form-control:focus {
   border-color: var(--color-brand);
+}
+
+textarea.form-control {
+  resize: vertical;
+  max-width: 100%;
 }
 
 .btn-primary {

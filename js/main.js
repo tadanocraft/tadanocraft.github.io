@@ -158,8 +158,8 @@ class TadanoHeader extends HTMLElement {
     const isHome = !isBoutique && !isLegal;
 
     const ctaHtml = isHome
-      ? `<button type="button" class="site-navbar__cta" data-modal-open="modalContact">Devis</button>`
-      : `<a href="${base}index.html#sur-mesure" class="site-navbar__cta">Devis</a>`;
+      ? `<button type="button" class="site-navbar__cta" data-modal-open="modalContact">Contact</button>`
+      : `<a href="${base}index.html#sur-mesure" class="site-navbar__cta">Contact</a>`;
 
     this.innerHTML = `
       <nav class="site-navbar" aria-label="Navigation principale">
