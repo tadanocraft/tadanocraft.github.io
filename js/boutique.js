@@ -1,10 +1,10 @@
 "use strict";
 
 /* ==========================================================================
-   1. BLOC DE CONFIGURATION DE LA BOUTIQUE
+   1. CONFIGURATION DE LA BOUTIQUE & DICTIONNAIRE DES COULEURS
    ========================================================================== */
 const CONFIG_BOUTIQUE = {
-  // 1. Lien CSV de ton onglet "Catalogue" Google Sheets (Fichier > Partager > Publier sur le web > CSV)
+  // 1. Lien CSV de ton onglet "Catalogue" Google Sheets
   urlCatalogueCSV:
     "https://docs.google.com/spreadsheets/d/e/2PACX-1vT-tlASqtvlqmNIfn_PnLSI2oXvD2Yb2HPO1BfBeDzRnc4DpYH_rviigkV74Tel_hVjQ31IhJgbIzU5/pub?output=csv",
 
@@ -15,7 +15,30 @@ const CONFIG_BOUTIQUE = {
   iban: "BE00 0000 0000 0000",
 };
 
-// Catalogue de démonstration affiché tant que urlCatalogueCSV est vide
+// Ajoute ou modifie tes couleurs de filaments ici (en minuscules, sans accents)
+const COULEURS_FILAMENTS = {
+  bordeaux: "#7f2b3f",
+  "rouge bordeaux": "#7f2b3f",
+  noir: "#18181b",
+  "noir mat": "#1f1f23",
+  blanc: "#f4f4f5",
+  "gris anthracite": "#3f3f46",
+  gris: "#71717a",
+  argent: "#a1a1aa",
+  rouge: "#dc2626",
+  bleu: "#2563eb",
+  "bleu marine": "#1e3a8a",
+  vert: "#16a34a",
+  jaune: "#eab308",
+  orange: "#ea580c",
+  or: "#d4af37",
+  rose: "#ec4899",
+  violet: "#7c3aed",
+  transparent:
+    "linear-gradient(135deg, rgba(255,255,255,0.65), rgba(255,255,255,0.12))",
+};
+
+// Catalogue de secours (sans T-shirts)
 const PRODUITS_DEMONSTRATION = [
   {
     nom: "Porte-clés Tadano Craft",
@@ -24,7 +47,7 @@ const PRODUITS_DEMONSTRATION = [
     image: "media/images/realisations/Tadano-Craft_Porte-cle.webp",
     description:
       "Porte-clés double couleur imprimé en 3D haute précision avec finition bordeaux et noir.",
-    options: "Bordeaux & Noir, Noir & Blanc, Sur demande",
+    options: "Bordeaux & Noir, Noir & Blanc",
     delai: "2 à 3 jours",
     statut: "Impression sur commande",
     lien_paiement: "",
@@ -35,7 +58,7 @@ const PRODUITS_DEMONSTRATION = [
     prix: "16,00 €",
     image: "media/images/realisations/boite-refermable.webp",
     description:
-      "Boîte compartimentée robuste avec couvercle coulissant, idéale pour atelier ou bureau.",
+      "Boîte compartimentée robuste avec couvercle coulissant, idéale pour bureau ou rangement.",
     options: "Noir mat, Gris anthracite, Bordeaux",
     delai: "3 à 5 jours",
     statut: "Impression sur commande",
@@ -48,27 +71,15 @@ const PRODUITS_DEMONSTRATION = [
     image: "media/images/realisations/Print-my-car.webp",
     description:
       "Silhouette automobile en relief imprimée en 3D pour passionnés et décoration murale.",
-    options: "Noir mat, Rouge bordeaux, Blanc",
+    options: "", // Produit à couleur fixe
     delai: "3 à 5 jours",
     statut: "En stock",
-    lien_paiement: "",
-  },
-  {
-    nom: "T-shirt Atelier Tadano Craft",
-    categorie: "T-shirts",
-    prix: "25,00 €",
-    image: "media/images/realisations/Pierret_Camionette.webp",
-    description:
-      "T-shirt coton épais marqué à la presse à chaud dans notre atelier à Charleroi.",
-    options: "Taille S, Taille M, Taille L, Taille XL",
-    delai: "3 à 5 jours",
-    statut: "Stock faible",
     lien_paiement: "",
   },
 ];
 
 /* ==========================================================================
-   2. UTILITAIRES CSV & STATUTS DE STOCK
+   2. UTILITAIRES COULEURS, PRIX & CSV
    ========================================================================== */
 function resolveAssetPath(path) {
   if (!path) return "";
@@ -81,6 +92,44 @@ function resolveAssetPath(path) {
     return path;
   }
   return window.location.pathname.includes("/pages/") ? `../${path}` : path;
+}
+
+function getSwatchColor(label) {
+  const clean = String(label || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+
+  if (COULEURS_FILAMENTS[clean]) return COULEURS_FILAMENTS[clean];
+
+  // Gestion automatique des couleurs doubles (ex: "Bordeaux & Noir")
+  if (clean.includes("&") || clean.includes("/")) {
+    const parts = clean.split(/[&/]/).map((p) => p.trim());
+    const c1 = COULEURS_FILAMENTS[parts[0]];
+    const c2 = COULEURS_FILAMENTS[parts[1]];
+    if (c1 && c2) {
+      return `linear-gradient(135deg, ${c1} 50%, ${c2} 50%)`;
+    }
+  }
+
+  for (const key of Object.keys(COULEURS_FILAMENTS)) {
+    if (clean.includes(key)) return COULEURS_FILAMENTS[key];
+  }
+  return null;
+}
+
+function parsePriceToNumber(priceStr) {
+  if (!priceStr) return 0;
+  const cleaned = String(priceStr)
+    .replace(/[^0-9,.-]/g, "")
+    .replace(",", ".");
+  const num = parseFloat(cleaned);
+  return Number.isNaN(num) ? 0 : num;
+}
+
+function formatEuro(amount) {
+  return amount.toFixed(2).replace(".", ",") + " €";
 }
 
 function parseCSV(text) {
@@ -173,7 +222,7 @@ function getStockBadgeConfig(statutRaw) {
 }
 
 /* ==========================================================================
-   3. RENDU DU CATALOGUE, FILTRES & COMMANDE
+   3. RENDU DU CATALOGUE, PASTILLES COULEUR & COMMANDE
    ========================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
   const shopGrid = document.getElementById("shopProductsGrid");
@@ -186,6 +235,37 @@ document.addEventListener("DOMContentLoaded", () => {
   let allProducts = [];
   let activeCategory = "Tous";
   let searchQuery = "";
+  let currentUnitPrice = 0;
+
+  const qtyInput = document.getElementById("orderQty");
+  const deliverySelect = document.getElementById("orderDelivery");
+  const subtotalEl = document.getElementById("orderSubtotal");
+  const shippingFeeEl = document.getElementById("orderShippingFee");
+  const grandTotalEl = document.getElementById("orderGrandTotal");
+  const priceInput = document.getElementById("orderProductPrice");
+
+  function updateOrderTotals() {
+    const qty = Math.max(1, parseInt(qtyInput?.value || "1", 10) || 1);
+    const selectedOpt = deliverySelect?.options[deliverySelect.selectedIndex];
+    const shippingFee = selectedOpt
+      ? parseFloat(selectedOpt.dataset.fee || "0")
+      : 0;
+
+    const subtotal = currentUnitPrice * qty;
+    const total = subtotal + shippingFee;
+
+    if (subtotalEl) subtotalEl.textContent = formatEuro(subtotal);
+    if (shippingFeeEl) shippingFeeEl.textContent = formatEuro(shippingFee);
+    if (grandTotalEl) grandTotalEl.textContent = formatEuro(total);
+
+    if (priceInput) {
+      priceInput.value = `${formatEuro(currentUnitPrice)} (Total : ${formatEuro(total)})`;
+    }
+  }
+
+  if (qtyInput) qtyInput.addEventListener("input", updateOrderTotals);
+  if (deliverySelect)
+    deliverySelect.addEventListener("change", updateOrderTotals);
 
   function renderShopCategories(products) {
     const categories = [
@@ -214,33 +294,72 @@ document.addEventListener("DOMContentLoaded", () => {
   function openOrderForProduct(product) {
     const summaryEl = document.getElementById("orderProductSummary");
     const nameInput = document.getElementById("orderProductName");
-    const priceInput = document.getElementById("orderProductPrice");
     const stripeInput = document.getElementById("orderStripeUrl");
-    const optionSelect = document.getElementById("orderOption");
+    const optionHiddenInput = document.getElementById("orderOption");
+    const swatchContainer = document.getElementById("orderSwatchGrid");
+    const fixedOptionEl = document.getElementById("orderFixedOption");
     const successBox = document.getElementById("orderSuccessBox");
 
+    currentUnitPrice = parsePriceToNumber(product.prix);
+
     if (successBox) successBox.hidden = true;
+    if (qtyInput) qtyInput.value = "1";
     if (summaryEl) {
       summaryEl.textContent = `${product.nom} • ${product.prix} (${product.statut || "Impression sur commande"})`;
     }
     if (nameInput) nameInput.value = product.nom;
-    if (priceInput) priceInput.value = product.prix;
     if (stripeInput) stripeInput.value = product.lien_paiement || "";
 
-    if (optionSelect) {
-      const opts = (product.options || "Standard")
+    // Génération des pastilles de couleur cliquables
+    if (swatchContainer && optionHiddenInput && fixedOptionEl) {
+      const opts = (product.options || "")
         .split(",")
         .map((o) => o.trim())
         .filter(Boolean);
-      optionSelect.innerHTML = "";
-      opts.forEach((opt) => {
-        const el = document.createElement("option");
-        el.value = opt;
-        el.textContent = opt;
-        optionSelect.appendChild(el);
-      });
+
+      swatchContainer.innerHTML = "";
+
+      if (opts.length === 0) {
+        optionHiddenInput.value = "Couleur d'origine (fixe)";
+        swatchContainer.hidden = true;
+        fixedOptionEl.hidden = false;
+      } else {
+        swatchContainer.hidden = false;
+        fixedOptionEl.hidden = true;
+
+        opts.forEach((opt, index) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "swatch-btn" + (index === 0 ? " is-selected" : "");
+
+          const colorValue = getSwatchColor(opt);
+          if (colorValue) {
+            const dot = document.createElement("span");
+            dot.className = "swatch-dot";
+            dot.style.background = colorValue;
+            btn.appendChild(dot);
+          }
+
+          const labelSpan = document.createElement("span");
+          labelSpan.textContent = opt;
+          btn.appendChild(labelSpan);
+
+          btn.addEventListener("click", () => {
+            swatchContainer
+              .querySelectorAll(".swatch-btn")
+              .forEach((b) => b.classList.remove("is-selected"));
+            btn.classList.add("is-selected");
+            optionHiddenInput.value = opt;
+          });
+
+          swatchContainer.appendChild(btn);
+        });
+
+        optionHiddenInput.value = opts[0];
+      }
     }
 
+    updateOrderTotals();
     window.openModal("modalOrder");
   }
 
@@ -276,7 +395,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <p class="product-card__desc">${product.description || ""}</p>
           <div class="product-card__meta">
             <span>Délai : ${product.delai || "3 à 5 jours"}</span>
-            <span>Retrait Charleroi / Envoi</span>
+            <span>Livraison Charleroi / Envoi</span>
           </div>
           <button type="button" class="btn-primary product-card__btn" ${badge.disabled ? "disabled" : ""}>
             ${badge.disabled ? "Indisponible" : "Commander"}
@@ -324,11 +443,42 @@ document.addEventListener("DOMContentLoaded", () => {
     renderShopProducts();
   }
 
-  // Envoi du formulaire de commande vers Google Apps Script
+  // Validation interactive & envoi de la commande
   const orderForm = document.getElementById("orderForm");
   if (orderForm) {
+    const nameInput = document.getElementById("orderName");
+    const emailInput = document.getElementById("orderEmail");
+    const phoneInput = document.getElementById("orderPhone");
+    const addressInput = document.getElementById("orderAddress");
+
+    if (nameInput)
+      nameInput.addEventListener("blur", () =>
+        window.TadanoValidator.validateName(nameInput),
+      );
+    if (emailInput)
+      emailInput.addEventListener("blur", () =>
+        window.TadanoValidator.validateEmail(emailInput),
+      );
+    if (phoneInput)
+      phoneInput.addEventListener("blur", () =>
+        window.TadanoValidator.validatePhone(phoneInput, true),
+      );
+    if (addressInput)
+      addressInput.addEventListener("blur", () =>
+        window.TadanoValidator.validateText(addressInput, 8),
+      );
+
     orderForm.addEventListener("submit", function (e) {
       e.preventDefault();
+
+      const okName = window.TadanoValidator.validateName(nameInput);
+      const okEmail = window.TadanoValidator.validateEmail(emailInput);
+      const okPhone = window.TadanoValidator.validatePhone(phoneInput, true);
+      const okAddr = window.TadanoValidator.validateText(addressInput, 8);
+
+      if (!okName || !okEmail || !okPhone || !okAddr) return;
+
+      updateOrderTotals();
 
       const submitBtn = document.getElementById("orderSubmitBtn");
       const successBox = document.getElementById("orderSuccessBox");
@@ -340,6 +490,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const paymentMode = formData.get("paiement") || "";
       const stripeUrl = formData.get("stripe_url") || "";
       const orderRef = "TC-" + Math.floor(1000 + Math.random() * 9000);
+
+      // Recombine téléphone + adresse dans "coordonnees" pour Google Apps Script
+      const phoneVal = (phoneInput?.value || "").trim();
+      const addrVal = (addressInput?.value || "").trim();
+      formData.set("coordonnees", `Tél : ${phoneVal} | Adresse : ${addrVal}`);
       formData.append("reference", orderRef);
 
       const scriptUrl = window.STUDIO_CONFIG
@@ -351,7 +506,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       fetch(scriptUrl, {
         method: "POST",
-        body: formData,
+        body: new URLSearchParams(formData),
         mode: "no-cors",
       })
         .then(() => {
@@ -370,7 +525,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 onlinePayLink.hidden = false;
               }
             } else {
-              successDetail.textContent = `Référence ${orderRef}. Nous lançons la fabrication à l'atelier ! Vous réglerez lors du retrait ou de la livraison (espèces ou Wero Pro).`;
+              successDetail.textContent = `Référence ${orderRef}. Nous lançons la fabrication ! Vous réglerez lors de la livraison (espèces, carte NFC, PayPal ou Lydia).`;
               if (onlinePayLink) onlinePayLink.hidden = true;
             }
           }

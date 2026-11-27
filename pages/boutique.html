@@ -3,30 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>La Boutique — Tadano Craft | Objets 3D &amp; T-shirts Atelier</title>
+    <title>La Boutique — Tadano Craft | Créations &amp; Objets 3D</title>
     <meta
       name="description"
-      content="Commandez les créations imprimées en 3D et t-shirts réalisés à l'atelier Tadano Craft à Charleroi. Retrait local gratuit ou livraison."
+      content="Commandez les créations et objets imprimés en 3D Tadano Craft. Livraison dans la région de Charleroi ou envoi postal bpost / Mondial Relay."
     />
     <link rel="canonical" href="https://tadanocraft.com/pages/boutique.html" />
-    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/boutique.css" />
   </head>
   <body class="page-wrapper has-top-nav">
-    <!-- Header unique piloté par main.js -->
     <tadano-header></tadano-header>
 
     <div class="linktree-shell">
       <header class="shop-header animate-slide-up" style="--delay: 80ms">
-        <span class="shop-eyebrow">Atelier Charleroi • Fabrication Maison</span>
+        <span class="shop-eyebrow">Charleroi • Impressions 3D sur mesure</span>
         <h1 class="shop-title">La Boutique Tadano Craft</h1>
         <p class="shop-subtitle">
-          Objets imprimés en 3D et t-shirts conçus à l'atelier. Choisissez votre
-          modèle, nous lançons la fabrication dès votre commande.
+          Objets imprimés en 3D et créations conçus sur commande. Livraison par
+          mes soins autour de Charleroi ou envoi postal partout en Belgique.
         </p>
       </header>
 
       <main class="main-container">
-        <!-- Barre de recherche et filtres par catégorie -->
         <section
           aria-label="Filtrer les créations"
           class="shop-toolbar animate-slide-up"
@@ -51,7 +50,7 @@
               id="shopSearchInput"
               type="search"
               class="shop-search-box__input"
-              placeholder="Rechercher un objet 3D, un t-shirt, un porte-clés..."
+              placeholder="Rechercher un objet 3D, un porte-clés, une plaque..."
               aria-label="Rechercher dans la boutique"
             />
           </div>
@@ -72,7 +71,6 @@
           </div>
         </section>
 
-        <!-- Grille des produits -->
         <section
           aria-label="Catalogue de la boutique"
           class="animate-slide-up"
@@ -95,7 +93,7 @@
       </main>
     </div>
 
-    <!-- MODALE DE COMMANDE (DOUBLE PAIEMENT) -->
+    <!-- MODALE DE COMMANDE -->
     <div
       id="modalOrder"
       class="modal-backdrop"
@@ -135,41 +133,47 @@
             Article sélectionné
           </p>
 
-          <form id="orderForm" class="contact-form">
+          <form id="orderForm" class="contact-form" novalidate>
             <input type="hidden" id="orderProductName" name="produit" />
             <input type="hidden" id="orderProductPrice" name="prix" />
             <input type="hidden" id="orderStripeUrl" name="stripe_url" />
+            <input type="hidden" id="orderOption" name="option" />
 
-            <div class="form-row-2">
-              <div class="form-group">
-                <label for="orderOption" class="form-label"
-                  >Variante (Couleur / Taille) *</label
-                >
-                <select
-                  id="orderOption"
-                  name="option"
-                  required
-                  class="form-control"
-                ></select>
-              </div>
-              <div class="form-group">
-                <label for="orderQty" class="form-label">Quantité *</label>
-                <input
-                  id="orderQty"
-                  type="number"
-                  name="quantite"
-                  min="1"
-                  max="20"
-                  value="1"
-                  required
-                  class="form-control"
-                />
-              </div>
+            <div class="form-group">
+              <span class="form-label">Couleur</span>
+              <div
+                id="orderSwatchGrid"
+                class="swatch-grid"
+                role="radiogroup"
+                aria-label="Choix de la couleur"
+              ></div>
+              <p id="orderFixedOption" class="order-fixed-option" hidden>
+                Couleur d'origine (non modifiable)
+              </p>
             </div>
 
             <div class="form-group">
+              <label for="orderQty" class="form-label">Quantité *</label>
+              <input
+                id="orderQty"
+                type="number"
+                name="quantite"
+                min="1"
+                max="20"
+                value="1"
+                required
+                class="form-control"
+              />
+            </div>
+
+            <p class="order-custom-note">
+              Besoin d'une taille spécifique ou d'une adaptation ?
+              <a href="../index.html#sur-mesure">Demandez un devis studio</a>.
+            </p>
+
+            <div class="form-group">
               <label for="orderDelivery" class="form-label"
-                >Mode de remise *</label
+                >Mode de livraison *</label
               >
               <select
                 id="orderDelivery"
@@ -177,11 +181,17 @@
                 required
                 class="form-control"
               >
-                <option value="Retrait atelier (Charleroi - Gratuit)">
-                  Retrait atelier (Région de Charleroi — Gratuit)
+                <option
+                  value="Livraison par mes soins — Charleroi (< 15 km) (+ 2,00 €)"
+                  data-fee="2"
+                >
+                  Livraison par mes soins — Charleroi (&lt; 15 km) (+ 2,00 €)
                 </option>
-                <option value="Envoi postal (bpost / Mondial Relay)">
-                  Envoi postal (bpost / Mondial Relay)
+                <option
+                  value="Envoi postal — bpost / Mondial Relay (+ 5,50 €)"
+                  data-fee="5.5"
+                >
+                  Envoi postal — bpost / Mondial Relay (+ 5,50 €)
                 </option>
               </select>
             </div>
@@ -196,13 +206,30 @@
                 required
                 class="form-control"
               >
-                <option value="Au retrait / livraison (Espèces ou Wero Pro)">
-                  Au retrait / à la livraison (Espèces ou Wero Pro)
+                <option
+                  value="À la livraison (Espèces, Carte / NFC, PayPal, Lydia...)"
+                >
+                  À la livraison (Espèces, Carte / NFC, PayPal, Lydia...)
                 </option>
-                <option value="En ligne (PayPal Business / Virement / Carte)">
-                  En ligne maintenant (PayPal Business / Virement / Carte)
+                <option value="En ligne / Virement bancaire (avant envoi)">
+                  En ligne / Virement bancaire (avant envoi)
                 </option>
               </select>
+            </div>
+
+            <div class="order-total-box" aria-live="polite">
+              <div class="order-total-box__row">
+                <span>Sous-total article(s)</span>
+                <span id="orderSubtotal">0,00 €</span>
+              </div>
+              <div class="order-total-box__row">
+                <span>Frais de livraison</span>
+                <span id="orderShippingFee">2,00 €</span>
+              </div>
+              <div class="order-total-box__row order-total-box__row--total">
+                <span>Total estimé</span>
+                <span id="orderGrandTotal">0,00 €</span>
+              </div>
             </div>
 
             <div class="form-row-2">
@@ -216,7 +243,7 @@
                   name="client"
                   required
                   class="form-control"
-                  placeholder="Votre nom"
+                  placeholder="Votre nom et prénom"
                 />
               </div>
               <div class="form-group">
@@ -235,16 +262,30 @@
             </div>
 
             <div class="form-group">
+              <label for="orderPhone" class="form-label"
+                >Numéro de téléphone *</label
+              >
+              <input
+                id="orderPhone"
+                type="tel"
+                name="telephone"
+                required
+                class="form-control"
+                placeholder="0470 12 34 56"
+              />
+            </div>
+
+            <div class="form-group">
               <label for="orderAddress" class="form-label"
-                >Téléphone &amp; Adresse postale (si envoi) *</label
+                >Adresse complète de livraison *</label
               >
               <textarea
                 id="orderAddress"
-                name="coordonnees"
+                name="adresse"
                 rows="2"
                 required
                 class="form-control"
-                placeholder="04... et adresse de livraison si envoi postal"
+                placeholder="Rue, numéro, code postal et commune"
               ></textarea>
             </div>
 
@@ -322,7 +363,7 @@
       />
     </div>
 
-    <script src="../main.js"></script>
-    <script src="../boutique.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/boutique.js"></script>
   </body>
 </html>

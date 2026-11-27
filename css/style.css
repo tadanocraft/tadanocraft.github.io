@@ -1990,3 +1990,53 @@ body {
 .bento-card--locked .bento-card__bg {
   opacity: 0.55;
 }
+
+/* ==========================================================================
+   14. OPTIONS FIXES, NOTE SUR MESURE & TOTAL DYNAMIQUE (MODALE COMMANDE)
+   ========================================================================== */
+.order-fixed-option {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-inner);
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.order-custom-note {
+  margin: -0.35rem 0 0;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.order-custom-note a {
+  color: var(--color-text);
+  text-decoration: underline;
+}
+
+.order-total-box {
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius-inner);
+  background-color: rgba(9, 9, 11, 0.65);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.order-total-box__row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.order-total-box__row--total {
+  margin-top: 0.25rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-text);
+}

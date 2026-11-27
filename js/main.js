@@ -14,7 +14,138 @@ const STUDIO_CONFIG = {
 window.STUDIO_CONFIG = STUDIO_CONFIG;
 
 /* ==========================================================================
-   2. COMPOSANT HEADER UNIQUE (<tadano-header>)
+   2. VALIDATION INTERACTIVE & FILTRE ANTI-TROLL (PARTAGÉ STUDIO + BOUTIQUE)
+   ========================================================================== */
+const MOTS_INTERDITS = [
+  "caca",
+  "pipi",
+  "merde",
+  "putain",
+  "connard",
+  "connasse",
+  "salope",
+  "encule",
+  "bite",
+  "couille",
+  "fdp",
+  "ntm",
+  "fuck",
+  "shit",
+  "bitch",
+  "azer",
+  "azerty",
+  "qsdf",
+  "wxcv",
+];
+
+function normalizeText(str) {
+  return String(str || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+function containsForbiddenWord(str) {
+  const clean = normalizeText(str);
+  return MOTS_INTERDITS.some((word) => {
+    const regex = new RegExp(`(^|[^a-z0-9])${word}([^a-z0-9]|$)`, "i");
+    return regex.test(clean);
+  });
+}
+
+function setFieldError(input, message) {
+  if (!input) return;
+  const group = input.closest(".form-group") || input.parentElement;
+  let errEl = group.querySelector(".form-error");
+
+  if (message) {
+    input.classList.add("is-invalid");
+    if (!errEl) {
+      errEl = document.createElement("p");
+      errEl.className = "form-error";
+      group.appendChild(errEl);
+    }
+    errEl.textContent = message;
+  } else {
+    input.classList.remove("is-invalid");
+    if (errEl) errEl.remove();
+  }
+}
+
+const TadanoValidator = {
+  validateEmail(input) {
+    const val = (input.value || "").trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    if (!emailRegex.test(val)) {
+      setFieldError(
+        input,
+        "Veuillez saisir une adresse e-mail valide (ex: nom@domaine.be).",
+      );
+      return false;
+    }
+    setFieldError(input, "");
+    return true;
+  },
+
+  validatePhone(input, required = false) {
+    const val = (input.value || "").trim();
+    if (!val && !required) {
+      setFieldError(input, "");
+      return true;
+    }
+    const digitsOnly = val.replace(/\D/g, "");
+    const phoneRegex = /^[0-9+\s./()-]+$/;
+    if (
+      !phoneRegex.test(val) ||
+      digitsOnly.length < 8 ||
+      digitsOnly.length > 15
+    ) {
+      setFieldError(
+        input,
+        "Veuillez saisir un numéro de téléphone valide (ex: 0470 12 34 56).",
+      );
+      return false;
+    }
+    setFieldError(input, "");
+    return true;
+  },
+
+  validateName(input) {
+    const val = (input.value || "").trim();
+    if (val.length < 2 || !/[a-zA-ZÀ-ÿ]{2,}/.test(val)) {
+      setFieldError(input, "Veuillez indiquer votre nom et prénom.");
+      return false;
+    }
+    if (containsForbiddenWord(val)) {
+      setFieldError(input, "Merci d'indiquer un nom valide.");
+      return false;
+    }
+    setFieldError(input, "");
+    return true;
+  },
+
+  validateText(input, minLength = 5) {
+    const val = (input.value || "").trim();
+    if (val.length < minLength) {
+      setFieldError(
+        input,
+        `Veuillez préciser un peu plus (${minLength} caractères minimum).`,
+      );
+      return false;
+    }
+    if (containsForbiddenWord(val)) {
+      setFieldError(input, "Merci d'utiliser un langage approprié.");
+      return false;
+    }
+    setFieldError(input, "");
+    return true;
+  },
+};
+
+window.TadanoValidator = TadanoValidator;
+
+/* ==========================================================================
+   3. COMPOSANT HEADER UNIQUE (<tadano-header>)
    ========================================================================== */
 class TadanoHeader extends HTMLElement {
   connectedCallback() {
@@ -28,7 +159,7 @@ class TadanoHeader extends HTMLElement {
 
     const ctaHtml = isHome
       ? `<button type="button" class="site-navbar__cta" data-modal-open="modalContact">Devis</button>`
-      : `<a href="${base}index.html#sur-mesure" class="site-navbar__cta">Sur mesure</a>`;
+      : `<a href="${base}index.html#sur-mesure" class="site-navbar__cta">Devis</a>`;
 
     this.innerHTML = `
       <nav class="site-navbar" aria-label="Navigation principale">
@@ -61,7 +192,7 @@ class TadanoHeader extends HTMLElement {
 customElements.define("tadano-header", TadanoHeader);
 
 /* ==========================================================================
-   3. GESTION DES MODALES, LIGHTBOX & BOUTON RETOUR MOBILE
+   4. GESTION DES MODALES, LIGHTBOX & BOUTON RETOUR MOBILE
    ========================================================================== */
 const MODAL_IDS = [
   "modalServices",
@@ -175,7 +306,7 @@ window.addEventListener("popstate", () => {
 });
 
 /* ==========================================================================
-   4. INITIALISATION AU CHARGEMENT DE LA PAGE
+   5. INITIALISATION AU CHARGEMENT DE LA PAGE
    ========================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
   if (window.location.hash === "#sur-mesure") {
@@ -283,11 +414,34 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // D. Envoi du formulaire de contact sur mesure
+  // D. Envoi du formulaire de contact sur mesure (avec validation interactive)
   const contactForm = document.getElementById("contactForm");
   if (contactForm) {
+    const inputProjet = document.getElementById("inputProjet");
+    const inputEmail = document.getElementById("inputEmail");
+    const inputPhone = document.getElementById("inputPhone");
+
+    if (inputProjet)
+      inputProjet.addEventListener("blur", () =>
+        TadanoValidator.validateText(inputProjet, 5),
+      );
+    if (inputEmail)
+      inputEmail.addEventListener("blur", () =>
+        TadanoValidator.validateEmail(inputEmail),
+      );
+    if (inputPhone)
+      inputPhone.addEventListener("blur", () =>
+        TadanoValidator.validatePhone(inputPhone, false),
+      );
+
     contactForm.addEventListener("submit", function (e) {
       e.preventDefault();
+
+      const validProjet = TadanoValidator.validateText(inputProjet, 5);
+      const validEmail = TadanoValidator.validateEmail(inputEmail);
+      const validPhone = TadanoValidator.validatePhone(inputPhone, false);
+
+      if (!validProjet || !validEmail || !validPhone) return;
 
       const submitBtn = document.getElementById("submitBtn");
       const successMsg = document.getElementById("successMsg");
@@ -298,7 +452,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       fetch(STUDIO_CONFIG.urlGoogleScript, {
         method: "POST",
-        body: new FormData(this),
+        body: new URLSearchParams(new FormData(this)),
         mode: "no-cors",
       })
         .then(() => {
