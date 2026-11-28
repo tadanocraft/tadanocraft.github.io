@@ -6,7 +6,7 @@
 const STUDIO_CONFIG = {
   // Ton script Google Apps Script (Devis + Commandes)
   urlGoogleScript:
-    "https://script.google.com/macros/s/AKfycbwmhlRG-jU5ir6ChjHeHRDnKMuLCUt0ILdafgagPG-t6ip-pK86oZSIJXwCfPsIJD0qeg/exec",
+    "https://script.google.com/macros/s/AKfycbxN9xbn4fy66dGJVV_KyI3ezns0fs4T6lvamwU_1IKBDD27Fbd6LP-UH8YbtuPkVTKa8w/exec",
   // Flux Instagram Behold.so
   urlBeholdFeed: "https://feeds.behold.so/7axuN4we2Mc4uPPQrSop",
 };

@@ -4,10 +4,10 @@
 @font-face {
   font-family: "Satoshi";
   src:
-    url("../media/Fonts/Satoshi_woff2/Satoshi-Variable.woff2") format("woff2"),
-    url("../media/Fonts/Satoshi-Variable.woff2") format("woff2"),
-    url("../media/Fonts/Satoshi_woff2.woff2") format("woff2"),
-    url("../media/Fonts/Satoshi_woff2") format("woff2");
+    url("../media/fonts/Satoshi_woff2/Satoshi-Variable.woff2") format("woff2"),
+    url("../media/fonts/Satoshi-Variable.woff2") format("woff2"),
+    url("../media/fonts/Satoshi_woff2.woff2") format("woff2"),
+    url("../media/fonts/Satoshi_woff2") format("woff2");
   font-weight: 300 900;
   font-style: normal;
   font-display: swap;
