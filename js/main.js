@@ -166,7 +166,7 @@ class TadanoHeader extends HTMLElement {
         <div class="site-navbar__inner">
           <a href="${base}index.html" class="site-navbar__brand" aria-label="Accueil Tadano Craft">
             <img
-              src="${base}media/images/tranche1.webp"
+              src="${base}media/images/identite/tranche1.webp"
               alt="Tadano Craft"
               width="180"
               height="48"

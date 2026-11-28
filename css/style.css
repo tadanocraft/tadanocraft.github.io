@@ -4,10 +4,10 @@
 @font-face {
   font-family: "Satoshi";
   src:
-    url("../media/Satoshi_woff2/Satoshi-Variable.woff2") format("woff2"),
-    url("../media/Satoshi-Variable.woff2") format("woff2"),
-    url("../media/Satoshi_woff2.woff2") format("woff2"),
-    url("../media/Satoshi_woff2") format("woff2");
+    url("../media/Fonts/Satoshi_woff2/Satoshi-Variable.woff2") format("woff2"),
+    url("../media/Fonts/Satoshi-Variable.woff2") format("woff2"),
+    url("../media/Fonts/Satoshi_woff2.woff2") format("woff2"),
+    url("../media/Fonts/Satoshi_woff2") format("woff2");
   font-weight: 300 900;
   font-style: normal;
   font-display: swap;
@@ -104,7 +104,7 @@ body {
       rgba(17, 17, 17, var(--fond-noir)),
       rgba(17, 17, 17, var(--fond-noir))
     ),
-    url("../media/images/fond_topo.jpg");
+    url("../media/images/identite/fond_topo.webp");
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
