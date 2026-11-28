@@ -104,7 +104,7 @@ body {
       rgba(17, 17, 17, var(--fond-noir)),
       rgba(17, 17, 17, var(--fond-noir))
     ),
-    url("../media/images/identite/fond_topo.webp");
+    url("../media/images/identite/fond_topo.jpg");
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
