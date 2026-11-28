@@ -174,12 +174,12 @@ class TadanoHeader extends HTMLElement {
             />
           </a>
           <div class="site-navbar__links">
-            <a href="${base}index.html" class="site-navbar__link ${isHome ? "is-active" : ""}">Le Studio</a>
+            <a href="${base}index.html" class="site-navbar__link ${isHome ? "is-active" : ""}">Studio</a>
             <a href="${pagesBase}boutique.html" class="site-navbar__link ${isBoutique ? "is-active" : ""}">
               <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
               </svg>
-              <span>La Boutique</span>
+              <span>Boutique</span>
             </a>
             ${ctaHtml}
           </div>
@@ -607,9 +607,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const heroGif = document.getElementById("heroGif");
   if (heroGif) {
     const gifs = [
-      "https://i.pinimg.com/originals/eb/50/87/eb50875a68b04b0480fa929af2c7547c.gif",
-      "https://i.pinimg.com/originals/b1/5b/d5/b15bd596014d9d9310e59b07b85da550.gif",
-      "https://i.pinimg.com/originals/1e/7d/d6/1e7dd6800a6ad9862861c878cfcc2fb2.gif",
+      "media/videos/igor-freitas-mesa.webm",
+      "media/videos/eb50875a68b04b0480fa929af2c7547c.webm",
+      "media/videos/0add5a26394fa458118f96c0bb49e840.webm",
     ];
     heroGif.src = gifs[Math.floor(Math.random() * gifs.length)];
   }

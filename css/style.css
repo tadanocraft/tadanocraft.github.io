@@ -1180,7 +1180,7 @@ body {
   }
 
   .logo-header {
-    width: clamp(18rem, 32%, 28rem);
+    width: clamp(22rem, 50%, 38rem);
   }
 
   .header-pills {

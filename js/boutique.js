@@ -622,7 +622,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Chargement du catalogue Google Sheets ou secours local
+  // Chargement du catalogue Google Sheets (sans produits de démonstration)
   if (CONFIG_BOUTIQUE.urlCatalogueCSV) {
     fetch(CONFIG_BOUTIQUE.urlCatalogueCSV)
       .then((res) => {
@@ -630,18 +630,17 @@ document.addEventListener("DOMContentLoaded", () => {
         return res.text();
       })
       .then((csvText) => {
-        const parsed = parseCSV(csvText);
-        allProducts = parsed.length > 0 ? parsed : PRODUITS_DEMONSTRATION;
+        allProducts = parseCSV(csvText);
         renderShopCategories(allProducts);
         renderShopProducts();
       })
       .catch(() => {
-        allProducts = PRODUITS_DEMONSTRATION;
+        allProducts = [];
         renderShopCategories(allProducts);
         renderShopProducts();
       });
   } else {
-    allProducts = PRODUITS_DEMONSTRATION;
+    allProducts = [];
     renderShopCategories(allProducts);
     renderShopProducts();
   }
